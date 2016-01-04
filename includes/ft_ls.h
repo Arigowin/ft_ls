@@ -17,6 +17,8 @@
 # include <stdio.h>
 # include <string.h>
 
+# define MAJOR 0XFF000000
+
 #endif
 // write
 // opendir

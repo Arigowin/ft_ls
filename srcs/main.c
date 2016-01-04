@@ -21,7 +21,7 @@ int main(int ac, const char **av)
 	uid = getpwuid(b->st_uid);
 	printf("Proprietaire: %s\n", uid->pw_name);
 	grp = getgrgid(b->st_gid);
-	printf("Groupe: %u\n", b->st_gid);
+	printf("Groupe: %s\n", grp->gr_name);
 	printf("Taille : %lld octets\n", b->st_size);
 	printf("Date de derniere modification: %ld\n", b->st_mtime);
 	ac = 0;

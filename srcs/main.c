@@ -24,40 +24,45 @@ int main(int ac, const char **av)
 
 	printf("Nom: %s\n", av[1]);
 
-	if (S_IFIFO & b->st_mode)
+	if (S_IFREG & b->st_mode)
 	{
-		tmp = "fifo";
-		droit[0] = 'p';
-	}
-	else if (S_IFCHR & b->st_mode)
-	{
-		tmp = "peripherique caractere";
-		droit[0] = 'c';
+		tmp = "Fichier";
+		droit[0] = '-';
 	}
 	else if (S_IFDIR & b->st_mode)
 	{
 		tmp = "Repertoire";
 		droit[0] = 'd';
 	}
-	else if (S_IFBLK & b->st_mode)
-	{
-		tmp = "peripherique bloc";
-		droit[0] = 'b';
-	}
-	else if (S_IFREG & b->st_mode)
-	{
-		tmp = "Fichier";
-		droit[0] = '-';
-	}
 	else if (S_IFLNK & b->st_mode)
 	{
 		tmp = "lien symbolique";
 		droit[0] = 'l';
 	}
+	else if (S_IFIFO & b->st_mode)
+	{
+		tmp = "fifo";
+		droit[0] = 'p';
+	}
+	else if (S_IFBLK & b->st_mode)
+	{
+		tmp = "peripherique bloc";
+		droit[0] = 'b';
+	}
+	else if (S_IFCHR & b->st_mode)
+	{
+		tmp = "peripherique caractere";
+		droit[0] = 'c';
+	}
 	else if (S_IFSOCK & b->st_mode)
 	{
 		tmp = "socket";
 		droit[0] = 's';
+	}
+	else
+	{
+		tmp = "?";
+		droit[0] = '?';
 	}
 	printf("Type: %s\n", tmp);
 

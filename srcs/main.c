@@ -1,33 +1,59 @@
 #include "ft_ls.h"
 
 
-
-int main(int ac, const char **av)
+int		printinfo(char *path, char *str)
 {
 	struct stat b;
 	struct passwd *uid;
 	struct group *grp;
-	char *tmp;
 	char *droit;
-	char **lst;
+	char *tmp;
+
+	tmp = NULL;
+	if (lstat(ft_strjoin(path, str), &b) == -1)
+		exit (ft_error(NULL));
+	droit = ft_modeoffile(b.st_mode);
+	printf("%s\t", droit);
+	printf("%hu\t", b.st_nlink);
+	uid = getpwuid(b.st_uid);
+	printf("%s\t", uid->pw_name);
+	grp = getgrgid(b.st_gid);
+	printf("%s\t", grp->gr_name);
+	if (!(b.st_rdev))
+		printf("%lld\t", b.st_size);
+	else
+		printf("%d, %d\t", ((b.st_rdev & MAJOR) >> 24), (b.st_rdev & ~MAJOR));
+	printf("%s\t", ft_format_date(b.st_mtime));
+	printf("%s\n", str);
+
+	if (droit[0] == '-')
+		return (0);
+	else
+		return (1);
+}
+
+char **ft_readdir(char *path)
+{
 	int		i;
-
-	DIR *dir;
+	char *tmp;
 	struct dirent *dp;
+	char **lst;
+	DIR *dir;
 
-	if (ac == 1)
+	if (path == NULL)
 		dir = opendir(".");
 	else
-		dir = opendir(av[1]);
+		dir = opendir(path);
 	if (dir == NULL)
 	{
 		if (errno == ENOTDIR)
 		{
-			printf("%s\n", av[1]);
-			return (0);
+			printf("%s\n", path);
+			exit (0);
 		}
-		return (ft_error(NULL));
+		exit (ft_error(NULL));
 	}
+
 	tmp = NULL;
 	i = 0;
 	while ((dp = readdir(dir)) != NULL)
@@ -41,34 +67,45 @@ int main(int ac, const char **av)
 		}
 		i++;
 	}
+	closedir(dir);
 	lst = ft_strsplit(tmp, '\n');
 	ft_sort_str(&lst, i);
+	return (lst);
+}
+
+int main(int ac, const char **av)
+{
+	char **lst;
+	char **lst2;
+	char *path;
+	int pospath;
+	char option;
+	int i;
+ac = 0;
+
+	pospath = 1;
+	if (ft_strchr(av[1], '-') != NULL)
+	{
+		pospath++;
+		option = av[1][1];
+	}
+
+	lst = ft_readdir((char*)av[pospath]);
 	i = 0;
+	path = "";
+	if (av[pospath][ft_strlen(av[pospath]) - 1] != '/')
+		path = ft_strjoin(av[pospath], "/");
+	printf("%s\n", path);
 	while (lst[i])
 	{
-		if (lst[i][0] != '.')
+		if (printinfo(path, lst[i]) == 1 && lst[i][0] != '.')
 		{
-			tmp = NULL;
-			if (lstat(lst[i], &b) == -1)
-				return (ft_error(lst[i]));
-
-			droit = ft_modeoffile(b.st_mode);
-			printf("%s\t", droit);
-			printf("%hu\t", b.st_nlink);
-			uid = getpwuid(b.st_uid);
-			printf("%s\t", uid->pw_name);
-			grp = getgrgid(b.st_gid);
-			printf("%s\t", grp->gr_name);
-			if (!(b.st_rdev))
-				printf("%lld\t", b.st_size);
-			else
-				printf("%d, %d\t", ((b.st_rdev & MAJOR) >> 24), (b.st_rdev & ~MAJOR));
-			printf("%s\t", ft_format_date(b.st_mtime));
-			printf("%s\n", lst[i]);
+			printf("%s%s\n", path, lst[i]);
+			lst2 = ft_readdir(ft_strjoin(path, lst[i]));
+			printinfo(path, lst[i]);
 		}
 		i++;
 	}
-	closedir(dir);
 
 	return (0);
 }

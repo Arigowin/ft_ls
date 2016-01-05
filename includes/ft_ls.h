@@ -16,8 +16,18 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+# include <sys/errno.h>
 
 # define MAJOR 0XFF000000
+
+// droit des fichier
+char	*ft_modeoffile(mode_t mode);
+
+// Format date
+char	*ft_format_date(time_t date);
+
+// Trie
+void ft_sort_str(char ***str, int size);
 
 #endif
 // write

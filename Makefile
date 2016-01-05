@@ -6,7 +6,7 @@
 #    By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/03 10:52:20 by dolewski          #+#    #+#              #
-#    Updated: 2016/01/04 11:13:53 by dolewski         ###   ########.fr        #
+#    Updated: 2016/01/05 13:51:30 by dolewski         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,11 @@ LFTHPATH =	$(LIBPATH)/includes
 CFLAGS = -g -Wall -Werror -Wextra -I $(HPATH) -I $(LFTHPATH)
 LIBS = -L $(LIBPATH) -lft
 
-SRC = main.c
+SRC = main.c \
+	  ft_ls_date.c \
+	  ft_ls_modeoffile.c \
+	  ft_ls_option.c \
+	  ft_ls_sort_str.c
 
 OFILES = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
 

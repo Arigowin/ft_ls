@@ -21,24 +21,28 @@ int main(int ac, const char **av)
 		dir = opendir(av[1]);
 	if (dir == NULL)
 	{
-		printf("ERROR : %s\n", strerror(errno));
-		return (-1);
+		if (errno == ENOTDIR)
+		{
+			printf("%s\n", av[1]);
+			return (0);
+		}
+		return (ft_error(NULL));
 	}
 	tmp = NULL;
+	i = 0;
 	while ((dp = readdir(dir)) != NULL)
 	{
 		if (tmp == NULL)
-		{
 			tmp = ft_strdup(dp->d_name);
-		}
 		else
 		{
-			tmp[dp->d_namlen] = '\n';
-			ft_strjoin(tmp, dp->d_name);
+			tmp = ft_strjoin(tmp, "\n");
+			tmp = ft_strjoin(tmp, dp->d_name);
 		}
+		i++;
 	}
-	printf("tmp:%s\n", tmp);
 	lst = ft_strsplit(tmp, '\n');
+	ft_sort_str(&lst, i);
 	i = 0;
 	while (lst[i])
 	{
@@ -46,10 +50,7 @@ int main(int ac, const char **av)
 		{
 			tmp = NULL;
 			if (lstat(lst[i], &b) == -1)
-			{
-				printf("ERROR : %s\n", strerror(errno));
-				return (-1);
-			}
+				return (ft_error(lst[i]));
 
 			droit = ft_modeoffile(b.st_mode);
 			printf("%s\t", droit);

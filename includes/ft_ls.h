@@ -27,7 +27,10 @@ char	*ft_modeoffile(mode_t mode);
 char	*ft_format_date(time_t date);
 
 // Trie
-void ft_sort_str(char ***str, int size);
+void	ft_sort_str(char ***str, int size);
+
+// Error
+int		ft_error(char *str);
 
 #endif
 // write

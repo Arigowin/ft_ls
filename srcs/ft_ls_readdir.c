@@ -8,10 +8,8 @@ char	**ft_readdir(char *path)
 	char			*tmp;
 	char			**lst;
 
-	if (path == NULL)
-		dir = opendir(".");
-	else
-		dir = opendir(path);
+
+	dir = opendir(path);
 	if (dir == NULL)
 	{
 		if (errno == ENOTDIR)

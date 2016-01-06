@@ -1,36 +1,34 @@
 #include "ft_ls.h"
 
-void ft_sort_str(char ***str, int size)
+void	ft_swap_s(char **s1, char **s2)
+{
+	char	*tmp;
+
+	tmp = *s1;
+	*s1 = ft_strdup(*s2);
+	*s2 = ft_strdup(tmp);
+}
+
+void	ft_sort_str(char ***str, int size)
 {
 	int		i;
 	int		x;
 	int		cmp;
-	char	*tmp;
 
 	i = 0;
 	x = 0;
 	size--;
 	if ((cmp = ft_strcmp((*str)[0], (*str)[size])) > 0)
 	{
-		tmp = (*str)[0];
-		//ft_strdel(&((*str)[0]));
-		(*str)[0] = ft_strdup((*str)[size]);
-		//ft_strdel(&((*str)[size]));
-		(*str)[size] = ft_strdup(tmp);
-		//ft_strdel(&tmp);
+		ft_swap_s(&((*str)[0]), &((*str)[size]));
 	}
-	while (x != size)
+	while (x != size + 1)
 	{
 		while (i < size)
 		{
 			if ((cmp = ft_strcmp((*str)[i], (*str)[i + 1])) > 0)
 			{
-				tmp = (*str)[i];
-				//ft_strdel(&((*str)[i]));
-				(*str)[i] = ft_strdup((*str)[i + 1]);
-				ft_strdel(&((*str)[i + 1]));
-				(*str)[i + 1] = ft_strdup(tmp);
-			//	ft_strdel(&tmp);
+				ft_swap_s(&((*str)[i]), &((*str)[i + 1]));
 			}
 			i++;
 		}

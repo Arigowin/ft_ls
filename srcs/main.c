@@ -37,15 +37,28 @@ int main(int ac, const char **av)
 	t_ft_ls		data;
 	char		**lst;
 	int i = 0;
+	int j = 0;
 
+	data.nb_path = 0;
+	data.path = NULL;
+	data.op = NULL;
 	ft_recup_option(&data, (char**)av, ac);
-	ft_sort_str(&(data.path), ac);
+	ft_sort_str(&(data.path), data.nb_path);
 
 	printf("option: [%s]\n", data.op);
 	while (data.path[i] != NULL)
 	{
+		data.path_format[i] = ft_format_path(data.path[i]);
 		printf("\n%s:\n", data.path[i]);
-		lst = ft_readdir(data.path[i]);
+		printf("%s\n", data.path_format[i]);
+		lst = ft_readdir(data.path_format[i]);
+		if (errno != 0)
+			printf("%s\n", strerror(errno));
+		while (lst[j] != NULL)
+		{
+			printinfo(data.path_format[i], lst[j]);
+			j++;
+		}
 		i++;
 	}
 

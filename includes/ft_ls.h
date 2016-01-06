@@ -24,6 +24,8 @@ typedef struct		s_ft_ls
 {
 	char			*op;		// Liste des option
 	char			**path;		// Liste des chemin passer en param
+	char			**path_format;
+	int				nb_path;
 }					t_ft_ls;
 
 // droit des fichier
@@ -43,6 +45,7 @@ char	**ft_readdir(char *path);
 
 // option
 void	ft_recup_option(t_ft_ls *data, char **lst, int nb);
+char	*ft_format_path(char *str);
 
 #endif
 // write

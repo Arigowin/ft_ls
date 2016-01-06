@@ -11,7 +11,7 @@ int		printinfo(char *path, char *str)
 
 	tmp = NULL;
 	if (lstat(ft_strjoin(path, str), &b) == -1)
-		exit (ft_error(NULL));
+		exit (ft_error(ft_strjoin(path, str)));
 	droit = ft_modeoffile(b.st_mode);
 	printf("%s\t", droit);
 	printf("%hu\t", b.st_nlink);
@@ -32,56 +32,17 @@ int		printinfo(char *path, char *str)
 		return (1);
 }
 
-char **ft_readdir(char *path)
-{
-	int		i;
-	char *tmp;
-	struct dirent *dp;
-	char **lst;
-	DIR *dir;
-
-	if (path == NULL)
-		dir = opendir(".");
-	else
-		dir = opendir(path);
-	if (dir == NULL)
-	{
-		if (errno == ENOTDIR)
-		{
-			printf("%s\n", path);
-			exit (0);
-		}
-		exit (ft_error(NULL));
-	}
-
-	tmp = NULL;
-	i = 0;
-	while ((dp = readdir(dir)) != NULL)
-	{
-		if (tmp == NULL)
-			tmp = ft_strdup(dp->d_name);
-		else
-		{
-			tmp = ft_strjoin(tmp, "\n");
-			tmp = ft_strjoin(tmp, dp->d_name);
-		}
-		i++;
-	}
-	closedir(dir);
-	lst = ft_strsplit(tmp, '\n');
-	ft_sort_str(&lst, i);
-	return (lst);
-}
-
 int main(int ac, const char **av)
 {
 	char **lst;
 	char **lst2;
 	char *path;
+	char *path2;
 	int pospath;
 	char option;
 	int i;
-ac = 0;
+	int j;
+	ac = 0;
 
 	pospath = 1;
 	if (ft_strchr(av[1], '-') != NULL)
@@ -95,14 +56,29 @@ ac = 0;
 	path = "";
 	if (av[pospath][ft_strlen(av[pospath]) - 1] != '/')
 		path = ft_strjoin(av[pospath], "/");
+	else
+		path = ft_strdup(av[pospath]);
 	printf("%s\n", path);
 	while (lst[i])
 	{
-		if (printinfo(path, lst[i]) == 1 && lst[i][0] != '.')
+		if (printinfo(path, lst[i]) == 1 && lst[i][0] != '.' && pospath == 2)
 		{
-			printf("%s%s\n", path, lst[i]);
+			j = 0;
+			printf("\n%s%s\n", path, lst[i]);
 			lst2 = ft_readdir(ft_strjoin(path, lst[i]));
-			printinfo(path, lst[i]);
+			while(lst2[j])
+			{
+				if (lst2[j][0] != '.')
+				{
+					printf("%s\n", lst2[j]);
+					path2 = ft_strnew(ft_strlen(path) + ft_strlen(lst[i]) + 1);
+					path2 = ft_strcat(path2, path);
+					path2 = ft_strcat(path2, lst[i]);
+					path2 = ft_strcat(path2, "/");
+					printinfo(path2, lst2[j]);
+				}
+				j++;
+			}
 		}
 		i++;
 	}

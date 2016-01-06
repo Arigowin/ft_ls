@@ -32,6 +32,9 @@ void	ft_sort_str(char ***str, int size);
 // Error
 int		ft_error(char *str);
 
+// Dir
+char	**ft_readdir(char *path);
+
 #endif
 // write
 // opendir

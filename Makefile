@@ -6,7 +6,7 @@
 #    By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/03 10:52:20 by dolewski          #+#    #+#              #
-#    Updated: 2016/01/05 14:35:23 by dolewski         ###   ########.fr        #
+#    Updated: 2016/01/06 11:01:38 by dolewski         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC = main.c \
 	  ft_ls_modeoffile.c \
 	  ft_ls_option.c \
 	  ft_ls_sort_str.c \
-	  ft_ls_error.c
+	  ft_ls_error.c \
+	  ft_ls_readdir.c
 
 OFILES = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
 

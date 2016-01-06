@@ -24,13 +24,18 @@ int		printinfo(char *path, char *str)
 	else
 		printf("%d, %d\t", ((b.st_rdev & MAJOR) >> 24), (b.st_rdev & ~MAJOR));
 	printf("%s\t", ft_format_date(b.st_mtime));
-	printf("%s\n", str);
+	if (str[0] != '\0')
+		printf("%s\n", str);
+	else
+		printf("%s\n", ft_strsub(path, 2, ft_strlen(path) - 2));
 
 	if (droit[0] == '-')
 		return (0);
 	else
 		return (1);
 }
+
+// fonction qui me renvoie 0 si ces un fichier et 1 si ces un dossier
 
 int main(int ac, const char **av)
 {
@@ -48,16 +53,25 @@ int main(int ac, const char **av)
 	printf("option: [%s]\n", data.op);
 	while (data.path[i] != NULL)
 	{
+		j = 0;
 		data.path_format[i] = ft_format_path(data.path[i]);
 		printf("\n%s:\n", data.path[i]);
-		printf("%s\n", data.path_format[i]);
-		lst = ft_readdir(data.path_format[i]);
-		if (errno != 0)
-			printf("%s\n", strerror(errno));
-		while (lst[j] != NULL)
+		if (ft_is_dir(data.path[i], data.path_format[i]) == 1)
 		{
-			printinfo(data.path_format[i], lst[j]);
-			j++;
+			if ((lst = ft_readdir(data.path_format[i], data.path[i])) == NULL)
+			{
+				i++;
+				continue ;
+			}
+			while (lst[j] != NULL)
+			{
+				printinfo(data.path_format[i], lst[j]);
+				j++;
+			}
+		}
+		else
+		{
+			printinfo(data.path_format[i], "");
 		}
 		i++;
 	}

@@ -1,24 +1,12 @@
 #include "ft_ls.h"
 
-char	**ft_readdir(char *path)
+static char		**ft_readdir_bis(DIR *dir)
 {
 	struct dirent	*dp;
-	DIR				*dir;
-	int				i;
 	char			*tmp;
 	char			**lst;
+	int				i;
 
-
-	dir = opendir(path);
-	if (dir == NULL)
-	{
-		if (errno == ENOTDIR)
-		{
-			printf("%s\n", path);
-			exit (0);
-		}
-		exit (ft_error(NULL));
-	}
 	tmp = NULL;
 	i = 0;
 	while ((dp = readdir(dir)) != NULL)
@@ -32,8 +20,31 @@ char	**ft_readdir(char *path)
 		}
 		i++;
 	}
-	closedir(dir);
 	lst = ft_strsplit(tmp, '\n');
 	ft_sort_str(&lst, i);
 	return (lst);
+}
+
+char			**ft_readdir(char *fpath, char *path)
+{
+	DIR				*dir;
+	char			**lst;
+
+	dir = opendir(fpath);
+	if (dir == NULL)
+	{
+		if (errno == ENOTDIR)
+		{
+			printf("%s\n", path);
+			exit (0);
+		}
+		ft_error(fpath);
+	}
+	else
+	{
+		lst = ft_readdir_bis(dir);
+		closedir(dir);
+		return (lst);
+	}
+	return (NULL);
 }

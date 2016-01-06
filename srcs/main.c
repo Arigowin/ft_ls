@@ -32,73 +32,55 @@ int		printinfo(char *path, char *str)
 		return (1);
 }
 
-int main(int ac, const char **av)
+void	ft_recup_option(t_ft_ls *data, char **lst, int nb)
 {
-	char **lst;
-	char **lst2;
-	char *path;
-	char *path2;
-	int pospath;
-	char option;
 	int i;
 	int j;
-	ac = 0;
+	int k;
+	int l;
 
-	pospath = 1;
-	if (ft_strchr(av[1], '-') != NULL)
-	{
-		pospath++;
-		option = av[1][1];
-	}
+	data->op = ft_strnew(nb);
+	data->path = (char **)malloc(sizeof(char *) * nb);
 
-	lst = ft_readdir((char*)av[pospath]);
 	i = 0;
-	path = "";
-	if (av[pospath][ft_strlen(av[pospath]) - 1] != '/')
-		path = ft_strjoin(av[pospath], "/");
-	else
-		path = ft_strdup(av[pospath]);
-	printf("%s\n", path);
-	while (lst[i])
+	j = 0;
+	k = 1;
+	while (k < nb)
 	{
-		if (printinfo(path, lst[i]) == 1 && lst[i][0] != '.' && pospath == 2)
+		if (ft_strchr(lst[k], '-') != NULL)
 		{
-			j = 0;
-			printf("\n%s%s\n", path, lst[i]);
-			lst2 = ft_readdir(ft_strjoin(path, lst[i]));
-			while(lst2[j])
+			data->op[i] = lst[k][1];
+			l = 2;
+			while (lst[k][l] != '\0')
 			{
-				if (lst2[j][0] != '.')
-				{
-					printf("%s\n", lst2[j]);
-					path2 = ft_strnew(ft_strlen(path) + ft_strlen(lst[i]) + 1);
-					path2 = ft_strcat(path2, path);
-					path2 = ft_strcat(path2, lst[i]);
-					path2 = ft_strcat(path2, "/");
-					printinfo(path2, lst2[j]);
-				}
-				j++;
+				i++;
+				data->op[i] = lst[k][l];
+				l++;
 			}
+			i++;
 		}
+		else
+			data->path[j++] = ft_strdup(lst[k]);
+		k++;
+	}
+}
+
+int main(int ac, const char **av)
+{
+	t_ft_ls		data;
+	int i = 0;
+
+	ft_recup_option(&data, (char**)av, ac);
+
+	printf("%s\n", data.op);
+	while (i < 3)
+	{
+		printf("%s\n", data.path[i]);
 		i++;
 	}
 
 	return (0);
 }
-/*
-// Recupere la liste des fichiers et dossier dans un dossier donne
-DIR *dir;
-struct dirent *dp;
-
-dir = opendir(av[1]);
-if (dir == NULL)
-return (-1);
-while ((dp = readdir(dir)) != NULL)
-{
-printf("%s\n", dp->d_name);
-}
-closedir(dir);
-*/
 
 /*
 // st_dev | MAJOR = hexa FF nb a garder | >> 24 pour deplacer de 24 bit sur la droite cad de 4 * 6 bit
@@ -122,4 +104,53 @@ printf("%d\t\t%d\n", minor(b.st_rdev), b.st_rdev & ~MAJOR);
    else
    printf("Poid de bit majeur, mineur: %d, %d\n", ((b.st_rdev & MAJOR) >> 24), (b.st_rdev & ~MAJOR));
    printf("Date de derniere modification: %s\n", ft_format_date(b.st_mtime));
+   */
+/*
+   char **lst;
+   char **lst2;
+   char *path;
+   char *path2;
+   int pospath;
+   char option;
+   int i;
+   int j;
+   ac = 0;
+
+   pospath = 1;
+   if (ft_strchr(av[1], '-') != NULL)
+   {
+   pospath++;
+   option = av[1][1];
+   }
+   path = "";
+   if (av[pospath][ft_strlen(av[pospath]) - 1] != '/')
+   path = ft_strjoin(av[pospath], "/");
+   else
+   path = ft_strdup(av[pospath]);
+
+   lst = ft_readdir((char*)av[pospath]);
+   i = 0;
+   printf("%s\n", path);
+   while (lst[i])
+   {
+   if (printinfo(path, lst[i]) == 1 && lst[i][0] != '.' && pospath == 2)
+   {
+   j = 0;
+   printf("\n%s%s\n", path, lst[i]);
+   lst2 = ft_readdir(ft_strjoin(path, lst[i]));
+   while(lst2[j])
+   {
+   if (lst2[j][0] != '.')
+   {
+   path2 = ft_strnew(ft_strlen(path) + ft_strlen(lst[i]) + 1);
+   path2 = ft_strcat(path2, path);
+   path2 = ft_strcat(path2, lst[i]);
+   path2 = ft_strcat(path2, "/");
+   printinfo(path2, lst2[j]);
+   }
+   j++;
+   }
+   }
+   i++;
+   }
    */

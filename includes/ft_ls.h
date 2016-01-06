@@ -41,6 +41,9 @@ int		ft_error(char *str);
 // Dir
 char	**ft_readdir(char *path);
 
+// option
+void	ft_recup_option(t_ft_ls *data, char **lst, int nb);
+
 #endif
 // write
 // opendir

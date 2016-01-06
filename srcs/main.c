@@ -32,52 +32,23 @@ int		printinfo(char *path, char *str)
 		return (1);
 }
 
-void	ft_recup_option(t_ft_ls *data, char **lst, int nb)
-{
-	int i;
-	int j;
-	int k;
-	int l;
-
-	data->op = ft_strnew(nb);
-	data->path = (char **)malloc(sizeof(char *) * nb);
-
-	i = 0;
-	j = 0;
-	k = 1;
-	while (k < nb)
-	{
-		if (ft_strchr(lst[k], '-') != NULL)
-		{
-			data->op[i] = lst[k][1];
-			l = 2;
-			while (lst[k][l] != '\0')
-			{
-				i++;
-				data->op[i] = lst[k][l];
-				l++;
-			}
-			i++;
-		}
-		else
-			data->path[j++] = ft_strdup(lst[k]);
-		k++;
-	}
-}
-
 int main(int ac, const char **av)
 {
 	t_ft_ls		data;
+	char		**lst;
 	int i = 0;
 
 	ft_recup_option(&data, (char**)av, ac);
+	ft_sort_str(&(data.path), ac);
 
-	printf("%s\n", data.op);
-	while (i < 3)
+	printf("option: [%s]\n", data.op);
+	while (data.path[i] != NULL)
 	{
-		printf("%s\n", data.path[i]);
+		printf("\n%s:\n", data.path[i]);
+		lst = ft_readdir(data.path[i]);
 		i++;
 	}
+
 
 	return (0);
 }

@@ -48,7 +48,8 @@ int main(int ac, const char **av)
 	data.path = NULL;
 	data.op = NULL;
 	ft_recup_option(&data, (char**)av, ac);
-	ft_sort_str(&(data.path), data.nb_path);
+	if (data.nb_path < 1)
+		ft_sort_str(&(data.path), data.nb_path);
 
 	printf("option: [%s]\n", data.op);
 	while (data.path[i] != NULL)

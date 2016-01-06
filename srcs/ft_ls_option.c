@@ -46,6 +46,12 @@ void			ft_recup_option(t_ft_ls *data, char **lst, int nb)
 	data->path_format = (char **)malloc(sizeof(char *) * nb);
 	i = 1;
 	j = 1;
+	if (nb < 2 || (nb < 3 && lst[1][0] == '-'))
+	{
+		data->path[0] = ".";
+		data->nb_path++;
+		return ;
+	}
 	if (lst[1][0] == '-' && lst[1][1] != '\0')
 	{
 		i = 2;

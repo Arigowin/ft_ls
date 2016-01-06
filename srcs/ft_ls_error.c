@@ -5,14 +5,12 @@ int		ft_error(char *str)
 	if (str != NULL)
 	{
 		ft_putstr("ft_ls: ");
-		ft_putstr(str);
-		ft_putstr(": ");
-		ft_putendl(strerror(errno));
+		perror(str);
 	}
 	else
 	{
 		ft_putstr("ft_ls: ");
-		ft_putendl(strerror(errno));
+		perror(str);
 	}
 	return (-1);
 }

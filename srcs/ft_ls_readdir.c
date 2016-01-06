@@ -38,7 +38,7 @@ char			**ft_readdir(char *fpath, char *path)
 			printf("%s\n", path);
 			exit (0);
 		}
-		ft_error(fpath);
+		ft_error(path);
 	}
 	else
 	{

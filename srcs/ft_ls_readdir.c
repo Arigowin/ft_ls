@@ -1,8 +1,9 @@
 #include "ft_ls.h"
-# include "libft.h"
-# include <dirent.h>
-# include <sys/errno.h>
-# include <stdlib.h>
+#include "libft.h"
+#include <dirent.h>
+#include <sys/errno.h>
+#include <stdlib.h>
+#include <sys/stat.h>
 
 static char		**ft_readdir_bis(DIR *dir)
 {
@@ -42,7 +43,7 @@ char			**ft_readdir(char *fpath, char *path)
 			ft_putendl(path);
 			exit (0);
 		}
-		ft_error("1");
+		ft_error(fpath);
 	}
 	else
 	{
@@ -51,4 +52,16 @@ char			**ft_readdir(char *fpath, char *path)
 		return (lst);
 	}
 	return (NULL);
+}
+
+int		ft_is_dir(char *path, char *fpath)
+{
+	struct stat b;
+
+	if (lstat(fpath, &b) == -1)
+		exit(ft_error(path));
+	if (S_ISDIR (b.st_mode))
+		return (1);
+	else
+		return (0);
 }

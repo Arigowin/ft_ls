@@ -6,7 +6,7 @@
 #    By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/03 10:52:20 by dolewski          #+#    #+#              #
-#    Updated: 2016/01/06 13:31:24 by dolewski         ###   ########.fr        #
+#    Updated: 2016/01/07 17:31:26 by dolewski         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ CFLAGS = -g -Wall -Werror -Wextra -I $(HPATH) -I $(LFTHPATH)
 LIBS = -L $(LIBPATH) -lft
 
 SRC = main.c \
-	  ft_ls_date.c \
+	  ft_ls_format.c \
 	  ft_ls_modeoffile.c \
 	  ft_ls_option.c \
 	  ft_ls_sort_str.c \

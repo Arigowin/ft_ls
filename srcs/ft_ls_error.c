@@ -2,6 +2,7 @@
 #include "libft.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 int		ft_error(char *str)
 {
@@ -15,5 +16,5 @@ int		ft_error(char *str)
 		ft_putstr("ft_ls: ");
 		perror(str);
 	}
-	return (-1);
+	return (EXIT_FAILURE);
 }

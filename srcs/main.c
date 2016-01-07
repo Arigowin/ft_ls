@@ -43,27 +43,13 @@ int		printinfo(char *path, char *str)
 		return (1);
 }
 
-int main(int ac, const char **av)
+void	ft_parcour(t_ft_ls data)
 {
-	t_ft_ls		data;
-	char		**lst;
-	int i = 0;
-	int j = 0;
+	int		i;
+	int		j;
+	char	**lst;
 
-	data.nb_path = 0;
-	data.path = NULL;
-	data.op = NULL;
-	ft_recup_arg(&data, (char**)av, ac);
-	if (data.nb_path > 1)
-		ft_sort_str(&(data.path), data.nb_path);
-
-	printf("option: [%s]\n", data.op);
-
-// stock tout les args em op et path : OK
-// afficher les dossier 1 par 1 : OK
-// afficher pour chaque dossier les sous dossier si -R : 
-// 
-
+	i = 0;
 	while (data.path[i] != NULL)
 	{
 		j = 0;
@@ -99,7 +85,28 @@ int main(int ac, const char **av)
 		}
 		i++;
 	}
+}
 
+int main(int ac, char **av)
+{
+	t_ft_ls		data;
+
+	data.nb_path = 0;
+	data.path = NULL;
+	data.path_format = NULL;
+	data.op = NULL;
+
+	ft_get_arg(&data, av, ac);
+	if (data.nb_path > 1)
+		ft_sort_str(&(data.path), data.nb_path);
+
+	printf("option: [%s]\n", data.op);
+
+// stock tout les args em op et path : OK
+// afficher les dossier 1 par 1 : OK
+// afficher pour chaque dossier les sous dossier si -R : 
+// 
+	ft_parcour(data);
 
 	return (0);
 }

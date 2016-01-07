@@ -30,7 +30,7 @@ int		ft_error(char *str);
 char	**ft_readdir(char *fpath, char *path);
 
 // option
-void	ft_recup_arg(t_ft_ls *data, char **lst, int nb);
+void	ft_get_arg(t_ft_ls *data, char **lst, int nb);
 char	*ft_format_path(char *str);
 int		ft_is_dir(char *path, char *fpath);
 

@@ -1,4 +1,8 @@
 #include "ft_ls.h"
+# include "libft.h"
+# include <dirent.h>
+# include <sys/errno.h>
+# include <stdlib.h>
 
 static char		**ft_readdir_bis(DIR *dir)
 {
@@ -35,10 +39,10 @@ char			**ft_readdir(char *fpath, char *path)
 	{
 		if (errno == ENOTDIR)
 		{
-			printf("%s\n", path);
+			ft_putendl(path);
 			exit (0);
 		}
-		ft_error(path);
+		ft_error("1");
 	}
 	else
 	{

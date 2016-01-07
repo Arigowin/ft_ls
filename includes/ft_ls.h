@@ -2,21 +2,7 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
-# include "libft.h"
-
-# include <unistd.h>
-# include <dirent.h>
-# include <sys/stat.h>
 # include <sys/types.h>
-# include <pwd.h>
-# include <uuid/uuid.h>
-# include <grp.h>
-# include <sys/xattr.h>
-# include <time.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <sys/errno.h>
 
 # define MAJOR 0XFF000000
 
@@ -44,11 +30,12 @@ int		ft_error(char *str);
 char	**ft_readdir(char *fpath, char *path);
 
 // option
-void	ft_recup_option(t_ft_ls *data, char **lst, int nb);
+void	ft_recup_arg(t_ft_ls *data, char **lst, int nb);
 char	*ft_format_path(char *str);
 int		ft_is_dir(char *path, char *fpath);
 
 #endif
+
 // write
 // opendir
 // readdir

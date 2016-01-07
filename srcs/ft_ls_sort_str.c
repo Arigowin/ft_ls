@@ -1,4 +1,5 @@
 #include "ft_ls.h"
+# include "libft.h"
 
 void	ft_swap_s(char **s1, char **s2)
 {

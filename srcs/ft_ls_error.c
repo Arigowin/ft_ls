@@ -1,4 +1,7 @@
 #include "ft_ls.h"
+#include "libft.h"
+#include <stdio.h>
+#include <string.h>
 
 int		ft_error(char *str)
 {

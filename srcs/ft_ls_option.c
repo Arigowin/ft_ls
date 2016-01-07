@@ -6,13 +6,15 @@
 // -t : sort by modification time, newest first
 
 #include "ft_ls.h"
+#include "libft.h"
+#include <sys/stat.h>
+#include <stdlib.h>
 
 int		ft_is_dir(char *path, char *fpath)
 {
 	struct stat b;
-
-	if (lstat(path, &b) == -1)
-		exit(ft_error(fpath));
+	if (lstat(fpath, &b) == -1)
+		exit(ft_error(path));
 	if (S_ISDIR (b.st_mode))
 		return (1);
 	else
@@ -27,7 +29,7 @@ char			*ft_format_path(char *str)
 	if (str[0] != '/' && str[1] != '/')
 	{
 		if ((str = ft_strjoin("./", str)) == NULL)
-			exit(ft_error(NULL));
+			exit(ft_error("4"));
 	}
 	if (path[ft_strlen(path) - 1] != '/')
 		path = ft_strjoin(path, "/");
@@ -35,37 +37,49 @@ char			*ft_format_path(char *str)
 		return (str);
 	return (path);
 }
-
-void			ft_recup_option(t_ft_ls *data, char **lst, int nb)
+static char		*ft_recup_option(char **lst, int *nb)
 {
-	int i;
-	int j;
+	int		i;
+	char	*ret;
+	int		nbb;
 
-	data->op = ft_strnew(nb);
+	i = 1;
+	nbb = (*nb);
+	ret = ft_strnew(*nb);
+	while (i < nbb && lst[i][0] == '-' && lst[i][1] != '\0')
+	{
+		if (lst[i][0] == '-' && lst[i][1] != '\0')
+			ret = ft_strjoin(ret, &lst[i][1]);
+		i++;
+		(*nb)--;
+	}
+	(*nb)--;
+	return (ret);
+}
+
+void			ft_recup_arg(t_ft_ls *data, char **lst, int nb)
+{
+	int		i;
+	int		j;
+	int		nbb;
+
 	data->path = (char **)malloc(sizeof(char *) * nb);
 	data->path_format = (char **)malloc(sizeof(char *) * nb);
-	i = 1;
-	j = 1;
-	if (nb < 2 || (nb < 3 && lst[1][0] == '-'))
+	nbb = nb;
+	data->op = ft_recup_option(lst, &nb);
+	if (nb < 1)
 	{
 		data->path[0] = ".";
+		data->path[1] = NULL;
 		data->nb_path++;
 		return ;
 	}
-	if (lst[1][0] == '-' && lst[1][1] != '\0')
-	{
-		i = 2;
-		while (lst[1][j])
-		{
-			data->op[j - 1] = lst[1][j];
-			j++;
-		}
-	}
+	i = nbb - nb;
 	j = 0;
-	while (i < nb)
+	while (i < nbb)
 	{
 		data->path[j++] = ft_strdup(lst[i++]);
 		data->nb_path++;
 	}
-	data->path[j] = NULL;
+	data->path[data->nb_path] = NULL;
 }

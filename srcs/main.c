@@ -57,13 +57,7 @@ int main(int ac, char **av)
 	if (ft_check_op(data.op))
 		exit(-1);
 
-	printf("option: [%s]\n", data.op);
-
-	// stock tout les args em op et path : OK
-	// afficher les dossier 1 par 1 : OK
-	// afficher pour chaque dossier les sous dossier si -R : 
-	// 
-	ft_parcour(data);
+	ft_browse(data);
 
 	return (0);
 }

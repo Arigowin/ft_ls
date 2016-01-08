@@ -43,7 +43,7 @@ char			**ft_readdir(char *fpath, char *path)
 			ft_putendl(path);
 			exit (0);
 		}
-		ft_error(fpath);
+		ft_error(1, ft_strsub(path, 2, ft_strlen(path)));
 	}
 	else
 	{
@@ -59,7 +59,7 @@ int		ft_is_dir(char *path, char *fpath)
 	struct stat b;
 
 	if (lstat(fpath, &b) == -1)
-		exit(ft_error(path));
+		exit(ft_error(1, path));
 	if (S_ISDIR (b.st_mode))
 		return (1);
 	else

@@ -3,6 +3,7 @@
 #include <time.h>
 #include <stdlib.h>
 
+#include <stdio.h>
 char			*ft_format_path(char *str)
 {
 	char	*path;
@@ -10,7 +11,7 @@ char			*ft_format_path(char *str)
 	if ((str[0] != '/' && str[1] != '/') && (str[0] != '.'))
 	{
 		if ((str = ft_strjoin("./", str)) == NULL)
-			exit(ft_error(str));
+			exit(ft_error(1, str));
 	}
 	path = ft_strdup(str);
 	if (path[ft_strlen(path) - 1] != '/')

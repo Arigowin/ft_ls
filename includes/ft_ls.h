@@ -36,7 +36,9 @@ int		ft_check_op(char *op);
 int		ft_is_dir(char *path, char *fpath);
 
 // browse
-void	ft_parcour(t_ft_ls data);
+void	ft_browse(t_ft_ls data);
+
+int		printinfo(char *path, char *str);
 
 #endif
 

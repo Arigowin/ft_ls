@@ -35,7 +35,7 @@ int		printinfo(char *path, char *str)
 	if (str[0] != '\0')
 		printf("%s\n", str);
 	else
-		printf("%s\n", ft_strsub(path, 2, ft_strlen(path) - 2));
+		printf("%s\n", path);
 
 	if (droit[0] == '-')
 		return (0);

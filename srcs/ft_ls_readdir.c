@@ -26,6 +26,7 @@ static char		**ft_readdir_bis(DIR *dir)
 		i++;
 	}
 	lst = ft_strsplit(tmp, '\n');
+	ft_sort_str(&lst, i);
 	return (lst);
 }
 
@@ -38,10 +39,7 @@ char			**ft_readdir(char *fpath, char *path)
 	if (dir == NULL)
 	{
 		if (errno == ENOTDIR)
-		{
 			ft_putendl(path);
-			exit (0);
-		}
 		ft_error(1, ft_strsub(path, 2, ft_strlen(path)));
 	}
 	else
@@ -58,7 +56,11 @@ int		ft_is_dir(char *path, char *fpath)
 	struct stat b;
 
 	if (lstat(fpath, &b) == -1)
-		exit(ft_error(1, path));
+	{
+		if (errno == ENOTDIR)
+			return (0);
+		ft_error(1, path);
+	}
 	if (S_ISDIR (b.st_mode))
 		return (1);
 	else

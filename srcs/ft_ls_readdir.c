@@ -26,7 +26,6 @@ static char		**ft_readdir_bis(DIR *dir)
 		i++;
 	}
 	lst = ft_strsplit(tmp, '\n');
-	ft_sort_str(&lst, i);
 	return (lst);
 }
 

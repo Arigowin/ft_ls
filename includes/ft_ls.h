@@ -5,12 +5,12 @@
 # include <sys/types.h>
 
 # define MAJOR 0XFF000000
+# define OP "Ralrt"
 
 typedef struct		s_ft_ls
 {
 	char			*op;		// Liste des option
 	char			**path;		// Liste des chemin passer en param
-	char			**path_format;
 	int				nb_path;
 }					t_ft_ls;
 
@@ -24,7 +24,7 @@ char	*ft_format_date(time_t date);
 void	ft_sort_str(char ***str, int size);
 
 // Error
-int		ft_error(char *str);
+int		ft_error(int nb, char *str);
 
 // Dir
 char	**ft_readdir(char *fpath, char *path);
@@ -32,7 +32,11 @@ char	**ft_readdir(char *fpath, char *path);
 // option
 void	ft_get_arg(t_ft_ls *data, char **lst, int nb);
 char	*ft_format_path(char *str);
+int		ft_check_op(char *op);
 int		ft_is_dir(char *path, char *fpath);
+
+// browse
+void	ft_parcour(t_ft_ls data);
 
 #endif
 

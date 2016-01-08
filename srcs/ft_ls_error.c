@@ -4,17 +4,20 @@
 #include <string.h>
 #include <stdlib.h>
 
-int		ft_error(char *str)
+int		ft_error(int nb, char *str)
 {
-	if (str != NULL)
+	if (nb == 1)
 	{
-		ft_putstr("ft_ls: ");
+		ft_putstr_fd("ft_ls: ", 2);
 		perror(str);
 	}
-	else
+	else if (nb == 2)
 	{
-		ft_putstr("ft_ls: ");
-		perror(str);
+		ft_putstr_fd("ft_ls: illegal option -- ", 2);
+		ft_putchar_fd(str[0], 2);
+		ft_putstr_fd("\nusage: ft_ls [-", 2);
+		ft_putstr_fd(OP, 2);
+		ft_putendl_fd("] [file ...]", 2);
 	}
 	return (EXIT_FAILURE);
 }

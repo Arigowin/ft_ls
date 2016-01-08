@@ -21,10 +21,18 @@ static char		*ft_get_option(char **lst, int *nb)
 	ret = ft_strnew(*nb);
 	while (i < nbb && lst[i][0] == '-' && lst[i][1] != '\0')
 	{
-		if (lst[i][0] == '-' && lst[i][1] != '\0')
-			ret = ft_strjoin(ret, &lst[i][1]);
-		i++;
-		(*nb)--;
+		if (lst[i][1] != '-')
+		{
+			if (lst[i][0] == '-' && lst[i][1] != '\0')
+				ret = ft_strjoin(ret, &lst[i][1]);
+			i++;
+			(*nb)--;
+		}
+		else
+		{
+			(*nb)--;
+			break ;
+		}
 	}
 	(*nb)--;
 	return (ret);
@@ -37,7 +45,6 @@ void			ft_get_arg(t_ft_ls *data, char **lst, int nb)
 	int		nbb;
 
 	data->path = (char **)malloc(sizeof(char *) * nb);
-	data->path_format = (char **)malloc(sizeof(char *) * nb);
 	nbb = nb;
 	data->op = ft_get_option(lst, &nb);
 	if (nb < 1)
@@ -55,4 +62,22 @@ void			ft_get_arg(t_ft_ls *data, char **lst, int nb)
 		data->nb_path++;
 	}
 	data->path[data->nb_path] = NULL;
+}
+
+int				ft_check_op(char *op)
+{
+	char	*lstop;
+	int		i;
+
+	lstop = OP;
+	i = 0;
+	while (op[i])
+	{
+		if (ft_strchr(lstop, op[i]) == NULL)
+		{
+			return (ft_error(2, &(op[i])));
+		}
+		i++;
+	}
+	return (0);
 }

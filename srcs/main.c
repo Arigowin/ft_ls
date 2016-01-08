@@ -19,7 +19,7 @@ int		printinfo(char *path, char *str)
 
 	tmp = NULL;
 	if (lstat(ft_strjoin(path, str), &b) == -1)
-		exit (ft_error("2"));
+		exit (ft_error(1, path));
 	droit = ft_modeoffile(b.st_mode);
 	printf("%s\t", droit);
 	printf("%hu\t", b.st_nlink);
@@ -43,69 +43,26 @@ int		printinfo(char *path, char *str)
 		return (1);
 }
 
-void	ft_parcour(t_ft_ls data)
-{
-	int		i;
-	int		j;
-	char	**lst;
-
-	i = 0;
-	while (data.path[i] != NULL)
-	{
-		j = 0;
-		data.path_format[i] = ft_format_path(data.path[i]);
-		if (ft_is_dir(data.path[i], data.path_format[i]) == 1)
-		{
-			printf("\n%s:\t%s\n", data.path[i], data.path_format[i]);
-			if ((lst = ft_readdir(data.path_format[i], data.path[i])) == NULL)
-			{
-				i++;
-				continue ;
-			}
-			while (lst[j] != NULL)
-			{
-				printinfo(data.path_format[i], lst[j]);
-				j++;
-			}
-			j = 0;
-			while (lst[j] != NULL)
-			{
-				if (lst[j][0] != '.' && ft_strchr(data.op, 'R') != NULL)
-				{
-					if (ft_is_dir(lst[j], ft_strjoin(data.path_format[i], lst[j])) == 1)
-						printf("\n-R %s\n", lst[j]);
-				}
-				j++;
-			}
-		}
-		else
-		{
-			printf("\n");
-			printinfo(data.path_format[i], "");
-		}
-		i++;
-	}
-}
-
 int main(int ac, char **av)
 {
 	t_ft_ls		data;
 
 	data.nb_path = 0;
 	data.path = NULL;
-	data.path_format = NULL;
 	data.op = NULL;
 
 	ft_get_arg(&data, av, ac);
 	if (data.nb_path > 1)
 		ft_sort_str(&(data.path), data.nb_path);
+	if (ft_check_op(data.op))
+		exit(-1);
 
 	printf("option: [%s]\n", data.op);
 
-// stock tout les args em op et path : OK
-// afficher les dossier 1 par 1 : OK
-// afficher pour chaque dossier les sous dossier si -R : 
-// 
+	// stock tout les args em op et path : OK
+	// afficher les dossier 1 par 1 : OK
+	// afficher pour chaque dossier les sous dossier si -R : 
+	// 
 	ft_parcour(data);
 
 	return (0);

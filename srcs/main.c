@@ -16,6 +16,11 @@ int		printinfo(char *path, char *str)
 	struct group *grp;
 	char *droit;
 	char *tmp;
+	
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : printinfo\n");
+#endif
 
 	tmp = NULL;
 	if (lstat(ft_strjoin(path, str), &b) == -1)
@@ -58,6 +63,11 @@ void	ft_free_lst(t_ft_ls data)
 {
 	int i;
 
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_free_lst\n");
+#endif
+
 	i = 0;
 	free(data.op);
 	while (i < data.nb_path)
@@ -75,6 +85,11 @@ int main(int ac, char **av)
 	data.nb_path = 0;
 	data.path = NULL;
 	data.op = NULL;
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : main\n");
+#endif
 
 	ft_get_arg(&data, av, ac);
 	if (data.nb_path > 1)

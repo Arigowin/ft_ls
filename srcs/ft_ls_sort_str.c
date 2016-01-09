@@ -1,9 +1,15 @@
 #include "ft_ls.h"
 # include "libft.h"
 
+#include <stdio.h>
 void	ft_swap_s(char **s1, char **s2)
 {
 	char	*tmp;
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_swap_s\n");
+#endif
 
 	tmp = *s1;
 	*s1 = ft_strdup(*s2);
@@ -15,6 +21,11 @@ void	ft_sort_str(char ***str, int size)
 	int		i;
 	int		x;
 	int		cmp;
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_sort_str\n");
+#endif
 
 	i = 0;
 	x = 0;

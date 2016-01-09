@@ -11,6 +11,11 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 	char *tmp2;
 	int j;
 
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_browse_recu\n");
+#endif
+
 	j = 0;
 	fpath = ft_strdup(path);
 	if (ft_is_dir(path, fpath) == 1)
@@ -72,6 +77,11 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 void	ft_browse(t_ft_ls data)
 {
 	int		i;
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_browse\n");
+#endif
 
 	i = 0;
 	while (i < data.nb_path)

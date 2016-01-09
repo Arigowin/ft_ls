@@ -2,8 +2,14 @@
 # include "libft.h"
 #include <sys/stat.h>
 
+#include <stdio.h>
 static char		ft_typeoffile(mode_t mode)
 {
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_typeoffile\n");
+#endif
+
 	char droit;
 
 	droit = '-';
@@ -29,6 +35,11 @@ static char		ft_typeoffile(mode_t mode)
 char			*ft_modeoffile(mode_t mode)
 {
 	char *droit;
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_modeoffile\n");
+#endif
 
 	droit = ft_strnew(10);
 	droit = ft_memset(droit, '-', 10);

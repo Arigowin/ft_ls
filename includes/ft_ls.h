@@ -7,6 +7,9 @@
 # define MAJOR 0XFF000000
 # define OP "Ralrt"
 
+//#define DEBUG
+
+// Arguments
 typedef struct		s_ft_ls
 {
 	char			*op;		// Liste des option
@@ -121,3 +124,24 @@ int		printinfo(char *path, char *str);
  *   #define S_IWOTH 0000002    // W for other
  *   #define S_IXOTH 0000001    // X for other
 */
+
+/*
+#define __DARWIN_STRUCT_DIRENTRY { \
+103 >   __uint64_t  d_ino;      // file number of entry 
+104 >   __uint64_t  d_seekoff;  // seek offset (optional, used by servers)
+105 >   __uint16_t  d_reclen;   // length of this record
+106 >   __uint16_t  d_namlen;   // length of string in d_name
+107 >   __uint8_t   d_type;     // file type, see below
+108 >   char      d_name[__DARWIN_MAXPATHLEN]; // entry name (up to MAXPATHLEN bytes)
+109 }
+
+123 #define>DT_UNKNOWN>  0
+124 #define>DT_FIFO>>    1
+125 #define>DT_CHR> >    2
+126 #define>DT_DIR> >    4
+127 #define>DT_BLK> >    6
+128 #define>DT_REG> >    8
+129 #define>DT_LNK> >   10
+130 #define>DT_SOCK>>   12
+131 #define>DT_WHT> >   14
+ */

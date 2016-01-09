@@ -10,11 +10,17 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
+#include <stdio.h>
 static char		*ft_get_option(char **lst, int *nb)
 {
 	int		i;
 	char	*ret;
 	int		nbb;
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_get_option\n");
+#endif
 
 	i = 1;
 	nbb = (*nb);
@@ -44,6 +50,11 @@ void			ft_get_arg(t_ft_ls *data, char **lst, int nb)
 	int		j;
 	int		nbb;
 
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_get_arg\n");
+#endif
+
 	nbb = nb;
 	data->op = ft_get_option(lst, &nb);
 	if ((data->path = (char **)malloc(sizeof(char *) * (((nbb - nb) <= 0 ? 1 : nbb - nb) + 1))) == NULL)
@@ -69,6 +80,11 @@ int				ft_check_op(char *op)
 {
 	char	*lstop;
 	int		i;
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_check_op\n");
+#endif
 
 	lstop = OP;
 	i = 0;

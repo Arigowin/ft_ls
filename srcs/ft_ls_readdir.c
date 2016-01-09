@@ -5,12 +5,18 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
+#include <stdio.h>
 static char		**ft_readdir_bis(DIR *dir)
 {
 	struct dirent	*dp;
 	char			*tmp;
 	char			**lst;
 	int				i;
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_readdir_bis\n");
+#endif
 
 	tmp = NULL;
 	i = 0;
@@ -35,6 +41,11 @@ char			**ft_readdir(char *fpath, char *path)
 	DIR				*dir;
 	char			**lst;
 
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_readdir\n");
+#endif
+
 	dir = opendir(fpath);
 	if (dir == NULL)
 	{
@@ -54,6 +65,11 @@ char			**ft_readdir(char *fpath, char *path)
 int		ft_is_dir(char *path, char *fpath)
 {
 	struct stat b;
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_is_dir\n");
+#endif
 
 	if (lstat(fpath, &b) == -1)
 	{

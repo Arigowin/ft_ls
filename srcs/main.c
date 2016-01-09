@@ -21,26 +21,51 @@ int		printinfo(char *path, char *str)
 	if (lstat(ft_strjoin(path, str), &b) == -1)
 		exit (ft_error(1, path));
 	droit = ft_modeoffile(b.st_mode);
-	printf("%s\t", droit);
-	printf("%hu\t", b.st_nlink);
 	uid = getpwuid(b.st_uid);
-	printf("%s\t", uid->pw_name);
 	grp = getgrgid(b.st_gid);
-	printf("%s\t", grp->gr_name);
+
+	ft_putstr(droit);
+	ft_putstr("\t");
+	ft_putnbr(b.st_nlink);
+	ft_putstr("\t");
+	ft_putstr(uid->pw_name);
+	ft_putstr("\t");
+	ft_putstr(grp->gr_name);
+	ft_putstr("\t");
 	if (!(b.st_rdev))
-		printf("%lld\t", b.st_size);
+		ft_putnbr(b.st_size);
 	else
-		printf("%d, %d\t", ((b.st_rdev & MAJOR) >> 24), (b.st_rdev & ~MAJOR));
-	printf("%s\t", ft_format_date(b.st_mtime));
+	{
+		ft_putnbr((b.st_rdev & MAJOR) >> 24);
+		ft_putstr(", ");
+		ft_putnbr(b.st_rdev & ~MAJOR);
+	}
+	ft_putstr("\t");
+	ft_putstr(ft_format_date(b.st_mtime));
+	ft_putstr("\t");
 	if (str[0] != '\0')
-		printf("%s\n", str);
+		ft_putendl(str);
 	else
-		printf("%s\n", path);
+		ft_putendl(path);
 
 	if (droit[0] == '-')
 		return (0);
 	else
 		return (1);
+}
+
+void	ft_free_lst(t_ft_ls data)
+{
+	int i;
+
+	i = 0;
+	free(data.op);
+	while (i < data.nb_path)
+	{
+		free(data.path[i]);
+		i++;
+	}
+	free(data.path);
 }
 
 int main(int ac, char **av)
@@ -58,6 +83,8 @@ int main(int ac, char **av)
 		exit(-1);
 
 	ft_browse(data);
+
+	ft_free_lst(data);
 
 	return (0);
 }

@@ -1,17 +1,21 @@
 #include "ft_ls.h"
 #include "libft.h"
+#include <stdlib.h>
 
 #include <stdio.h>
 static int		ft_browse_recu(t_ft_ls data, char *path)
 {
 	char	**lst;
 	char	*fpath;
+	char *tmp;
+	char *tmp2;
 	int j;
 
 	j = 0;
 	fpath = ft_strdup(path);
 	if (ft_is_dir(path, fpath) == 1)
 	{
+		free(fpath);
 		fpath = ft_format_path(path);
 		if (data.nb_path > 1 || ft_strchr(data.op, 'R') != NULL)
 		{
@@ -39,7 +43,16 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 			if (lst[j][0] != '.' && ft_strchr(data.op, 'R') != NULL)
 			{
 				if (ft_is_dir(lst[j], ft_strjoin(fpath, lst[j])) == 1)
-					ft_browse_recu(data, ft_strjoin(ft_strjoin(path, "/"), lst[j]));
+				{
+					if (path[ft_strlen(path) - 1] == '/')
+						tmp = ft_strdup(path);
+					else
+						tmp = ft_strjoin(path, "/");
+					tmp2 = ft_strjoin(tmp, lst[j]);
+					free(tmp);
+					ft_browse_recu(data, tmp2);
+					free(tmp2);
+				}
 			}
 			j++;
 		}
@@ -52,6 +65,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 		else
 			printinfo(fpath, "");
 	}
+	free(fpath);
 	return (0);
 }
 

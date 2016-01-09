@@ -44,12 +44,13 @@ void			ft_get_arg(t_ft_ls *data, char **lst, int nb)
 	int		j;
 	int		nbb;
 
-	data->path = (char **)malloc(sizeof(char *) * nb);
 	nbb = nb;
 	data->op = ft_get_option(lst, &nb);
+	if ((data->path = (char **)malloc(sizeof(char *) * (((nbb - nb) <= 0 ? 1 : nbb - nb) + 1))) == NULL)
+		ft_error(1, "ft_get_arg");
 	if (nb < 1)
 	{
-		data->path[0] = ".";
+		data->path[0] = ft_strdup(".");
 		data->path[1] = NULL;
 		data->nb_path++;
 		return ;
@@ -74,9 +75,7 @@ int				ft_check_op(char *op)
 	while (op[i])
 	{
 		if (ft_strchr(lstop, op[i]) == NULL)
-		{
 			return (ft_error(2, &(op[i])));
-		}
 		i++;
 	}
 	return (0);

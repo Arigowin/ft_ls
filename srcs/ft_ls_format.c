@@ -3,25 +3,36 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include <stdio.h>
 char			*ft_format_path(char *str)
 {
 	char	*path;
+	char	*tmp;
 
 	if ((str[0] != '/' && str[1] != '/') && (str[0] != '.'))
 	{
-		if ((str = ft_strjoin("./", str)) == NULL)
+		if ((tmp = ft_strjoin("./", str)) == NULL)
 			exit(ft_error(1, str));
+		ft_strdel(&str);
+		str = ft_strdup(tmp);
+		free(tmp);
 	}
 	path = ft_strdup(str);
 	if (path[ft_strlen(path) - 1] != '/')
-		path = ft_strjoin(path, "/");
+	{
+		tmp = ft_strjoin(path, "/");
+		ft_strdel(&path);
+		path = ft_strjoin(tmp, "/");
+		free(tmp);
+	}
 	if (ft_is_dir(str, path) == 0)
+	{
+		free(path);
 		return (str);
+	}
 	return (path);
 }
 
-char	*ft_format_date(time_t date)
+char			*ft_format_date(time_t date)
 {
 	char *ret;
 	char *tmp;

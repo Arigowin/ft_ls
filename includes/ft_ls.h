@@ -69,6 +69,7 @@ void	ft_browse(t_ft_ls data);
 void	ft_free_lst(t_ft_ls data);
 
 void	print(t_ft_ls data, t_elem **elem, char *path);
+void	printone(t_elem elem, size_t *size);
 
 #endif
 

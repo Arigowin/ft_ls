@@ -4,7 +4,7 @@
 #include <sys/dirent.h>
 
 #include <stdio.h>
-static int		ft_browse_recu(t_ft_ls data, char *path)
+static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 {
 	t_elem	*elem;
 	char	*fpath;
@@ -23,7 +23,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 	{
 		free(fpath);
 		fpath = ft_format_path(path);
-		if (data.nb_path > 1 || data.op_R)
+		if (data.nb_path > 1 || (data.op_R && i > 0))
 		{
 			ft_putendl("");
 			ft_putstr(path);
@@ -49,7 +49,10 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 		j = 0;
 		while (j < elem[0].nbelem)
 		{
-			if (data.op_R && elem[j].name[0] != '.')
+			if (data.op_R)
+			if ((data.op_a || elem[j].name[0] != '.')
+					&& ft_strcmp(elem[j].name, "..") != 0
+					&& ft_strcmp(elem[j].name, ".") != 0)
 			{
 				if (elem[j].type == DT_DIR)
 				{
@@ -59,7 +62,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 						tmp = ft_strjoin(path, "/");
 					tmp2 = ft_strjoin(tmp, elem[j].name);
 					free(tmp);
-					ft_browse_recu(data, tmp2);
+					ft_browse_recu(data, tmp2, i + 1);
 					free(tmp2);
 				}
 			}
@@ -68,11 +71,17 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 	}
 	else
 	{
-		ft_putendl("");
-//		if (data.op_l)
-//			print(elem, path);
-//		else
-//			ft_putendl(path);
+		if (data.op_l)
+		{
+			elem = (t_elem *)malloc(sizeof(t_elem));
+			elem->name = path;
+			elem->nbelem = 1;
+			ft_putendl("------------------------------");
+			print(data, &elem, "./");
+			ft_putendl("------------------------------");
+		}
+		else
+			ft_putendl(path);
 	}
 	free(fpath);
 	return (0);
@@ -90,7 +99,7 @@ void	ft_browse(t_ft_ls data)
 	i = 0;
 	while (i < data.nb_path)
 	{
-		ft_browse_recu(data, data.path[i]);
+		ft_browse_recu(data, data.path[i], 0);
 		i++;
 	}
 }

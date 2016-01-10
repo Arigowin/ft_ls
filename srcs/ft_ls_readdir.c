@@ -77,7 +77,7 @@ t_elem			*ft_readdir(char *fpath, char *path)
 	{
 		if (errno == ENOTDIR)
 			ft_putendl(path);
-		ft_error(1, path);
+		ft_error(1, ft_strsub(path, 2, ft_strlen(path)));
 	}
 	else
 	{

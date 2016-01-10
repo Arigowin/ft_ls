@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 #include <stdio.h>
-static void	printone(t_elem elem, size_t *size)
+void	printone(t_elem elem, size_t *size)
 {
 	// 0 : nlink
 	// 1 : uid
@@ -149,7 +149,7 @@ int main(int ac, char **av)
 
 	ft_browse(data);
 
-	ft_free_lst(data);
+//	ft_free_lst(data);
 
 	return (0);
 }

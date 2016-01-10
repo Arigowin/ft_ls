@@ -18,38 +18,34 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 #endif
 
 	j = 0;
-	fpath = ft_strdup(path);
-	if (ft_is_dir(path, fpath) == 1)
+	fpath = ft_format_path(path);
+	if (data.nb_path > 1 || (data.op_R && i > 0))
 	{
-		free(fpath);
-		fpath = ft_format_path(path);
-		if (data.nb_path > 1 || (data.op_R && i > 0))
+		ft_putendl("");
+		ft_putstr(path);
+		ft_putendl(":");
+	}
+	if ((elem = ft_readdir(fpath, path)) == NULL)
+		return (0);
+	j = 0;
+	while (j < elem[0].nbelem)
+	{
+		if (data.op_a || elem[j].name[0] != '.')
 		{
-			ft_putendl("");
-			ft_putstr(path);
-			ft_putendl(":");
-		}
-		if ((elem = ft_readdir(fpath, path)) == NULL)
-			return (0);
-		j = 0;
-		while (j < elem[0].nbelem)
-		{
-			if (data.op_a || elem[j].name[0] != '.')
+			if (data.op_l)
 			{
-				if (data.op_l)
-				{
-					print(data, &elem, fpath);
-					break ;
-				}
-				else
-					ft_putendl(elem[j].name);
+				print(data, &elem, fpath);
+				break ;
 			}
-			j++;
+			else
+				ft_putendl(elem[j].name);
 		}
-		j = 0;
-		while (j < elem[0].nbelem)
-		{
-			if (data.op_R)
+		j++;
+	}
+	j = 0;
+	while (j < elem[0].nbelem)
+	{
+		if (data.op_R)
 			if ((data.op_a || elem[j].name[0] != '.')
 					&& ft_strcmp(elem[j].name, "..") != 0
 					&& ft_strcmp(elem[j].name, ".") != 0)
@@ -66,23 +62,9 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 					free(tmp2);
 				}
 			}
-			j++;
-		}
+		j++;
 	}
-	else
-	{
-		if (data.op_l)
-		{
-			elem = (t_elem *)malloc(sizeof(t_elem));
-			elem->name = path;
-			elem->nbelem = 1;
-			ft_putendl("------------------------------");
-			print(data, &elem, "./");
-			ft_putendl("------------------------------");
-		}
-		else
-			ft_putendl(path);
-	}
+
 	free(fpath);
 	return (0);
 }
@@ -90,6 +72,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 void	ft_browse(t_ft_ls data)
 {
 	int		i;
+	t_elem	*elem;
 
 	// DEBUG
 #ifdef DEBUG
@@ -97,10 +80,36 @@ void	ft_browse(t_ft_ls data)
 #endif
 
 	i = 0;
+	elem = (t_elem *)malloc(sizeof(t_elem) * data.nb_path);
 	// Si j'ai des fichier les afficher en 1er
+	ft_init_t_elem(elem);
 	while (i < data.nb_path)
 	{
-		ft_browse_recu(data, data.path[i], 0);
+		if (ft_is_dir(data.path[i], data.path[i]) == 0)
+		{
+			if (data.op_l)
+			{
+				// cree une liste d'elem puis les afficher
+				elem[i].name = data.path[i];
+				elem[i].nbelem = data.nb_path;
+			}
+			else
+				ft_putendl(data.path[i]);
+			data.path[i] = NULL;
+		}
+		i++;
+	}
+	if (data.op_l)
+	{
+		print(data, &elem, "./");
+	}
+	i = 0;
+	while (i < data.nb_path)
+	{
+		if (data.path[i] != NULL)
+		{
+			ft_browse_recu(data, data.path[i], 0);
+		}
 		i++;
 	}
 }

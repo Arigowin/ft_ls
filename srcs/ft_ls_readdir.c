@@ -103,8 +103,5 @@ int		ft_is_dir(char *path, char *fpath)
 			return (0);
 		ft_error(1, path);
 	}
-	if (S_ISDIR (b.st_mode))
-		return (1);
-	else
-		return (0);
+	return (S_ISDIR (b.st_mode));
 }

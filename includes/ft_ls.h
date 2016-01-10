@@ -7,7 +7,7 @@
 # define MAJOR 0XFF000000
 # define OP "Ralrt"
 
-#define DEBUG
+//#define DEBUG
 
 // Arguments
 typedef struct		s_ft_ls

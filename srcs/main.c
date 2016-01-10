@@ -16,6 +16,9 @@ int		printinfo(char *path, char *str)
 	struct group *grp;
 	char *droit;
 	char *tmp;
+
+	char *nlink;
+	char *size;
 	
 	// DEBUG
 #ifdef DEBUG
@@ -30,24 +33,32 @@ int		printinfo(char *path, char *str)
 	grp = getgrgid(b.st_gid);
 
 	ft_putstr(droit);
-	ft_putstr("\t");
-	ft_putnbr(b.st_nlink);
-	ft_putstr("\t");
+	ft_putstr("  ");
+	nlink = ft_itoa(b.st_nlink);
+	////////////////
+	if (ft_strlen(nlink) < 2)
+			ft_putstr(" ");
+	////////////////
+	ft_putstr(nlink);
+	ft_putstr(" ");
 	ft_putstr(uid->pw_name);
-	ft_putstr("\t");
+	ft_putstr(" ");
 	ft_putstr(grp->gr_name);
-	ft_putstr("\t");
+	ft_putstr(" ");
 	if (!(b.st_rdev))
-		ft_putnbr(b.st_size);
+	{
+		size = ft_itoa(b.st_size);
+		ft_putstr(size);
+	}
 	else
 	{
 		ft_putnbr((b.st_rdev & MAJOR) >> 24);
 		ft_putstr(", ");
 		ft_putnbr(b.st_rdev & ~MAJOR);
 	}
-	ft_putstr("\t");
+	ft_putstr(" ");
 	ft_putstr(ft_format_date(b.st_mtime));
-	ft_putstr("\t");
+	ft_putstr(" ");
 	if (str[0] != '\0')
 		ft_putendl(str);
 	else

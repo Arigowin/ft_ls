@@ -37,7 +37,10 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 			if (data.op_a || elem[j].name[0] != '.')
 			{
 				if (data.op_l)
-					printinfo(fpath, elem[j].name);
+				{
+					print(data, &elem, fpath);
+					break ;
+				}
 				else
 					ft_putendl(elem[j].name);
 			}
@@ -66,10 +69,10 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 	else
 	{
 		ft_putendl("");
-		if (data.op_l)
-			printinfo(fpath, "");
-		else
-			ft_putendl(path);
+//		if (data.op_l)
+//			print(elem, path);
+//		else
+//			ft_putendl(path);
 	}
 	free(fpath);
 	return (0);

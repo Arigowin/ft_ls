@@ -52,6 +52,7 @@ static t_elem		*ft_readdir_bis(DIR *dir)
 	j = 0;
 	while (lst[j])
 	{
+		ft_init_t_elem(&(elem[j]));
 		elem[j].name = lst[j];
 		elem[j].type = lst2[j][0];
 		elem[j].nbelem = i;

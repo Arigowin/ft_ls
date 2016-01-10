@@ -7,7 +7,7 @@
 # define MAJOR 0XFF000000
 # define OP "Ralrt"
 
-#define DEBUG
+//#define DEBUG
 
 // Arguments
 typedef struct		s_ft_ls
@@ -34,6 +34,10 @@ typedef struct		s_elem
 	char			*date;
 
 }					t_elem;
+
+// init
+void	ft_init_t_ft_ls(t_ft_ls *data);
+void	ft_init_t_elem(t_elem *elem);
 
 // droit des fichier
 char	*ft_modeoffile(mode_t mode);
@@ -64,7 +68,7 @@ void	ft_browse(t_ft_ls data);
 // free
 void	ft_free_lst(t_ft_ls data);
 
-int		printinfo(char *path, char *str);
+void	print(t_ft_ls data, t_elem **elem, char *path);
 
 #endif
 

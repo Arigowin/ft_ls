@@ -9,90 +9,125 @@
 #include <stdlib.h>
 
 #include <stdio.h>
-void	print(t_elem **elem, char *path)
+static void	printone(t_elem elem, size_t *size)
+{
+	// 0 : nlink
+	// 1 : uid
+	// 2 : grp
+	// 3 : size
+	size_t	i;
+
+	ft_putstr(elem.droit);
+	ft_putstr("  ");
+	i = 0;
+	while (i < size[0] - ft_strlen(elem.nlink))
+	{
+		ft_putchar(' ');
+		i++;
+	}
+	ft_putstr(elem.nlink);
+	ft_putstr(" ");
+	i = 0;
+	while (i < size[1] - ft_strlen(elem.uid))
+	{
+		ft_putchar(' ');
+		i++;
+	}
+	ft_putstr(elem.uid);
+	ft_putstr("  ");
+	i = 0;
+	while (i < size[2] - ft_strlen(elem.grp))
+	{
+		ft_putchar(' ');
+		i++;
+	}
+	ft_putstr(elem.grp);
+	ft_putstr("  ");
+	i = 0;
+	while (i < size[3] - ft_strlen(elem.size))
+	{
+		ft_putchar(' ');
+		i++;
+	}
+	ft_putstr(elem.size);
+	ft_putstr(" ");
+	ft_putstr(elem.date);
+	ft_putstr(" ");
+	ft_putstr(elem.name);
+	// si lien symbolique afficher le lien
+	ft_putstr("\n");
+
+}
+
+void	print(t_ft_ls data, t_elem **elem, char *path)
 {
 	struct stat st;
 	int			i;
+	char		*tmp;
+	size_t		sizemax[4] = {0, 0, 0, 0};
 
 	i = 0;
-	while(i < (*elem)[i].nbelem)
+	while(i < (*elem)[0].nbelem)
 	{
 		if (lstat(ft_strjoin(path, (*elem)[i].name), &st) == -1)
 			exit (ft_error(1, (*elem)[i].name));
-		(*elem)[i].droit = ft_modeoffile(st.st_mode);
-		(*elem)[i].nlink = ft_itoa(st.st_nlink);
-		(*elem)[i].uid = (getpwuid(st.st_uid))->pw_name;
-		(*elem)[i].grp = (getgrgid(st.st_gid))->gr_name;
-		// save la taille la plus grande
-		(*elem)[i].size = ft_itoa(st.st_size);
-		(*elem)[i].date = ft_format_date(st.st_mtime);
 
+		(*elem)[i].droit = ft_modeoffile(st.st_mode);
+
+		tmp = ft_itoa(st.st_nlink);
+		if (sizemax[0] < ft_strlen(tmp))
+			sizemax[0] = ft_strlen(tmp);
+		(*elem)[i].nlink = tmp;
+
+		tmp = (getpwuid(st.st_uid))->pw_name;
+		if (sizemax[1] < ft_strlen(tmp))
+			sizemax[1] = ft_strlen(tmp);
+		(*elem)[i].uid = tmp;
+
+		tmp = (getgrgid(st.st_gid))->gr_name;
+		if (sizemax[2] < ft_strlen(tmp))
+			sizemax[2] = ft_strlen(tmp);
+		(*elem)[i].grp = tmp;
+
+		tmp = ft_itoa(st.st_size);
+		if (sizemax[3] < ft_strlen(tmp))
+			sizemax[3] = ft_strlen(tmp);
+		(*elem)[i].size = tmp;
+
+		(*elem)[i].date = ft_format_date(st.st_mtime);
 		i++;
 	}
-	// boucler pour afficher les info
+	i = 0;
+	while (i < (*elem)[0].nbelem)
+	{
+		if (data.op_a || (*elem)[i].name[0] != '.')
+			printone((*elem)[i], sizemax);
+		i++;
+	}
 }
 
-int		printinfo(char *path, char *str)
+void	ft_init_t_ft_ls(t_ft_ls *data)
 {
-	struct stat b;
-	struct passwd *uid;
-	struct group *grp;
-	char *droit;
-	char *tmp;
-/*
-	char *taillelaplusgrandelink;
-	char *taillelaplusgrandesize;*/
-	char *nlink;
-	char *size;
-	
-	// DEBUG
-#ifdef DEBUG
-	printf("DEBUG : printinfo\n");
-#endif
+	data->path = NULL;
+	data->op_R = 0;
+	data->op_a = 0;
+	data->op_l = 0;
+	data->op_r = 0;
+	data->op_t = 0;
+	data->nb_path = 0;
+}
 
-	tmp = NULL;
-	if (lstat(ft_strjoin(path, str), &b) == -1)
-		exit (ft_error(1, path));
-	droit = ft_modeoffile(b.st_mode);
-	uid = getpwuid(b.st_uid);
-	grp = getgrgid(b.st_gid);
-
-	ft_putstr(droit);
-	ft_putstr("  ");
-	nlink = ft_itoa(b.st_nlink);
-	////////////////
-	if (ft_strlen(nlink) < 2)
-			ft_putstr(" ");
-	////////////////
-	ft_putstr(nlink);
-	ft_putstr(" ");
-	ft_putstr(uid->pw_name);
-	ft_putstr(" ");
-	ft_putstr(grp->gr_name);
-	ft_putstr(" ");
-	if (!(b.st_rdev))
-	{
-		size = ft_itoa(b.st_size);
-		ft_putstr(size);
-	}
-	else
-	{
-		ft_putnbr((b.st_rdev & MAJOR) >> 24);
-		ft_putstr(", ");
-		ft_putnbr(b.st_rdev & ~MAJOR);
-	}
-	ft_putstr(" ");
-	ft_putstr(ft_format_date(b.st_mtime));
-	ft_putstr(" ");
-	if (str[0] != '\0')
-		ft_putendl(str);
-	else
-		ft_putendl(path);
-
-	if (droit[0] == '-')
-		return (0);
-	else
-		return (1);
+void	ft_init_t_elem(t_elem *elem)
+{
+	elem->name = NULL;
+	elem->droit = NULL;
+	elem->nlink = NULL;
+	elem->uid = NULL;
+	elem->grp = NULL;
+	elem->size = NULL;
+	elem->date = NULL;
+	elem->type = 0;
+	elem->nbelem = 0;
 }
 
 int main(int ac, char **av)
@@ -100,8 +135,7 @@ int main(int ac, char **av)
 	t_ft_ls		data;
 	char		*op;
 
-	data.nb_path = 0;
-	data.path = NULL;
+	ft_init_t_ft_ls(&data);
 
 	// DEBUG
 #ifdef DEBUG

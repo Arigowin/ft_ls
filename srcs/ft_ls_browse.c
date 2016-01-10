@@ -97,6 +97,7 @@ void	ft_browse(t_ft_ls data)
 #endif
 
 	i = 0;
+	// Si j'ai des fichier les afficher en 1er
 	while (i < data.nb_path)
 	{
 		ft_browse_recu(data, data.path[i], 0);

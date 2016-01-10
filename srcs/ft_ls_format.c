@@ -27,7 +27,7 @@ char			*ft_format_path(char *str)
 	{
 		tmp = ft_strjoin(path, "/");
 		ft_strdel(&path);
-		path = ft_strjoin(tmp, "/");
+		path = ft_strdup(tmp);
 		free(tmp);
 	}
 	if (ft_is_dir(str, path) == 0)

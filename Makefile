@@ -6,7 +6,7 @@
 #    By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/03 10:52:20 by dolewski          #+#    #+#              #
-#    Updated: 2016/01/08 12:57:08 by dolewski         ###   ########.fr        #
+#    Updated: 2016/01/10 13:46:53 by dolewski         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRC = main.c \
 	  ft_ls_sort_str.c \
 	  ft_ls_error.c \
 	  ft_ls_readdir.c \
-	  ft_ls_browse.c
+	  ft_ls_browse.c \
+	  ft_ls_free.c
 
 OFILES = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
 

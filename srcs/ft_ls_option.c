@@ -11,6 +11,35 @@
 #include <stdlib.h>
 
 #include <stdio.h>
+
+void		ft_set_op(char *op, t_ft_ls *data)
+{
+	int	i;
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_set_option\n");
+#endif
+
+	i = 0;
+	if (ft_check_op(op))
+		exit(-1);
+	while (op[i])
+	{
+		if (!data->op_R)
+			data->op_R = (op[i] == 'R' ? 1 : 0);
+		if (!data->op_a)
+			data->op_a = (op[i] == 'a' ? 1 : 0);
+		if (!data->op_l)
+			data->op_l = (op[i] == 'l' ? 1 : 0);
+		if (!data->op_r)
+			data->op_r = (op[i] == 'r' ? 1 : 0);
+		if (!data->op_t)
+			data->op_t = (op[i] == 't' ? 1 : 0);
+		i++;
+	}
+}
+
 static char		*ft_get_option(char **lst, int *nb)
 {
 	int		i;
@@ -44,11 +73,12 @@ static char		*ft_get_option(char **lst, int *nb)
 	return (ret);
 }
 
-void			ft_get_arg(t_ft_ls *data, char **lst, int nb)
+char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
 {
 	int		i;
 	int		j;
 	int		nbb;
+	char	*op;
 
 	// DEBUG
 #ifdef DEBUG
@@ -56,24 +86,27 @@ void			ft_get_arg(t_ft_ls *data, char **lst, int nb)
 #endif
 
 	nbb = nb;
-	data->op = ft_get_option(lst, &nb);
-	if ((data->path = (char **)malloc(sizeof(char *) * (((nbb - nb) <= 0 ? 1 : nbb - nb) + 1))) == NULL)
+	op = ft_get_option(lst, &nb);
+	if ((data->path = (char **)malloc(sizeof(char *) * (((nb) == 0 ? 1 : nb) + 1))) == NULL)
 		ft_error(1, "ft_get_arg");
 	if (nb < 1)
 	{
 		data->path[0] = ft_strdup(".");
 		data->path[1] = NULL;
 		data->nb_path++;
-		return ;
+		return (op);
 	}
 	i = nbb - nb;
 	j = 0;
 	while (i < nbb)
 	{
-		data->path[j++] = ft_strdup(lst[i++]);
+		data->path[j] = ft_strdup(lst[i]);
+		j++;
+		i++;
 		data->nb_path++;
 	}
-	data->path[data->nb_path] = NULL;
+	data->path[j] = NULL;
+	return (op);
 }
 
 int				ft_check_op(char *op)

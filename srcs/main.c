@@ -1,12 +1,12 @@
 #include "ft_ls.h"
 #include "libft.h"
 #include <sys/stat.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <pwd.h>
 #include <uuid/uuid.h>
 #include <grp.h>
 #include <sys/xattr.h>
+#include <stdlib.h>
 
 #include <stdio.h>
 int		printinfo(char *path, char *str)
@@ -59,43 +59,23 @@ int		printinfo(char *path, char *str)
 		return (1);
 }
 
-void	ft_free_lst(t_ft_ls data)
-{
-	int i;
-
-	// DEBUG
-#ifdef DEBUG
-	printf("DEBUG : ft_free_lst\n");
-#endif
-
-	i = 0;
-	free(data.op);
-	while (i < data.nb_path)
-	{
-		free(data.path[i]);
-		i++;
-	}
-	free(data.path);
-}
-
 int main(int ac, char **av)
 {
 	t_ft_ls		data;
+	char		*op;
 
 	data.nb_path = 0;
 	data.path = NULL;
-	data.op = NULL;
 
 	// DEBUG
 #ifdef DEBUG
 	printf("DEBUG : main\n");
 #endif
 
-	ft_get_arg(&data, av, ac);
+	op = ft_get_arg(&data, av, ac);
+	ft_set_op(op, &data);
 	if (data.nb_path > 1)
 		ft_sort_str(&(data.path), data.nb_path);
-	if (ft_check_op(data.op))
-		exit(-1);
 
 	ft_browse(data);
 

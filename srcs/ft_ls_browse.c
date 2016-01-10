@@ -1,15 +1,16 @@
 #include "ft_ls.h"
 #include "libft.h"
 #include <stdlib.h>
+#include <sys/dirent.h>
 
 #include <stdio.h>
 static int		ft_browse_recu(t_ft_ls data, char *path)
 {
-	char	**lst;
+	t_elem	*elem;
 	char	*fpath;
-	char *tmp;
-	char *tmp2;
-	int j;
+	char	*tmp;
+	char	*tmp2;
+	int		j;
 
 	// DEBUG
 #ifdef DEBUG
@@ -22,38 +23,38 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 	{
 		free(fpath);
 		fpath = ft_format_path(path);
-		if (data.nb_path > 1 || ft_strchr(data.op, 'R') != NULL)
+		if (data.nb_path > 1 || data.op_R)
 		{
 			ft_putendl("");
 			ft_putstr(path);
 			ft_putendl(":");
 		}
-		if ((lst = ft_readdir(fpath, path)) == NULL)
+		if ((elem = ft_readdir(fpath, path)) == NULL)
 			return (0);
 		j = 0;
-		while (lst[j] != NULL)
+		while (j <= elem[j].nbelem)
 		{
-			if (ft_strchr(data.op, 'a') || lst[j][0] != '.')
+			if (data.op_a || elem[j].name[0] != '.')
 			{
-				if (ft_strchr(data.op, 'l') == NULL)
-					ft_putendl(lst[j]);
+				if (data.op_l)
+					printinfo(fpath, elem[j].name);
 				else
-					printinfo(fpath, lst[j]);
+					ft_putendl(elem[j].name);
 			}
 			j++;
 		}
 		j = 0;
-		while (lst[j] != NULL)
+		while (j <= elem[j].nbelem)
 		{
-			if (lst[j][0] != '.' && ft_strchr(data.op, 'R') != NULL)
+			if (data.op_R && elem[j].name[0] != '.')
 			{
-				if (ft_is_dir(lst[j], ft_strjoin(fpath, lst[j])) == 1)
+				if (elem[j].type == DT_DIR)
 				{
 					if (path[ft_strlen(path) - 1] == '/')
 						tmp = ft_strdup(path);
 					else
 						tmp = ft_strjoin(path, "/");
-					tmp2 = ft_strjoin(tmp, lst[j]);
+					tmp2 = ft_strjoin(tmp, elem[j].name);
 					free(tmp);
 					ft_browse_recu(data, tmp2);
 					free(tmp2);
@@ -65,10 +66,10 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 	else
 	{
 		ft_putendl("");
-		if (ft_strchr(data.op, 'l') == NULL)
-			ft_putendl(path);
-		else
+		if (data.op_l)
 			printinfo(fpath, "");
+		else
+			ft_putendl(path);
 	}
 	free(fpath);
 	return (0);

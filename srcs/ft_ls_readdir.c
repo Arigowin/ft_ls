@@ -30,7 +30,7 @@ static t_elem		*ft_readdir_bis(DIR *dir)
 		if (tmp == NULL)
 		{
 			tmp = ft_strdup(dp->d_name);
-			tmpc = (char)dp->d_type;
+			tmpc = ((char)dp->d_type != 0 ? (char)dp->d_type : 42);
 			tmp2 = ft_strdup(&tmpc);
 		}
 		else
@@ -38,26 +38,24 @@ static t_elem		*ft_readdir_bis(DIR *dir)
 			tmp = ft_strjoin(tmp, "\n");
 			tmp = ft_strjoin(tmp, dp->d_name);
 			tmp2 = ft_strjoin(tmp2, ":");
-			tmpc = (char)dp->d_type;
+			tmpc = ((char)dp->d_type != 0 ? (char)dp->d_type : 42);
 			tmp2 = ft_strjoin(tmp2, &tmpc);
 		}
 		i++;
 	}
+	if (dp == NULL && tmp == NULL)
+		ft_error(1, "ft_read_bis");
 	lst = ft_strsplit(tmp, '\n');
 	lst2 = ft_strsplit(tmp2, ':');
-	i = 0;
+	if ((elem = (t_elem *)malloc(sizeof(t_elem) * i)) == NULL)
+		exit (ft_error(1, "ft_readdir_bis"));
 	j = 0;
 	while (lst[j])
-		j++;
-	elem = (t_elem *)malloc(sizeof(t_elem) * j);
-	j -= 2;
-	i = 0;
-	while (lst[i])
 	{
-		elem[i].name = lst[i];
-		elem[i].type = lst2[i][0];
-		elem[i].nbelem = j;
-		i++;
+		elem[j].name = lst[j];
+		elem[j].type = lst2[j][0];
+		elem[j].nbelem = i;
+		j++;
 	}
 	ft_sort_elem(&elem, elem[0].nbelem);
 	return (elem);

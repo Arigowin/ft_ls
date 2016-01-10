@@ -32,7 +32,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 		if ((elem = ft_readdir(fpath, path)) == NULL)
 			return (0);
 		j = 0;
-		while (j <= elem[j].nbelem)
+		while (j < elem[0].nbelem)
 		{
 			if (data.op_a || elem[j].name[0] != '.')
 			{
@@ -44,7 +44,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path)
 			j++;
 		}
 		j = 0;
-		while (j <= elem[j].nbelem)
+		while (j < elem[0].nbelem)
 		{
 			if (data.op_R && elem[j].name[0] != '.')
 			{

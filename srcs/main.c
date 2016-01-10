@@ -9,6 +9,29 @@
 #include <stdlib.h>
 
 #include <stdio.h>
+void	print(t_elem **elem, char *path)
+{
+	struct stat st;
+	int			i;
+
+	i = 0;
+	while(i < (*elem)[i].nbelem)
+	{
+		if (lstat(ft_strjoin(path, (*elem)[i].name), &st) == -1)
+			exit (ft_error(1, (*elem)[i].name));
+		(*elem)[i].droit = ft_modeoffile(st.st_mode);
+		(*elem)[i].nlink = ft_itoa(st.st_nlink);
+		(*elem)[i].uid = (getpwuid(st.st_uid))->pw_name;
+		(*elem)[i].grp = (getgrgid(st.st_gid))->gr_name;
+		// save la taille la plus grande
+		(*elem)[i].size = ft_itoa(st.st_size);
+		(*elem)[i].date = ft_format_date(st.st_mtime);
+
+		i++;
+	}
+	// boucler pour afficher les info
+}
+
 int		printinfo(char *path, char *str)
 {
 	struct stat b;
@@ -16,7 +39,9 @@ int		printinfo(char *path, char *str)
 	struct group *grp;
 	char *droit;
 	char *tmp;
-
+/*
+	char *taillelaplusgrandelink;
+	char *taillelaplusgrandesize;*/
 	char *nlink;
 	char *size;
 	

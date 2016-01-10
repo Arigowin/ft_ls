@@ -26,6 +26,13 @@ typedef struct		s_elem
 	char			*name;
 	char			type;
 	int				nbelem;
+	char			*droit;
+	char			*nlink;
+	char			*uid;
+	char			*grp;
+	char			*size;
+	char			*date;
+
 }					t_elem;
 
 // droit des fichier

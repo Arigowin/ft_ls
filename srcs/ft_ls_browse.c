@@ -34,7 +34,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 		{
 			if (data.op_l)
 			{
-				print(data, &elem, fpath);
+				ft_print(data, &elem, fpath);
 				break ;
 			}
 			else
@@ -101,7 +101,7 @@ void	ft_browse(t_ft_ls data)
 	}
 	if (data.op_l)
 	{
-		print(data, &elem, "./");
+		ft_print(data, &elem, "./");
 	}
 	i = 0;
 	while (i < data.nb_path)

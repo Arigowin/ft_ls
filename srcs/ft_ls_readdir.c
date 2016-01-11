@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 
 #include <stdio.h>
-static t_elem		*ft_readdir_bis(DIR *dir)
+static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls data)
 {
 	struct dirent	*dp;
 	char			*tmp;
@@ -63,11 +63,14 @@ static t_elem		*ft_readdir_bis(DIR *dir)
 		elem[j].nbelem = i;
 		j++;
 	}
-	ft_sort_elem(&elem, elem[0].nbelem);
+	if (data.op_r)
+		ft_sort_elem(&elem, elem[0].nbelem, 1);
+	else
+		ft_sort_elem(&elem, elem[0].nbelem, 0);
 	return (elem);
 }
 
-t_elem			*ft_readdir(char *fpath, char *path)
+t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls data)
 {
 	DIR				*dir;
 	t_elem			*elem;
@@ -86,7 +89,7 @@ t_elem			*ft_readdir(char *fpath, char *path)
 	}
 	else
 	{
-		elem = ft_readdir_bis(dir);
+		elem = ft_readdir_bis(dir, data);
 		closedir(dir);
 		return (elem);
 	}

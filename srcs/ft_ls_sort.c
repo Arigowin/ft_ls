@@ -17,7 +17,7 @@ static void		ft_swap_e(t_elem *e1, t_elem *e2)
 	*e2 = tmp;
 }
 
-void			ft_sort_elem(t_elem **elem, int size)
+void			ft_sort_elem(t_elem **elem, int size, int r)
 {
 	int		i;
 	int		x;
@@ -31,12 +31,18 @@ void			ft_sort_elem(t_elem **elem, int size)
 	i = 1;
 	x = 0;
 	size--;
-	while (x != size + 1)
+	while (x <= size)
 	{
-		while (i < size)
+		while (i <= size)
 		{
-			if ((cmp = ft_strcmp((*elem)[x].name, (*elem)[i].name)) > 0)
-				ft_swap_e(&((*elem)[x]), &((*elem)[i]));
+			if (r)
+			{
+				if ((cmp = ft_strcmp((*elem)[x].name, (*elem)[i].name)) < 0)
+					ft_swap_e(&((*elem)[x]), &((*elem)[i]));
+			}
+			else
+				if ((cmp = ft_strcmp((*elem)[x].name, (*elem)[i].name)) > 0)
+					ft_swap_e(&((*elem)[x]), &((*elem)[i]));
 			i++;
 		}
 		x++;
@@ -61,7 +67,7 @@ static void		ft_swap_s(char **s1, char **s2)
 	free(tmp);
 }
 
-void			ft_sort_str(char ***str, int size)
+void			ft_sort_str(char ***str, int size, int r)
 {
 	int		i;
 	int		x;
@@ -75,12 +81,18 @@ void			ft_sort_str(char ***str, int size)
 	i = 0;
 	x = 0;
 	size--;
-	while (x != size + 1)
+	while (x <= size)
 	{
-		while (i < size)
+		while (i <= size)
 		{
-			if ((cmp = ft_strcmp((*str)[x], (*str)[i])) > 0)
-				ft_swap_s(&((*str)[x]), &((*str)[i]));
+			if (r)
+			{
+				if ((cmp = ft_strcmp((*str)[x], (*str)[i])) < 0)
+					ft_swap_s(&((*str)[x]), &((*str)[i]));
+			}
+			else
+				if ((cmp = ft_strcmp((*str)[x], (*str)[i])) > 0)
+					ft_swap_s(&((*str)[x]), &((*str)[i]));
 			i++;
 		}
 		x++;

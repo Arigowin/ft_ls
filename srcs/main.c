@@ -10,7 +10,7 @@ int main(int ac, char **av)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : main\n");
+	printf("DEBUG : START\nDEBUG : main\n");
 #endif
 
 	ft_init_t_ft_ls(&data);
@@ -18,9 +18,21 @@ int main(int ac, char **av)
 	op = ft_get_arg(&data, av, ac);
 	ft_set_op(op, &data);
 	if (data.nb_path > 1)
-		ft_sort_str(&(data.path), data.nb_path);
+	{
+		if (data.op_r)
+			ft_sort_str(&(data.path), data.nb_path, 1);
+		else
+			ft_sort_str(&(data.path), data.nb_path, 0);
+	}
 	ft_browse(data);
 	ft_free_lst(&data);
 	free(op);
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : END\n");
+#endif
+
+	while(1);
 	return (0);
 }

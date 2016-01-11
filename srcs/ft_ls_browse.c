@@ -25,7 +25,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 		ft_putstr(path);
 		ft_putendl(":");
 	}
-	if ((elem = ft_readdir(fpath, path)) == NULL)
+	if ((elem = ft_readdir(fpath, path, data)) == NULL)
 		return (0);
 	j = 0;
 	while (j < elem[0].nbelem)

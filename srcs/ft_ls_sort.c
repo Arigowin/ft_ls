@@ -50,6 +50,42 @@ void			ft_sort_elem(t_elem **elem, int size, int r)
 	}
 }
 
+void			ft_sort_elem_date(t_elem **elem, int size, int r, int a)
+{
+	int		i;
+	int		x;
+	int		cmp;
+
+	// DEBUG
+#ifdef DEBUG
+	printf("DEBUG : ft_sort_elem_date\n");
+#endif
+
+	i = 1;
+	x = 0;
+	size--;
+	while (x <= size)
+	{
+		while (i <= size)
+		{
+			if (a || ((*elem)[x].name[0] != '.' && (*elem)[i].name[0] != '.'))
+			{
+				if (r)
+				{
+					if ((cmp = ft_strcmp((*elem)[x].date, (*elem)[i].date)) < 0)
+						ft_swap_e(&((*elem)[x]), &((*elem)[i]));
+				}
+				else
+					if ((cmp = ft_strcmp((*elem)[x].date, (*elem)[i].date)) > 0)
+						ft_swap_e(&((*elem)[x]), &((*elem)[i]));
+			}
+			i++;
+		}
+		x++;
+		i = x;
+	}
+}
+
 static void		ft_swap_s(char **s1, char **s2)
 {
 	char	*tmp;

@@ -18,12 +18,7 @@ int main(int ac, char **av)
 	op = ft_get_arg(&data, av, ac);
 	ft_set_op(op, &data);
 	if (data.nb_path > 1)
-	{
-		if (data.op_r)
-			ft_sort_str(&(data.path), data.nb_path, 1);
-		else
-			ft_sort_str(&(data.path), data.nb_path, 0);
-	}
+		ft_sort_str(&(data.path), data.nb_path, data.op_r);
 	ft_browse(data);
 	ft_free_lst(&data);
 	free(op);
@@ -32,7 +27,5 @@ int main(int ac, char **av)
 #ifdef DEBUG
 	printf("DEBUG : END\n");
 #endif
-
-	while(1);
 	return (0);
 }

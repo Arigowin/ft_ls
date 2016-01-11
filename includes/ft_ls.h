@@ -44,6 +44,7 @@ void	ft_init_t_elem(t_elem *elem);
 char	*ft_modeoffile(mode_t mode);
 char	*ft_format_date(time_t date);
 void	ft_sort_elem(t_elem **str, int size, int r);
+void	ft_sort_elem_date(t_elem **str, int size, int r, int a);
 void	ft_sort_str(char ***str, int size, int r);
 int		ft_error(int nb, char *str);
 t_elem	*ft_readdir(char *fpath, char *path, t_ft_ls data);

@@ -171,12 +171,17 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 	i = 0;
 	while (i < (*elem)[0].nbelem)
 	{
-		if ((*elem)[i].name != NULL && (data.op_a || (*elem)[i].name[0] != '.'))
+		if (data.op_a || (*elem)[i].name[0] != '.')
 		{
-			if (tmp2 == NULL)
-				ft_printone((*elem)[i], sizemax, 0);
-			else
-				ft_printone((*elem)[i], sizemax, 1);
+			if (data.op_t)
+					ft_sort_elem_date(elem, (*elem)[0].nbelem, !data.op_r, data.op_a);
+			if ((*elem)[i].name != NULL)
+			{
+				if (tmp2 == NULL)
+					ft_printone((*elem)[i], sizemax, 0);
+				else
+					ft_printone((*elem)[i], sizemax, 1);
+			}
 		}
 		i++;
 	}

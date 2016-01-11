@@ -9,7 +9,7 @@
 
 #define BUFF_SIZE 1024
 
-//#define DEBUG
+#define DEBUG
 
 typedef struct		s_ft_ls
 {
@@ -53,7 +53,8 @@ char	*ft_format_path(char *str);
 int		ft_check_op(char *op);
 int		ft_is_dir(char *path, char *fpath);
 void	ft_browse(t_ft_ls data);
-void	ft_free_lst(t_ft_ls data);
+void	ft_free_lst(t_ft_ls *data);
+void	ft_free_elem(t_elem **elem);
 void	ft_print(t_ft_ls data, t_elem **elem, char *path);
 
 #endif

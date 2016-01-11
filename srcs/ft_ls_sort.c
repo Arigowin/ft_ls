@@ -1,5 +1,6 @@
 #include "ft_ls.h"
 # include "libft.h"
+#include <stdlib.h>
 
 #include <stdio.h>
 static void		ft_swap_e(t_elem *e1, t_elem *e2)
@@ -35,9 +36,7 @@ void			ft_sort_elem(t_elem **elem, int size)
 		while (i < size)
 		{
 			if ((cmp = ft_strcmp((*elem)[x].name, (*elem)[i].name)) > 0)
-			{
 				ft_swap_e(&((*elem)[x]), &((*elem)[i]));
-			}
 			i++;
 		}
 		x++;
@@ -55,8 +54,11 @@ static void		ft_swap_s(char **s1, char **s2)
 #endif
 
 	tmp = ft_strdup(*s1);
+	ft_strdel(s1);
 	*s1 = ft_strdup(*s2);
+	ft_strdel(s2);
 	*s2 = ft_strdup(tmp);
+	free(tmp);
 }
 
 void			ft_sort_str(char ***str, int size)
@@ -78,9 +80,7 @@ void			ft_sort_str(char ***str, int size)
 		while (i < size)
 		{
 			if ((cmp = ft_strcmp((*str)[x], (*str)[i])) > 0)
-			{
 				ft_swap_s(&((*str)[x]), &((*str)[i]));
-			}
 			i++;
 		}
 		x++;

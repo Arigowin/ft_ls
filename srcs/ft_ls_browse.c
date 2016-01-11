@@ -64,7 +64,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 			}
 		j++;
 	}
-
+	ft_free_elem(&elem);
 	free(fpath);
 	return (0);
 }
@@ -80,8 +80,8 @@ void	ft_browse(t_ft_ls data)
 #endif
 
 	i = 0;
-	elem = (t_elem *)malloc(sizeof(t_elem) * data.nb_path);
-	// Si j'ai des fichier les afficher en 1er
+	if ((elem = (t_elem *)malloc(sizeof(t_elem) * data.nb_path)) == NULL)
+		exit (ft_error(1, ""));
 	ft_init_t_elem(elem);
 	while (i < data.nb_path)
 	{
@@ -89,7 +89,6 @@ void	ft_browse(t_ft_ls data)
 		{
 			if (data.op_l)
 			{
-				// cree une liste d'elem puis les afficher
 				elem[i].name = data.path[i];
 				elem[i].nbelem = data.nb_path;
 			}
@@ -102,14 +101,13 @@ void	ft_browse(t_ft_ls data)
 	if (data.op_l)
 	{
 		ft_print(data, &elem, "./");
+		ft_free_elem(&elem);
 	}
 	i = 0;
 	while (i < data.nb_path)
 	{
 		if (data.path[i] != NULL)
-		{
 			ft_browse_recu(data, data.path[i], 0);
-		}
 		i++;
 	}
 }

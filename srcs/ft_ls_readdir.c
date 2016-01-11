@@ -11,6 +11,7 @@ static t_elem		*ft_readdir_bis(DIR *dir)
 	struct dirent	*dp;
 	char			*tmp;
 	char			*tmp2;
+	char			*tmp3;
 	char			**lst;
 	char			**lst2;
 	char			tmpc;
@@ -35,11 +36,15 @@ static t_elem		*ft_readdir_bis(DIR *dir)
 		}
 		else
 		{
-			tmp = ft_strjoin(tmp, "\n");
-			tmp = ft_strjoin(tmp, dp->d_name);
-			tmp2 = ft_strjoin(tmp2, ":");
+			tmp3 = ft_strjoin(tmp, "\n");
+			ft_strdel(&tmp);
+			tmp = ft_strjoin(tmp3, dp->d_name);
+			ft_strdel(&tmp3);
+			tmp3 = ft_strjoin(tmp2, ":");
+			ft_strdel(&tmp2);
 			tmpc = ((char)dp->d_type != 0 ? (char)dp->d_type : 42);
-			tmp2 = ft_strjoin(tmp2, &tmpc);
+			tmp2 = ft_strjoin(tmp3, &tmpc);
+			ft_strdel(&tmp3);
 		}
 		i++;
 	}

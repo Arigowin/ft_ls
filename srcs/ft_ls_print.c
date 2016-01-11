@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#include <stdio.h>
 static void		ft_printone(t_elem elem, size_t *size, int rdev)
 {
 	size_t	i;
@@ -120,29 +121,29 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 			if (lstat(ft_strjoin(path, (*elem)[i].name), &st) == -1)
 				exit (ft_error(1, (*elem)[i].name));
 
-			(*elem)[i].droit = ft_modeoffile(st.st_mode);
+			(*elem)[i].droit = ft_strdup(ft_modeoffile(st.st_mode));
 
 			tmp = ft_itoa(st.st_nlink);
 			if (sizemax[0] < ft_strlen(tmp))
 				sizemax[0] = ft_strlen(tmp);
-			(*elem)[i].nlink = tmp;
+			(*elem)[i].nlink = ft_strdup(tmp);
 
 			tmp = (getpwuid(st.st_uid))->pw_name;
 			if (sizemax[1] < ft_strlen(tmp))
 				sizemax[1] = ft_strlen(tmp);
-			(*elem)[i].uid = tmp;
+			(*elem)[i].uid = ft_strdup(tmp);
 
 			tmp = (getgrgid(st.st_gid))->gr_name;
 			if (sizemax[2] < ft_strlen(tmp))
 				sizemax[2] = ft_strlen(tmp);
-			(*elem)[i].grp = tmp;
+			(*elem)[i].grp = ft_strdup(tmp);
 
 			if ((*elem)[i].droit[0] != 'c' && (*elem)[i].droit[0] != 'b')
 			{
 				tmp = ft_itoa(st.st_size);
 				if (sizemax[3] < ft_strlen(tmp))
 					sizemax[3] = ft_strlen(tmp);
-				(*elem)[i].size = tmp;
+				(*elem)[i].size = ft_strdup(tmp);
 			}
 			else
 			{
@@ -152,17 +153,17 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 					sizemax[3] = ft_strlen(tmp);
 				if (sizemax[4] < ft_strlen(tmp2))
 					sizemax[4] = ft_strlen(tmp2);
-				(*elem)[i].rdevmineur = tmp;
-				(*elem)[i].rdevmajeur = tmp2;
+				(*elem)[i].rdevmineur = ft_strdup(tmp);
+				(*elem)[i].rdevmajeur = ft_strdup(tmp2);
 			}
 
-			(*elem)[i].date = ft_format_date(st.st_mtime);
+			(*elem)[i].date = ft_strdup(ft_format_date(st.st_mtime));
 
 			if ((*elem)[i].type == DT_LNK)
 			{
 				if ((ret = readlink(ft_strjoin(path, (*elem)[i].name), buff, BUFF_SIZE)) == -1)
 					ft_error(1, path);
-				(*elem)[i].link = ft_strsub(buff, 0, ret);
+				(*elem)[i].link = ft_strdup(ft_strsub(buff, 0, ret));
 			}
 		}
 		i++;

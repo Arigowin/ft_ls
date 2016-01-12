@@ -1,7 +1,7 @@
 #include "ft_ls.h"
 #include "libft.h"
 #include <stdlib.h>
-#include <sys/dirent.h>
+#include <dirent.h>
 
 #include <stdio.h>
 static int		ft_browse_recu(t_ft_ls data, char *path, int i)

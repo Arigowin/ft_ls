@@ -72,11 +72,11 @@ void			ft_sort_elem_date(t_elem **elem, int size, int r, int a)
 			{
 				if (r)
 				{
-					if ((cmp = ft_strcmp((*elem)[x].date, (*elem)[i].date)) < 0)
+					if ((cmp = ft_strcmp((*elem)[x].sec_date, (*elem)[i].sec_date)) < 0)
 						ft_swap_e(&((*elem)[x]), &((*elem)[i]));
 				}
 				else
-					if ((cmp = ft_strcmp((*elem)[x].date, (*elem)[i].date)) > 0)
+					if ((cmp = ft_strcmp((*elem)[x].sec_date, (*elem)[i].sec_date)) > 0)
 						ft_swap_e(&((*elem)[x]), &((*elem)[i]));
 			}
 			i++;

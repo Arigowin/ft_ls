@@ -127,17 +127,17 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 			if (sizemax[0] < ft_strlen(tmp))
 				sizemax[0] = ft_strlen(tmp);
 			(*elem)[i].nlink = ft_strdup(tmp);
-
+			free(tmp);
 			tmp = (getpwuid(st.st_uid))->pw_name;
 			if (sizemax[1] < ft_strlen(tmp))
 				sizemax[1] = ft_strlen(tmp);
 			(*elem)[i].uid = ft_strdup(tmp);
-
+			free(tmp);
 			tmp = (getgrgid(st.st_gid))->gr_name;
 			if (sizemax[2] < ft_strlen(tmp))
 				sizemax[2] = ft_strlen(tmp);
 			(*elem)[i].grp = ft_strdup(tmp);
-
+			free(tmp);
 			if ((*elem)[i].droit[0] != 'c' && (*elem)[i].droit[0] != 'b')
 			{
 				tmp = ft_itoa(st.st_size);
@@ -156,9 +156,12 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 				(*elem)[i].rdevmineur = ft_strdup(tmp);
 				(*elem)[i].rdevmajeur = ft_strdup(tmp2);
 			}
-
+			free(tmp);
+			free(tmp2);
 			(*elem)[i].date = ft_strdup(ft_format_date(st.st_mtime));
-
+			tmp = ft_itoa(st.mtime);
+			(*elem)[i].sec_date = ft_strdup(tmp);
+			free(tmp);
 			if ((*elem)[i].type == DT_LNK)
 			{
 				if ((ret = readlink(ft_strjoin(path, (*elem)[i].name), buff, BUFF_SIZE)) == -1)

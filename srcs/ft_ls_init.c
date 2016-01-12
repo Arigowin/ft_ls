@@ -21,6 +21,7 @@ void	ft_init_t_elem(t_elem *elem)
 	elem->grp = NULL;
 	elem->size = NULL;
 	elem->date = NULL;
+	elem->sec_date = NULL;
 	elem->rdevmineur = NULL;
 	elem->rdevmajeur = NULL;
 	elem->link = NULL;

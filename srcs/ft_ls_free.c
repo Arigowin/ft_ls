@@ -43,6 +43,8 @@ void	ft_free_elem(t_elem **elem)
 			free((*elem)[i].size);
 		if ((*elem)[i].date != NULL)
 			free((*elem)[i].date);
+		if ((*elem)[i].sec_date != NULL)
+			free((*elem)[i].sec_date);
 		if ((*elem)[i].rdevmajeur != NULL)
 			free((*elem)[i].rdevmajeur);
 		if ((*elem)[i].rdevmineur != NULL)

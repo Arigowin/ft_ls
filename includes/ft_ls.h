@@ -33,6 +33,7 @@ typedef struct		s_elem
 	char			*grp;
 	char			*size;
 	char			*date;
+	char			*sec_date;
 	char			*rdevmineur;
 	char			*rdevmajeur;
 	char			*link;

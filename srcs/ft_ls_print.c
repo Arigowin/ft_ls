@@ -2,7 +2,6 @@
 #include "libft.h"
 #include <sys/stat.h>
 #include <pwd.h>
-//#include <uuid/uuid.h>
 #include <grp.h>
 #include <dirent.h>
 #include <unistd.h>
@@ -121,19 +120,19 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 			if (lstat(ft_strjoin(path, (*elem)[i].name), &st) == -1)
 				exit (ft_error(1, (*elem)[i].name));
 
-			(*elem)[i].droit = ft_strdup(ft_modeoffile(st.st_mode));
+			(*elem)[i].droit = ft_modeoffile(st.st_mode);
 
 			tmp = ft_itoa(st.st_nlink);
 			if (sizemax[0] < ft_strlen(tmp))
 				sizemax[0] = ft_strlen(tmp);
 			(*elem)[i].nlink = ft_strdup(tmp);
 			free(tmp);
-			tmp = (getpwuid(st.st_uid))->pw_name;
+			tmp = ft_strdup((getpwuid(st.st_uid))->pw_name);
 			if (sizemax[1] < ft_strlen(tmp))
 				sizemax[1] = ft_strlen(tmp);
 			(*elem)[i].uid = ft_strdup(tmp);
 			free(tmp);
-			tmp = (getgrgid(st.st_gid))->gr_name;
+			tmp = ft_strdup((getgrgid(st.st_gid))->gr_name);
 			if (sizemax[2] < ft_strlen(tmp))
 				sizemax[2] = ft_strlen(tmp);
 			(*elem)[i].grp = ft_strdup(tmp);

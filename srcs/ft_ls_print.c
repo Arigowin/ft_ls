@@ -2,7 +2,7 @@
 #include "libft.h"
 #include <sys/stat.h>
 #include <pwd.h>
-#include <uuid/uuid.h>
+//#include <uuid/uuid.h>
 #include <grp.h>
 #include <dirent.h>
 #include <unistd.h>
@@ -159,7 +159,7 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 			free(tmp);
 			free(tmp2);
 			(*elem)[i].date = ft_strdup(ft_format_date(st.st_mtime));
-			tmp = ft_itoa(st.mtime);
+			tmp = ft_itoa(st.st_mtime);
 			(*elem)[i].sec_date = ft_strdup(tmp);
 			free(tmp);
 			if ((*elem)[i].type == DT_LNK)

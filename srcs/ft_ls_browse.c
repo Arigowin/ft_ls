@@ -18,13 +18,14 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 #endif
 
 	j = 0;
-	fpath = ft_format_path(path);
 	if (data.nb_path > 1 || (data.op_R && i > 0))
 	{
-		ft_putendl("");
+		if (i > 0)
+			ft_putendl("");
 		ft_putstr(path);
 		ft_putendl(":");
 	}
+	fpath = ft_format_path(path);
 	if ((elem = ft_readdir(fpath, path, data)) == NULL)
 		return (0);
 	j = 0;
@@ -98,7 +99,7 @@ void	ft_browse(t_ft_ls data)
 		}
 		i++;
 	}
-	if (data.op_l)
+	if (data.op_l && elem[0].name != NULL)
 	{
 		ft_print(data, &elem, "./");
 		ft_free_elem(&elem);
@@ -107,7 +108,7 @@ void	ft_browse(t_ft_ls data)
 	while (i < data.nb_path)
 	{
 		if (data.path[i] != NULL)
-			ft_browse_recu(data, data.path[i], 0);
+			ft_browse_recu(data, data.path[i], i);
 		i++;
 	}
 }

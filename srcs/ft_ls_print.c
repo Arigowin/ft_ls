@@ -104,6 +104,7 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 	char		*tmp2;
 	char		buff[BUFF_SIZE];
 	size_t		sizemax[5] = {0, 0, 0, 0, 0};
+	size_t		total;
 	int			ret;
 
 	// DEBUG
@@ -113,6 +114,7 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 
 	tmp2 = NULL;
 	i = 0;
+	total = 0;
 	while(i < (*elem)[0].nbelem)
 	{
 		if ((*elem)[i].name != NULL &&  (data.op_a || (*elem)[i].name[0] != '.'))
@@ -167,10 +169,13 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 					ft_error(1, path);
 				(*elem)[i].link = ft_strdup(ft_strsub(buff, 0, ret));
 			}
+			total += st.st_blocks;
 		}
 		i++;
 	}
 	i = 0;
+	ft_putstr("total ");
+	ft_putnbrendl(total);
 	while (i < (*elem)[0].nbelem)
 	{
 		if (data.op_a || (*elem)[i].name[0] != '.')

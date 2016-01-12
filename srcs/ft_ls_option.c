@@ -9,6 +9,7 @@
 #include "libft.h"
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <errno.h>
 
 #include <stdio.h>
 
@@ -106,6 +107,11 @@ char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
 	j = 0;
 	while (i < nbb)
 	{
+		if (lst[i][0] == '\0')
+		{
+			errno = ENOENT;
+			exit(ft_error(1, "fts_open"));
+		}
 		data->path[j] = ft_strdup(lst[i]);
 		j++;
 		i++;

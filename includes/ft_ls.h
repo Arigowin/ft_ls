@@ -9,7 +9,7 @@
 
 # define BUFF_SIZE 1024
 
-#define DEBUG
+//#define DEBUG
 
 typedef struct		s_ft_ls
 {
@@ -33,7 +33,7 @@ typedef struct		s_elem
 	char			*grp;
 	char			*size;
 	char			*date;
-	char			*sec_date;
+	int				sec_date;
 	char			*rdevmineur;
 	char			*rdevmajeur;
 	char			*link;

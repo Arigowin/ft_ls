@@ -36,7 +36,6 @@ void	ft_free_elem(t_elem *elem)
 	free(elem->grp);
 	free(elem->size);
 	free(elem->date);
-	free(elem->sec_date);
 	free(elem->rdevmajeur);
 	free(elem->rdevmineur);
 	free(elem->link);

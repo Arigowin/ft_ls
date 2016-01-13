@@ -21,6 +21,7 @@ void			ft_sort_elem(t_elem **elem, int size, int r)
 {
 	int		i;
 	int		x;
+	int		cmp;
 
 	// DEBUG
 #ifdef DEBUG
@@ -34,14 +35,10 @@ void			ft_sort_elem(t_elem **elem, int size, int r)
 	{
 		while (i <= size)
 		{
-			if (r)
-			{
-				if ((ft_strcmp((*elem)[x].name, (*elem)[i].name)) < 0)
-					ft_swap_e(&((*elem)[x]), &((*elem)[i]));
-			}
-			else
-				if ((ft_strcmp((*elem)[x].name, (*elem)[i].name)) > 0)
-					ft_swap_e(&((*elem)[x]), &((*elem)[i]));
+			cmp = (r ? ft_strcmp((*elem)[x].name, (*elem)[i].name) :
+					ft_strcmp((*elem)[i].name, (*elem)[x].name));
+			if (cmp < 0)
+				ft_swap_e(&((*elem)[x]), &((*elem)[i]));
 			i++;
 		}
 		x++;
@@ -53,6 +50,7 @@ void			ft_sort_elem_date(t_elem **elem, int size, int r, int a)
 {
 	int		i;
 	int		x;
+	int		cmp;
 
 	// DEBUG
 #ifdef DEBUG
@@ -66,16 +64,12 @@ void			ft_sort_elem_date(t_elem **elem, int size, int r, int a)
 	{
 		while (i <= size)
 		{
-			if (a || ((*elem)[x].name[0] != '.' && (*elem)[i].name[0] != '.'))
+			if (a || ((*elem)[i].name[0] != '.' && (*elem)[x].name[0] != '.'))
 			{
-				if (r)
-				{
-					if ((ft_strcmp((*elem)[x].sec_date, (*elem)[i].sec_date)) < 0)
-						ft_swap_e(&((*elem)[x]), &((*elem)[i]));
-				}
-				else
-					if ((ft_strcmp((*elem)[x].sec_date, (*elem)[i].sec_date)) > 0)
-						ft_swap_e(&((*elem)[x]), &((*elem)[i]));
+				cmp = (r ? (*elem)[i].sec_date - (*elem)[x].sec_date :
+						(*elem)[x].sec_date - (*elem)[i].sec_date);
+				if (cmp < 0)
+					ft_swap_e(&((*elem)[x]), &((*elem)[i]));
 			}
 			i++;
 		}

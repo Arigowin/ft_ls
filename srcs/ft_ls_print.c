@@ -168,9 +168,7 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 
 			(*elem)[i].date = ft_strdup(ft_format_date(st.st_mtime));
 
-			tmp = ft_itoa(st.st_mtime);
-			(*elem)[i].sec_date = ft_strdup(tmp);
-			ft_strdel(&tmp);
+			(*elem)[i].sec_date = st.st_mtime;
 
 			if ((*elem)[i].type == DT_LNK)
 			{
@@ -187,12 +185,12 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 	i = 0;
 	ft_putstr("total ");
 	ft_putnbrendl(total);
+	if (data.op_t)
+		ft_sort_elem_date(elem, (*elem)[0].nbelem, data.op_r, data.op_a);
 	while (i < (*elem)[0].nbelem)
 	{
 		if (data.op_a || (*elem)[i].name[0] != '.')
 		{
-			if (data.op_t)
-				ft_sort_elem_date(elem, (*elem)[0].nbelem, !data.op_r, data.op_a);
 			if ((*elem)[i].name != NULL)
 			{
 				if (tmp2 == NULL)

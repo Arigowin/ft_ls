@@ -68,7 +68,8 @@ static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls data)
 	}
 	ft_free_tbl_s(lst);
 	ft_free_tbl_s(lst2);
-	ft_sort_elem(&elem, elem[0].nbelem, data.op_r);
+	if (!data.op_t)
+		ft_sort_elem(&elem, elem[0].nbelem, data.op_r);
 	return (elem);
 }
 

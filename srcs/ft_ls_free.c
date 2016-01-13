@@ -15,7 +15,12 @@ void	ft_free_lst(t_ft_ls *data)
 	i = 0;
 	while (i < data->nb_path)
 	{
-		free(data->path[i]);
+		if (data->path[i] != NULL)
+		{
+			printf("path|%s|\tpath[0]%d\tlen%zu\ti%d\tnb%d\n", data->path[i], data->path[i][0], ft_strlen(data->path[i]), i, data->nb_path);
+
+			//free(data->path[i]);
+		}
 		i++;
 	}
 	free(data->path);
@@ -24,11 +29,9 @@ void	ft_free_lst(t_ft_ls *data)
 void	ft_free_elem(t_elem **elem)
 {
 	int		i;
-	int		nb;
 
 	i = 0;
-	nb = (*elem)[0].nbelem;
-	while (i < nb)
+	while (i < (*elem)[0].nbelem)
 	{
 		free((*elem)[i].name);
 		if ((*elem)[i].droit != NULL)

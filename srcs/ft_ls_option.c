@@ -45,7 +45,6 @@ static char		*ft_get_option(char **lst, int *nb)
 {
 	int		i;
 	char	*ret;
-	char	*tmp;
 	int		nbb;
 
 	// DEBUG
@@ -62,10 +61,7 @@ static char		*ft_get_option(char **lst, int *nb)
 		{
 			if (lst[i][0] == '-' && lst[i][1] != '\0')
 			{
-				tmp = ft_strjoin(ret, &lst[i][1]);
-				ft_strdel(&ret);
-				ret = ft_strdup(tmp);
-				ft_strdel(&tmp);
+				ret = ft_strproperjoin(ret, &lst[i][1]);
 			}
 			i++;
 			(*nb)--;

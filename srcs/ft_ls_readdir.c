@@ -52,17 +52,21 @@ static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls data)
 		ft_error(1, "ft_read_bis");
 	lst = ft_strsplit(tmp, '\n');
 	lst2 = ft_strsplit(tmp2, ':');
+	ft_strdel(&tmp);
+	ft_strdel(&tmp2);
 	if ((elem = (t_elem *)malloc(sizeof(t_elem) * i)) == NULL)
 		exit (ft_error(1, "ft_readdir_bis"));
 	j = 0;
 	while (lst[j])
 	{
 		ft_init_t_elem(&(elem[j]));
-		elem[j].name = lst[j];
+		elem[j].name = ft_strdup(lst[j]);
 		elem[j].type = lst2[j][0];
 		elem[j].nbelem = i;
 		j++;
 	}
+	ft_free_tbl_s(lst);
+	ft_free_tbl_s(lst2);
 	ft_sort_elem(&elem, elem[0].nbelem, data.op_r);
 	return (elem);
 }

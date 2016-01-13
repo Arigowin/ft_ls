@@ -112,6 +112,7 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 	printf("DEBUG : print\n");
 #endif
 
+	tmp = NULL;
 	tmp2 = NULL;
 	i = 0;
 	total = 0;
@@ -119,8 +120,10 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 	{
 		if ((*elem)[i].name != NULL &&  (data.op_a || (*elem)[i].name[0] != '.'))
 		{
-			if (lstat(ft_strjoin(path, (*elem)[i].name), &st) == -1)
+			tmp2 = ft_strproperjoin(path, (*elem)[i].name);
+			if (lstat(tmp2, &st) == -1)
 				exit (ft_error(1, (*elem)[i].name));
+			ft_strdel(&tmp2);
 
 			(*elem)[i].droit = ft_modeoffile(st.st_mode);
 
@@ -128,17 +131,20 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 			if (sizemax[0] < ft_strlen(tmp))
 				sizemax[0] = ft_strlen(tmp);
 			(*elem)[i].nlink = ft_strdup(tmp);
-			free(tmp);
+			ft_strdel(&tmp);
+
 			tmp = ft_strdup((getpwuid(st.st_uid))->pw_name);
 			if (sizemax[1] < ft_strlen(tmp))
 				sizemax[1] = ft_strlen(tmp);
 			(*elem)[i].uid = ft_strdup(tmp);
-			free(tmp);
+			ft_strdel(&tmp);
+
 			tmp = ft_strdup((getgrgid(st.st_gid))->gr_name);
 			if (sizemax[2] < ft_strlen(tmp))
 				sizemax[2] = ft_strlen(tmp);
 			(*elem)[i].grp = ft_strdup(tmp);
-			free(tmp);
+			ft_strdel(&tmp);
+
 			if ((*elem)[i].droit[0] != 'c' && (*elem)[i].droit[0] != 'b')
 			{
 				tmp = ft_itoa(st.st_size);
@@ -157,17 +163,22 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 				(*elem)[i].rdevmineur = ft_strdup(tmp);
 				(*elem)[i].rdevmajeur = ft_strdup(tmp2);
 			}
-			free(tmp);
-			free(tmp2);
+			ft_strdel(&tmp);
+			ft_strdel(&tmp2);
+
 			(*elem)[i].date = ft_strdup(ft_format_date(st.st_mtime));
+
 			tmp = ft_itoa(st.st_mtime);
 			(*elem)[i].sec_date = ft_strdup(tmp);
-			free(tmp);
+			ft_strdel(&tmp);
+
 			if ((*elem)[i].type == DT_LNK)
 			{
-				if ((ret = readlink(ft_strjoin(path, (*elem)[i].name), buff, BUFF_SIZE)) == -1)
+				if ((ret = readlink(ft_strproperjoin(path, (*elem)[i].name), buff, BUFF_SIZE)) == -1)
 					ft_error(1, path);
-				(*elem)[i].link = ft_strdup(ft_strsub(buff, 0, ret));
+				tmp = ft_strsub(buff, 0, ret);
+				(*elem)[i].link = ft_strdup(tmp);
+				ft_strdel(&tmp);
 			}
 			total += st.st_blocks;
 		}
@@ -181,7 +192,7 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 		if (data.op_a || (*elem)[i].name[0] != '.')
 		{
 			if (data.op_t)
-					ft_sort_elem_date(elem, (*elem)[0].nbelem, !data.op_r, data.op_a);
+				ft_sort_elem_date(elem, (*elem)[0].nbelem, !data.op_r, data.op_a);
 			if ((*elem)[i].name != NULL)
 			{
 				if (tmp2 == NULL)
@@ -192,4 +203,5 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 		}
 		i++;
 	}
+	ft_free_elem(elem);
 }

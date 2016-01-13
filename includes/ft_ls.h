@@ -11,11 +11,11 @@
 
 # define MACRO (x) (x != 0 ? < : >)
 
-//#define DEBUG
+#define DEBUG
 
 typedef struct		s_ft_ls
 {
-	char			op_R;
+	char			op_R; // op_recu
 	char			op_a;
 	char			op_l;
 	char			op_r;
@@ -56,7 +56,7 @@ void				ft_set_op(char *op, t_ft_ls *data);
 char				*ft_format_path(char *str);
 int					ft_check_op(char *op);
 int					ft_is_dir(char *path, char *fpath);
-void				ft_browse(t_ft_ls data);
+void				ft_browse(t_ft_ls *data);
 void				ft_free_lst(t_ft_ls *data);
 void				ft_free_elem(t_elem **elem);
 void				ft_print(t_ft_ls data, t_elem **elem, char *path);

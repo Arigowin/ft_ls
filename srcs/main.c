@@ -19,9 +19,9 @@ int main(int ac, char **av)
 	ft_set_op(op, &data);
 	if (data.nb_path > 1)
 		ft_sort_str(&(data.path), data.nb_path, data.op_r);
-	ft_browse(data);
+	ft_browse(&data);
 	ft_free_lst(&data);
-	free(op);
+	ft_strdel(&op);
 
 	// DEBUG
 #ifdef DEBUG

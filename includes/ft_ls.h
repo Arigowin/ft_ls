@@ -9,9 +9,7 @@
 
 # define BUFF_SIZE 1024
 
-# define MACRO (x) (x != 0 ? < : >)
-
-#define DEBUG
+//#define DEBUG
 
 typedef struct		s_ft_ls
 {

@@ -49,7 +49,7 @@ static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls data)
 		}
 		i++;
 	}
-	if (dp == NULL && tmp == NULL)
+	if (dp == NULL && (tmp == NULL || tmp2 == NULL))
 		ft_error(1, "ft_read_bis");
 	lst = ft_strsplit(tmp, '\n');
 	lst2 = ft_strsplit(tmp2, ':');
@@ -83,7 +83,10 @@ t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls data)
 #endif
 
 	if ((dir = opendir(fpath)) == NULL)
-		ft_error(1, ft_strsub(path, 2, ft_strlen(path)));
+	{
+		ft_error(1, path);
+		return (NULL);
+	}
 	elem = ft_readdir_bis(dir, data);
 	closedir(dir);
 	return (elem);

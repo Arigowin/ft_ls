@@ -60,7 +60,9 @@ static char		*ft_get_option(char **lst, int *nb)
 		if (lst[i][1] != '-')
 		{
 			if (lst[i][0] == '-' && lst[i][1] != '\0')
-				ret = ft_strproperjoin(ret, ft_strdup(&lst[i][1]));
+			{
+				ret = ft_strjoin(ret, ft_strdup(&lst[i][1]));
+			}
 			i++;
 			(*nb)--;
 		}

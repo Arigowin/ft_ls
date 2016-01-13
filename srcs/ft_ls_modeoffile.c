@@ -13,19 +13,19 @@ static char		ft_typeoffile(mode_t mode)
 	char droit;
 
 	droit = '-';
-	if (S_ISREG (mode))
+	if (S_ISREG(mode))
 		droit = '-';
-	else if (S_ISDIR (mode))
+	else if (S_ISDIR(mode))
 		droit = 'd';
-	else if (S_ISLNK (mode))
+	else if (S_ISLNK(mode))
 		droit = 'l';
-	else if (S_ISFIFO (mode))
+	else if (S_ISFIFO(mode))
 		droit = 'p';
-	else if (S_ISBLK (mode))
+	else if (S_ISBLK(mode))
 		droit = 'b';
-	else if (S_ISCHR (mode))
+	else if (S_ISCHR(mode))
 		droit = 'c';
-	else if (S_ISSOCK (mode))
+	else if (S_ISSOCK(mode))
 		droit = 's';
 	else
 		droit = '?';

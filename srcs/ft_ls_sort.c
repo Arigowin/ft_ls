@@ -94,11 +94,11 @@ static void		ft_swap_s(char **s1, char **s2)
 #endif
 
 	tmp = ft_strdup(*s1);
-	ft_strdel(s1);
+//	ft_strdel(s1);
 	*s1 = ft_strdup(*s2);
-	ft_strdel(s2);
+//	ft_strdel(s2);
 	*s2 = ft_strdup(tmp);
-	free(tmp);
+//	free(tmp);
 }
 
 void			ft_sort_str(char ***str, int size, int r)

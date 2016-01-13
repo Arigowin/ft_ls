@@ -120,7 +120,7 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 	{
 		if ((*elem)[i].name != NULL &&  (data.op_a || (*elem)[i].name[0] != '.'))
 		{
-			tmp2 = ft_strproperjoin(path, (*elem)[i].name);
+			tmp2 = ft_strproperjoin(path, ft_strdup((*elem)[i].name));
 			if (lstat(tmp2, &st) == -1)
 				exit (ft_error(1, (*elem)[i].name));
 			ft_strdel(&tmp2);

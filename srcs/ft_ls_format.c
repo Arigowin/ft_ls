@@ -6,42 +6,34 @@
 #include <stdio.h>
 char			*ft_format_path(char *str)
 {
-	char	*path;
+	char	*tmp;
 
 	// DEBUG
 #ifdef DEBUG
 	printf("DEBUG : ft_format_path\n");
 #endif
 
-	if ((str[0] != '/' && str[1] != '/') && (str[0] != '.'))
+	if ((str[0] != '/' || str[1] != '/') && (str[0] != '.'))
 	{
-		str = ft_strproperjoin(ft_strdup("./"), str);
+		tmp = ft_strjoin(ft_strdup("./"), str);
+		ft_strdel(&str);
+		str = ft_strdup(tmp);
+		ft_strdel(&tmp);
 	}
-	path = ft_strdup(str);
-	if (path[ft_strlen(path) - 1] != '/')
-	{
-		path = ft_strproperjoin(path, ft_strdup("/"));
-	}
-	if (ft_is_dir(str, path) == 0)
-	{
-		ft_strdel(&path);
+	if (ft_is_dir(str) == 0)
 		return (str);
-	}
-	return (path);
+	return (ft_strjoin(str, ft_strdup("/")));
 }
 
 char			*ft_format_date(time_t date)
 {
 	char *ret;
-	char *tmp;
 
 	// DEBUG
 #ifdef DEBUG
 	printf("DEBUG : ft_format_date\n");
 #endif
 
-	tmp = ft_strdup(ctime(&(date)));
-	ret = ft_strsub(tmp, 4, 12);
-	ft_strdel(&tmp);
+	ret = ft_strsub(ctime(&(date)), 4, 12);
 	return (ret);
 }

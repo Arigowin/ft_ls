@@ -20,7 +20,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 	tmp = NULL;
 	tmp2 = NULL;
 	j = 0;
-	if (data.nb_path > 1 || (data.op_R && i > 0))
+	if (data.nb_path > 1 || (data.op_recu && i > 0))
 	{
 		if (i > 0)
 			ft_putendl("");
@@ -47,7 +47,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 	}
 	ft_strdel(&fpath);
 	j = 0;
-	while (j < elem[0].nbelem && data.op_R)
+	while (j < elem[0].nbelem && data.op_recu)
 	{
 		if ((data.op_a || elem[j].name[0] != '.')
 				&& ft_strcmp(elem[j].name, "..") != 0
@@ -79,17 +79,17 @@ void	ft_browse(t_ft_ls *data)
 	printf("DEBUG : ft_browse\n");
 #endif
 
-	i = 0;
-	j = 0;
 	if ((elem = (t_elem *)malloc(sizeof(t_elem) * data->nb_path)) == NULL)
 		exit (ft_error(1, "ft_browse"));
-	ft_init_t_elem(elem);
+	i = 0;
+	j = 0;
 	while (i < data->nb_path)
 	{
-		if (ft_is_dir(data->path[i], data->path[i]) == 0)
+		if (ft_is_dir(data->path[i]) == 0)
 		{
 			if (data->op_l)
 			{
+				ft_init_t_elem(&(elem[j]));
 				elem[j].name = ft_strdup(data->path[i]);
 				elem[0].nbelem++;
 			}
@@ -101,14 +101,12 @@ void	ft_browse(t_ft_ls *data)
 		i++;
 	}
 	if (data->op_l && elem[0].name != NULL)
-	{
 		ft_print(*data, &elem, "./");
-	}
 	i = 0;
 	while (i < data->nb_path)
 	{
 		if (data->path[i] != NULL)
-			ft_browse_recu(*data, data->path[i], i);
+			ft_browse_recu(*data, ft_strdup(data->path[i]), i);
 		i++;
 	}
 }

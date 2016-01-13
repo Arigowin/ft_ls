@@ -4,7 +4,7 @@
 void	ft_init_t_ft_ls(t_ft_ls *data)
 {
 	data->path = NULL;
-	data->op_R = 0;
+	data->op_recu = 0;
 	data->op_a = 0;
 	data->op_l = 0;
 	data->op_r = 0;

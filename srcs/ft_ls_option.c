@@ -12,7 +12,7 @@
 #include <errno.h>
 
 #include <stdio.h>
-
+#include <unistd.h>
 void		ft_set_op(char *op, t_ft_ls *data)
 {
 	int	i;
@@ -27,8 +27,8 @@ void		ft_set_op(char *op, t_ft_ls *data)
 		exit(-1);
 	while (op[i])
 	{
-		if (!data->op_R)
-			data->op_R = (op[i] == 'R' ? 1 : 0);
+		if (!data->op_recu)
+			data->op_recu = (op[i] == 'R' ? 1 : 0);
 		if (!data->op_a)
 			data->op_a = (op[i] == 'a' ? 1 : 0);
 		if (!data->op_l)
@@ -60,9 +60,7 @@ static char		*ft_get_option(char **lst, int *nb)
 		if (lst[i][1] != '-')
 		{
 			if (lst[i][0] == '-' && lst[i][1] != '\0')
-			{
 				ret = ft_strproperjoin(ret, ft_strdup(&lst[i][1]));
-			}
 			i++;
 			(*nb)--;
 		}
@@ -94,6 +92,7 @@ char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
 		ft_error(1, "ft_get_arg");
 	if (nb < 1)
 	{
+		data->path[0] = NULL;
 		data->path[0] = ft_strdup(".");
 		data->path[1] = NULL;
 		data->nb_path++;
@@ -103,6 +102,7 @@ char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
 	j = 0;
 	while (i < nbb)
 	{
+		data->path[j] = NULL;
 		if (lst[i][0] == '\0')
 		{
 			errno = ENOENT;

@@ -17,9 +17,7 @@ void	ft_free_lst(t_ft_ls *data)
 	{
 		if (data->path[i] != NULL)
 		{
-			printf("path|%s|\tpath[0]%d\tlen%zu\ti%d\tnb%d\n", data->path[i], data->path[i][0], ft_strlen(data->path[i]), i, data->nb_path);
-
-			//free(data->path[i]);
+			free(data->path[i]);
 		}
 		i++;
 	}

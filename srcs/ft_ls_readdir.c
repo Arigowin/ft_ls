@@ -25,6 +25,7 @@ static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls data)
 #endif
 
 	tmp = NULL;
+	tmp2 = NULL;
 	i = 0;
 	while ((dp = readdir(dir)) != NULL)
 	{
@@ -81,23 +82,14 @@ t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls data)
 	printf("DEBUG : ft_readdir\n");
 #endif
 
-	dir = opendir(fpath);
-	if (dir == NULL)
-	{
-		if (errno == ENOTDIR)
-			ft_putendl(path);
+	if ((dir = opendir(fpath)) == NULL)
 		ft_error(1, ft_strsub(path, 2, ft_strlen(path)));
-	}
-	else
-	{
-		elem = ft_readdir_bis(dir, data);
-		closedir(dir);
-		return (elem);
-	}
-	return (NULL);
+	elem = ft_readdir_bis(dir, data);
+	closedir(dir);
+	return (elem);
 }
 
-int		ft_is_dir(char *path, char *fpath)
+int		ft_is_dir(char *path)
 {
 	struct stat b;
 
@@ -106,7 +98,7 @@ int		ft_is_dir(char *path, char *fpath)
 	printf("DEBUG : ft_is_dir\n");
 #endif
 
-	if (lstat(fpath, &b) == -1)
+	if (lstat(path, &b) == -1)
 	{
 		if (errno == ENOTDIR)
 			return (0);

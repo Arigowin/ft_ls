@@ -16,9 +16,9 @@ char			*ft_format_path(char *str)
 	if ((str[0] != '/' && str[1] != '/') && (str[0] != '.'))
 	{
 		tmp = ft_strjoin(ft_strdup("./"), str);
-//		ft_strdel(&str);
+		ft_strdel(&str);
 		str = ft_strdup(tmp);
-//		ft_strdel(&tmp);
+		ft_strdel(&tmp);
 	}
 	if (ft_is_dir(str) == 0)
 		return (str);

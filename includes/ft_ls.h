@@ -5,7 +5,7 @@
 # include <sys/types.h>
 
 # define MAJOR 0XFF000000
-# define OP "Ralrt"
+# define OP "1Ralrt"
 
 # define BUFF_SIZE 1024
 
@@ -48,11 +48,12 @@ void				ft_sort_elem(t_elem **str, int size, int r);
 void				ft_sort_elem_date(t_elem **str, int size, int r, int a);
 void				ft_sort_str(char ***str, int size, int r);
 int					ft_error(int nb, char *str);
-t_elem				*ft_readdir(char *fpath, char *path, t_ft_ls data);
+t_elem				*ft_readdir(char *fpath, char *path);
 char				*ft_get_arg(t_ft_ls *data, char **lst, int nb);
 void				ft_set_op(char *op, t_ft_ls *data);
 char				*ft_format_path(char *str);
 int					ft_check_op(char *op);
+int					ft_check_arg(t_ft_ls data);
 int					ft_is_dir(char *path);
 void				ft_browse(t_ft_ls *data);
 void				ft_free_lst(t_ft_ls *data);

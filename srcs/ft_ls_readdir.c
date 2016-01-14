@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 
 #include <stdio.h>
-static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls data)
+static t_elem		*ft_readdir_bis(DIR *dir)
 {
 	struct dirent	*dp;
 	char			*tmp;
@@ -68,12 +68,10 @@ static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls data)
 	}
 	ft_free_tbl_s(lst);
 	ft_free_tbl_s(lst2);
-	if (!data.op_t)
-		ft_sort_elem(&elem, elem[0].nbelem, data.op_r);
 	return (elem);
 }
 
-t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls data)
+t_elem			*ft_readdir(char *fpath, char *path)
 {
 	DIR				*dir;
 	t_elem			*elem;
@@ -88,7 +86,7 @@ t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls data)
 		ft_error(1, path);
 		return (NULL);
 	}
-	elem = ft_readdir_bis(dir, data);
+	elem = ft_readdir_bis(dir);
 	closedir(dir);
 	return (elem);
 }
@@ -101,12 +99,11 @@ int		ft_is_dir(char *path)
 #ifdef DEBUG
 	printf("DEBUG : ft_is_dir\n");
 #endif
-
 	if (lstat(path, &b) == -1)
 	{
 		if (errno == ENOTDIR)
 			return (0);
-		ft_error(1, path);
+		return (ft_error(1, path));
 	}
 	return (S_ISDIR (b.st_mode));
 }

@@ -24,5 +24,5 @@ int		ft_error(int nb, char *str)
 		ft_putstr_fd(OP, 2);
 		ft_putendl_fd("] [file ...]", 2);
 	}
-	return (EXIT_FAILURE);
+	return (-1);
 }

@@ -28,20 +28,15 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 		ft_putendl(":");
 	}
 	fpath = ft_format_path(path);
-	if ((elem = ft_readdir(fpath, path, data)) == NULL)
+	if ((elem = ft_readdir(fpath, path)) == NULL)
 		return (0);
 	j = 0;
 	while (j < elem[0].nbelem)
 	{
 		if (data.op_a || elem[j].name[0] != '.')
 		{
-			if (data.op_l)
-			{
-				ft_print(data, &elem, fpath);
-				break ;
-			}
-			else
-				ft_putendl(elem[j].name);
+			ft_print(data, &elem, fpath);
+			break;
 		}
 		j++;
 	}
@@ -76,6 +71,7 @@ void	ft_browse(t_ft_ls *data)
 	int		i;
 	int		j;
 	t_elem	*elem;
+	int		er;
 
 	// DEBUG
 #ifdef DEBUG
@@ -86,24 +82,22 @@ void	ft_browse(t_ft_ls *data)
 		exit (ft_error(1, "ft_browse"));
 	i = 0;
 	j = 0;
+	er = 0;
 	while (i < data->nb_path)
 	{
-		if (ft_is_dir(data->path[i]) == 0)
+		if ((er = ft_is_dir(data->path[i])) == 0 && er != -1)
 		{
-			if (data->op_l)
-			{
-				ft_init_t_elem(&(elem[j]));
-				elem[j].name = ft_strdup(data->path[i]);
-				elem[0].nbelem++;
-			}
-			else
-				ft_putendl(data->path[i]);
+			ft_init_t_elem(&(elem[j]));
+			elem[j].name = ft_strdup(data->path[i]);
+			elem[0].nbelem++;
 			ft_strdel(&(data->path[i]));
 			j++;
 		}
+		if (er == -1)
+			ft_strdel(&(data->path[i]));
 		i++;
 	}
-	if (data->op_l && elem[0].name != NULL && j != 0)
+	if (elem[0].name != NULL && j != 0)
 		ft_print(*data, &elem, "./");
 	i = 0;
 	while (i < data->nb_path)

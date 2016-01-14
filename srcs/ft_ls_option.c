@@ -23,8 +23,8 @@ void		ft_set_op(char *op, t_ft_ls *data)
 #endif
 
 	i = 0;
-	if (ft_check_op(op))
-		exit(-1);
+	ft_check_op(op);
+	ft_check_arg(*data);
 	while (op[i])
 	{
 		if (!data->op_recu)
@@ -57,20 +57,20 @@ static char		*ft_get_option(char **lst, int *nb)
 	ret = ft_strnew(*nb);
 	while (i < nbb && lst[i][0] == '-' && lst[i][1] != '\0')
 	{
-		if (lst[i][1] != '-')
+		if (ft_strcmp(lst[i], "--") != 0)
 		{
 			if (lst[i][0] == '-' && lst[i][1] != '\0')
 			{
 				ret = ft_strjoin(ret, ft_strdup(&lst[i][1]));
 			}
-			i++;
-			(*nb)--;
 		}
 		else
 		{
 			(*nb)--;
 			break ;
 		}
+		i++;
+		(*nb)--;
 	}
 	(*nb)--;
 	return (ret);
@@ -105,11 +105,6 @@ char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
 	while (i < nbb)
 	{
 		data->path[j] = NULL;
-		if (lst[i][0] == '\0')
-		{
-			errno = ENOENT;
-			exit(ft_error(1, "fts_open"));
-		}
 		data->path[j] = ft_strdup(lst[i]);
 		j++;
 		i++;
@@ -134,7 +129,27 @@ int				ft_check_op(char *op)
 	while (op[i])
 	{
 		if (ft_strchr(lstop, op[i]) == NULL)
-			return (ft_error(2, &(op[i])));
+			exit (ft_error(2, &(op[i])));
+		i++;
+	}
+	return (0);
+}
+
+int			ft_check_arg(t_ft_ls data)
+{
+#ifdef DEBUG
+	printf("DEBUG : ft_check_arg\n");
+#endif
+	int i;
+
+	i = 0;
+	while (i < data.nb_path)
+	{
+		if (data.path[i][0] == '\0')
+		{
+			errno = ENOENT;
+			exit(ft_error(1, "fts_open"));
+		}
 		i++;
 	}
 	return (0);

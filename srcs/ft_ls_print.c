@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 #include <stdio.h>
-static void		ft_printone(t_elem elem, size_t *size, int rdev)
+static void		ft_printone(t_elem elem, size_t *size, int rdev, int op_l)
 {
 	size_t	i;
 
@@ -17,83 +17,87 @@ static void		ft_printone(t_elem elem, size_t *size, int rdev)
 	printf("DEBUG : printone\n");
 #endif
 
-	ft_putstr(elem.droit);
-	ft_putstr("  ");
-	i = 0;
-	while (i < size[0] - ft_strlen(elem.nlink))
+	if (op_l)
 	{
-		ft_putchar(' ');
-		i++;
-	}
-	ft_putstr(elem.nlink);
-	ft_putstr(" ");
-	ft_putstr(elem.uid);
-	i = 0;
-	while (i < size[1] - ft_strlen(elem.uid))
-	{
-		ft_putchar(' ');
-		i++;
-	}
-	ft_putstr("  ");
-	ft_putstr(elem.grp);
-	i = 0;
-	while (i < size[2] - ft_strlen(elem.grp))
-	{
-		ft_putchar(' ');
-		i++;
-	}
-	ft_putstr("  ");
-	if (elem.size != NULL)
-	{
+		ft_putstr(elem.droit);
+		ft_putstr("  ");
 		i = 0;
-		if (rdev)
+		while (i < size[0] - ft_strlen(elem.nlink))
 		{
-			while (i < size[4] + size[3])
+			ft_putchar(' ');
+			i++;
+		}
+		ft_putstr(elem.nlink);
+		ft_putstr(" ");
+		ft_putstr(elem.uid);
+		i = 0;
+		while (i < size[1] - ft_strlen(elem.uid))
+		{
+			ft_putchar(' ');
+			i++;
+		}
+		ft_putstr("  ");
+		ft_putstr(elem.grp);
+		i = 0;
+		while (i < size[2] - ft_strlen(elem.grp))
+		{
+			ft_putchar(' ');
+			i++;
+		}
+		ft_putstr("  ");
+		if (elem.size != NULL)
+		{
+			i = 0;
+			if (rdev)
 			{
-				ft_putchar(' ');
-				i++;
+				while (i < size[4] + size[3] + 2)
+				{
+					ft_putchar(' ');
+					i++;
+				}
 			}
+			else
+			{
+				while (i < size[3] - ft_strlen(elem.size))
+				{
+					ft_putchar(' ');
+					i++;
+				}
+			}
+			ft_putstr(elem.size);
 		}
 		else
 		{
-			while (i < size[3] - ft_strlen(elem.size))
+			ft_putstr(" ");
+			i = 0;
+			while (i < size[3] - ft_strlen(elem.rdevmineur))
 			{
 				ft_putchar(' ');
 				i++;
 			}
+			ft_putstr(elem.rdevmineur);
+			ft_putstr(", ");
+			i = 0;
+			while (i < (size[4] - ft_strlen(elem.rdevmajeur)))
+			{
+				ft_putchar(' ');
+				i++;
+			}
+			ft_putstr(elem.rdevmajeur);
 		}
-		ft_putstr(elem.size);
+		ft_putstr(" ");
+		ft_putstr(elem.date);
+		ft_putstr(" ");
+		ft_putstr(elem.name);
+		if (elem.link != NULL)
+		{
+			ft_putstr(" -> ");
+			ft_putstr(elem.link);
+		}
+		ft_putstr("\n");
 	}
 	else
-	{
-		ft_putstr(" ");
-		i = 0;
-		while (i < size[3] - ft_strlen(elem.rdevmineur))
-		{
-			ft_putchar(' ');
-			i++;
-		}
-		ft_putstr(elem.rdevmineur);
-		ft_putstr(", ");
-		i = 0;
-		while (i < (size[4] - ft_strlen(elem.rdevmajeur)))
-		{
-			ft_putchar(' ');
-			i++;
-		}
-		ft_putstr(elem.rdevmajeur);
-	}
-	ft_putstr(" ");
-	ft_putstr(elem.date);
-	ft_putstr(" ");
-	ft_putstr(elem.name);
-	if (elem.link != NULL)
-	{
-		ft_putstr(" -> ");
-		ft_putstr(elem.link);
-	}
-	ft_putstr("\n");
-
+		ft_putendl(elem.name);
 }
 
 void	ft_print(t_ft_ls data, t_elem **elem, char *path)
@@ -183,8 +187,12 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 		i++;
 	}
 	i = 0;
-	ft_putstr("total ");
-	ft_putnbrendl(total);
+
+	if (data.op_l)
+	{
+		ft_putstr("total ");
+		ft_putnbrendl(total);
+	}
 	if (data.op_t)
 		ft_sort_elem_date(elem, (*elem)[0].nbelem, data.op_r, data.op_a);
 	while (i < (*elem)[0].nbelem)
@@ -194,9 +202,9 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 			if ((*elem)[i].name != NULL)
 			{
 				if (tmp2 == NULL)
-					ft_printone((*elem)[i], sizemax, 0);
+					ft_printone((*elem)[i], sizemax, 0, data.op_l);
 				else
-					ft_printone((*elem)[i], sizemax, 1);
+					ft_printone((*elem)[i], sizemax, 1, data.op_l);
 			}
 		}
 		i++;

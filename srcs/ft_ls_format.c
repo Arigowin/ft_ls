@@ -28,12 +28,33 @@ char			*ft_format_path(char *str)
 char			*ft_format_date(time_t date)
 {
 	char *ret;
+	char *tmp;
+	time_t sdate;
+	time_t now;
 
 	// DEBUG
 #ifdef DEBUG
 	printf("DEBUG : ft_format_date\n");
 #endif
 
-	ret = ft_strsub(ctime(&(date)), 4, 12);
+	sdate = date;
+	now = time(&date);
+	if (sdate > now)
+	{
+		ret = ft_strsub(ctime(&(sdate)), 4, 7);
+		tmp = ft_strsub(ctime(&(sdate)), 19, 5);
+		ret = ft_strjoin(ret, tmp);
+	}
+	else if (sdate < now - (365.25 * (3600 * 24)) / 2)
+	{
+		ret = ft_strsub(ctime(&(sdate)), 4, 7);
+		tmp = ft_strsub(ctime(&(sdate)), 19, 5);
+		ret = ft_strjoin(ret, tmp);
+	}
+	else
+	{
+		ret = ft_strsub(ctime(&(date)), 4, 12);
+	}
+
 	return (ret);
 }

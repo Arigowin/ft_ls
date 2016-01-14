@@ -6,7 +6,7 @@
 #    By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/03 10:52:20 by dolewski          #+#    #+#              #
-#    Updated: 2016/01/11 15:38:42 by dolewski         ###   ########.fr        #
+#    Updated: 2016/01/14 11:33:46 by dolewski         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,8 @@ clean:
 	@echo "$(NAME) : Deleting objs"
 	@$(RM) -rf $(OPATH)
 
-fclean: clean lib.fclean
+# libft.clean -----------------------------------------------------------------------
+fclean: clean
 	@echo "$(NAME) : Deleting $(NAME)"
 	@$(RM) -f $(NAME)
 	@echo "\033[32mDone !\033[0m"

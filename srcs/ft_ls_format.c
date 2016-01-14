@@ -7,6 +7,7 @@
 char			*ft_format_path(char *str)
 {
 	char	*tmp;
+	int		ret;
 
 	// DEBUG
 #ifdef DEBUG
@@ -20,7 +21,7 @@ char			*ft_format_path(char *str)
 		str = ft_strdup(tmp);
 		ft_strdel(&tmp);
 	}
-	if (ft_is_dir(str) == 0)
+	if ((ret =ft_is_dir(str)) == 0)
 		return (str);
 	return (ft_strjoin(str, ft_strdup("/")));
 }
@@ -53,7 +54,7 @@ char			*ft_format_date(time_t date)
 	}
 	else
 	{
-		ret = ft_strsub(ctime(&(date)), 4, 12);
+		ret = ft_strsub(ctime(&(sdate)), 4, 12);
 	}
 
 	return (ret);

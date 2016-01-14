@@ -174,7 +174,7 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 
 			(*elem)[i].sec_date = st.st_mtime;
 
-			if ((*elem)[i].type == DT_LNK)
+			if ((*elem)[i].droit[0] == 'l')
 			{
 				if ((ret = readlink(ft_strjoin(path, (*elem)[i].name), buff, BUFF_SIZE)) == -1)
 					ft_error(1, path);
@@ -193,6 +193,7 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 		ft_putstr("total ");
 		ft_putnbrendl(total);
 	}
+	ft_sort_elem(elem, (*elem)[0].nbelem, data.op_r);
 	if (data.op_t)
 		ft_sort_elem_date(elem, (*elem)[0].nbelem, data.op_r, data.op_a);
 	while (i < (*elem)[0].nbelem)

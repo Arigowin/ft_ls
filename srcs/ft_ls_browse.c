@@ -85,7 +85,8 @@ void	ft_browse(t_ft_ls *data)
 	er = 0;
 	while (i < data->nb_path)
 	{
-		if ((er = ft_is_dir(data->path[i])) == 0 && er != -1)
+		if (((er = ft_is_dir(data->path[i])) == 0 && er != -1) ||
+				(er == 2 && data->op_l))
 		{
 			ft_init_t_elem(&(elem[j]));
 			elem[j].name = ft_strdup(data->path[i]);

@@ -83,6 +83,11 @@ t_elem			*ft_readdir(char *fpath, char *path)
 
 	if ((dir = opendir(fpath)) == NULL)
 	{
+		if (ft_is_dir(path) != 0 && (errno == ENOENT || errno == ENOTDIR))
+		{
+			ft_putendl(ft_strsub(path, 2, ft_strlen(path)));
+			return (NULL);
+		}
 		ft_error(1, path);
 		return (NULL);
 	}
@@ -105,5 +110,9 @@ int		ft_is_dir(char *path)
 			return (0);
 		return (ft_error(1, path));
 	}
-	return (S_ISDIR (b.st_mode));
+	if (S_ISDIR(b.st_mode))
+		return (1);
+	else if (S_ISLNK(b.st_mode))
+		return (2);
+	return (0);
 }

@@ -1,10 +1,3 @@
-// option a gerer : 
-// -l : list one file per line.
-// -R : list subdirectories recursively
-// -a : do not ignore entries starting with .
-// -r : reverse order while sorting
-// -t : sort by modification time, newest first
-
 #include "ft_ls.h"
 #include "libft.h"
 #include <sys/stat.h>
@@ -12,7 +5,6 @@
 #include <errno.h>
 
 #include <stdio.h>
-#include <unistd.h>
 void		ft_set_op(char *op, t_ft_ls *data)
 {
 	int	i;
@@ -60,9 +52,7 @@ static char		*ft_get_option(char **lst, int *nb)
 		if (ft_strcmp(lst[i], "--") != 0)
 		{
 			if (lst[i][0] == '-' && lst[i][1] != '\0')
-			{
 				ret = ft_strjoin(ret, ft_strdup(&lst[i][1]));
-			}
 		}
 		else
 		{

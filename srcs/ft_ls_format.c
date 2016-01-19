@@ -53,9 +53,6 @@ char			*ft_format_date(time_t date)
 		ret = ft_strjoin(ret, tmp);
 	}
 	else
-	{
 		ret = ft_strsub(ctime(&(sdate)), 4, 12);
-	}
-
 	return (ret);
 }

@@ -2,8 +2,10 @@
 #include "libft.h"
 #include <stdlib.h>
 #include <dirent.h>
+#include <sys/errno.h>
 
 #include <stdio.h>
+#include <unistd.h>
 static int		ft_browse_read(t_ft_ls data, char **path, int i, t_elem **elem)
 {
 	char	*fpath;
@@ -16,7 +18,7 @@ static int		ft_browse_read(t_ft_ls data, char **path, int i, t_elem **elem)
 	j = 0;
 	if (data.nb_path > 1 || (data.op_recu && i > 0))
 	{
-		if (i > 0)
+		if (i > 0 && errno == 0)
 			ft_putendl("");
 		ft_putstr(*path);
 		ft_putendl(":");
@@ -24,7 +26,7 @@ static int		ft_browse_read(t_ft_ls data, char **path, int i, t_elem **elem)
 	fpath = ft_format_path(*path);
 	if ((*elem = ft_readdir(fpath, *path)) == NULL)
 		return (0);
-	ft_print(data, elem, fpath);
+	ft_print(data, elem, fpath, 1);
 	ft_strdel(&fpath);
 	return (1);
 }
@@ -90,7 +92,7 @@ static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 		i++;
 	}
 	if (elem[0].name != NULL && j != 0)
-		ft_print(*data, &elem, "./");
+		ft_print(*data, &elem, "./", 0);
 	return (j);
 }
 

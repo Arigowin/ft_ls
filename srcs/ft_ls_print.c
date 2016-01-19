@@ -67,7 +67,7 @@ static void		ft_printone(t_elem elem, size_t *size, int rdev, int op_l)
 		ft_putendl(elem.name);
 }
 
-void	ft_print(t_ft_ls data, t_elem **elem, char *path)
+void	ft_print(t_ft_ls data, t_elem **elem, char *path, int t)
 {
 	int			i;
 	size_t		sizemax[5] = {0, 0, 0, 0, 0};
@@ -86,9 +86,8 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 			total += ft_get_info(path, &((*elem)[i]), sizemax);
 		i++;
 	}
-	i = 0;
 	// condition a ajouter mais je ne sais pas encore laquelle
-	if (data.op_l)
+	if (data.op_l && t && (i > 2 || data.op_a))
 	{
 		ft_putstr("total ");
 		ft_putnbrendl(total);
@@ -96,11 +95,12 @@ void	ft_print(t_ft_ls data, t_elem **elem, char *path)
 	ft_sort_elem(elem, (*elem)[0].nbelem, data.op_r);
 	if (data.op_t)
 		ft_sort_elem_date(elem, (*elem)[0].nbelem, data.op_r, data.op_a);
+	i = 0;
 	while (i < (*elem)[0].nbelem)
 	{
 		if ((data.op_a || (*elem)[i].name[0] != '.') && (*elem)[i].name != NULL)
 		{
-			if ((*elem)[i].rdevmineur == NULL)
+			if (sizemax[4] == 0)
 				ft_printone((*elem)[i], sizemax, 0, data.op_l);
 			else
 				ft_printone((*elem)[i], sizemax, 1, data.op_l);

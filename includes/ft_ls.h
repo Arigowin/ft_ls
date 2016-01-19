@@ -65,7 +65,7 @@ void				ft_browse(t_ft_ls *data);
 void				ft_free_lst(t_ft_ls *data);
 void				ft_free_elem(t_elem *elem);
 
-void				ft_print(t_ft_ls data, t_elem **elem, char *path);
+void				ft_print(t_ft_ls data, t_elem **elem, char *path, int t);
 
 char				*ft_modeoffile(mode_t mode);
 

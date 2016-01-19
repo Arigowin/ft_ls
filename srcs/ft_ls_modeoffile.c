@@ -32,6 +32,22 @@ static char		ft_typeoffile(mode_t mode)
 	return (droit);
 }
 
+void			ft_modeoffile_bis(mode_t mode, char **droit)
+{
+	if (S_ISUID & mode && (*droit)[3] == '-')
+		(*droit)[3] = 'S';
+	else if (S_ISUID & mode)
+		(*droit)[3] = 's';
+	if (S_ISGID & mode && (*droit)[6] == '-')
+		(*droit)[6] = 'S';
+	else if (S_ISGID & mode)
+		(*droit)[6] = 's';
+	if (S_ISVTX & mode && (*droit)[9] == '-')
+		(*droit)[9] = 'T';
+	else if (S_ISVTX & mode)
+		(*droit)[9] = 't';
+}
+
 char			*ft_modeoffile(mode_t mode)
 {
 	char *droit;
@@ -61,6 +77,7 @@ char			*ft_modeoffile(mode_t mode)
 		droit[8] = 'w';
 	if (S_IXOTH & mode)
 		droit[9] = 'x';
+	ft_modeoffile_bis(mode, &droit);
 	droit[0] = ft_typeoffile(mode);
 	return (droit);
 }

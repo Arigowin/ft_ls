@@ -66,7 +66,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 		}
 		tmpel = tmpel->next;
 	}
-	ft_free_elem(&elem);
+//	ft_free_elem(&elem);
 	return (0);
 }
 
@@ -94,7 +94,7 @@ static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 	}
 	if (elem && j != 0)
 		ft_print(*data, &elem, "./", 0);
-	ft_free_elem(&elem);
+//	ft_free_elem(&elem);
 	return (j);
 }
 
@@ -109,8 +109,7 @@ void			ft_browse(t_ft_ls *data)
 	printf("DEBUG : ft_browse\n");
 #endif
 
-	if ((elem = (t_elem *)malloc(sizeof(t_elem))) == NULL)
-		exit (ft_error(1, "ft_browse"));
+	elem = NULL;
 	j = ft_browse_not_a_directorie(data, elem);
 	i = 0;
 	while (i < data->nb_path)

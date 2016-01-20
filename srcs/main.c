@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #include <stdio.h>
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_ft_ls		data;
 	char		*op;

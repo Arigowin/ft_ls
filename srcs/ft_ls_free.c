@@ -29,24 +29,22 @@ void	ft_free_elem(t_elem **elem)
 	printf("DEBUG : ft_free_elem\n");
 #endif
 	t_elem	*tmp;
-	t_elem	*tmp2;
 
-	tmp = *elem;
-	while (tmp)
+	while (*elem)
 	{
-	//	free(tmp->name);
-	//	free(tmp->droit);
-	//	free(tmp->nlink);
-	//	free(tmp->uid);
-	//	free(tmp->grp);
-	//	free(tmp->size);
-	//	free(tmp->date);
-	//	free(tmp->rdevmajeur);
-	//	free(tmp->rdevmineur);
-	//	free(tmp->link);
-		tmp2 = tmp->next;
-	//	free (tmp);
-		tmp = tmp2;
+		free((*elem)->name);
+		free((*elem)->droit);
+		free((*elem)->nlink);
+		free((*elem)->uid);
+		free((*elem)->grp);
+		free((*elem)->size);
+		free((*elem)->date);
+		free((*elem)->rdevmajeur);
+		free((*elem)->rdevmineur);
+		free((*elem)->link);
+		tmp = (*elem)->next;
+		free (*elem);
+		*elem = tmp;
 	}
-	//free (elem);
+	free (elem);
 }

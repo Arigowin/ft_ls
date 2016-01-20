@@ -24,13 +24,8 @@ static t_elem		*ft_readdir_bis(DIR *dir, char r)
 	{
 		tmp = ft_elem_insert(&elem, dp->d_name, r);
 		tmp->type = ((char)dp->d_type != 0 ? (char)dp->d_type : 42);
+		// ajouter stat ici ??????????????????????
 	}
-	while (elem)
-	{
-		printf("---------------------------------read:%s\n", elem->name);
-		elem = elem->next;
-	}
-	exit(1);
 	if (dp == NULL && elem == NULL)
 		ft_error(1, "ft_read_bis");
 	return (elem);
@@ -61,7 +56,7 @@ t_elem			*ft_readdir(char *fpath, char *path, char r)
 	return (elem);
 }
 
-int		ft_is_dir(char *path)
+int				ft_is_dir(char *path)
 {
 	struct stat b;
 
@@ -69,6 +64,7 @@ int		ft_is_dir(char *path)
 #ifdef DEBUG
 	printf("DEBUG : ft_is_dir\n");
 #endif
+
 	if (lstat(path, &b) == -1)
 	{
 		if (errno == ENOTDIR)

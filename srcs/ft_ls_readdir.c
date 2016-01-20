@@ -6,72 +6,37 @@
 #include <sys/stat.h>
 
 #include <stdio.h>
-static t_elem		*ft_readdir_bis(DIR *dir)
+static t_elem		*ft_readdir_bis(DIR *dir, char r)
 {
 	struct dirent	*dp;
-	char			*tmp;
-	char			*tmp2;
-	char			*tmp3;
-	char			**lst;
-	char			**lst2;
-	char			tmpc;
-	int				i;
-	int				j;
 	t_elem			*elem;
+	t_elem			*tmp;
 
 	// DEBUG
 #ifdef DEBUG
 	printf("DEBUG : ft_readdir_bis\n");
 #endif
 
+	
+	elem = NULL;
 	tmp = NULL;
-	tmp2 = NULL;
-	i = 0;
 	while ((dp = readdir(dir)) != NULL)
 	{
-		if (tmp == NULL)
-		{
-			tmp = ft_strdup(dp->d_name);
-			tmpc = ((char)dp->d_type != 0 ? (char)dp->d_type : 42);
-			tmp2 = ft_strdup(&tmpc);
-		}
-		else
-		{
-			tmp3 = ft_strjoin(tmp, "\n");
-			ft_strdel(&tmp);
-			tmp = ft_strjoin(tmp3, dp->d_name);
-			ft_strdel(&tmp3);
-			tmp3 = ft_strjoin(tmp2, ":");
-			ft_strdel(&tmp2);
-			tmpc = ((char)dp->d_type != 0 ? (char)dp->d_type : 42);
-			tmp2 = ft_strjoin(tmp3, &tmpc);
-			ft_strdel(&tmp3);
-		}
-		i++;
+		tmp = ft_elem_insert(&elem, dp->d_name, r);
+		tmp->type = ((char)dp->d_type != 0 ? (char)dp->d_type : 42);
 	}
-	if (dp == NULL && (tmp == NULL || tmp2 == NULL))
-		ft_error(1, "ft_read_bis");
-	lst = ft_strsplit(tmp, '\n');
-	lst2 = ft_strsplit(tmp2, ':');
-	ft_strdel(&tmp);
-	ft_strdel(&tmp2);
-	if ((elem = (t_elem *)malloc(sizeof(t_elem) * i)) == NULL)
-		exit (ft_error(1, "ft_readdir_bis"));
-	j = 0;
-	while (lst[j])
+	while (elem)
 	{
-		ft_init_t_elem(&(elem[j]));
-		elem[j].name = ft_strdup(lst[j]);
-		elem[j].type = lst2[j][0];
-		elem[j].nbelem = i;
-		j++;
+		printf("---------------------------------read:%s\n", elem->name);
+		elem = elem->next;
 	}
-	ft_free_tbl_s(lst);
-	ft_free_tbl_s(lst2);
+	exit(1);
+	if (dp == NULL && elem == NULL)
+		ft_error(1, "ft_read_bis");
 	return (elem);
 }
 
-t_elem			*ft_readdir(char *fpath, char *path)
+t_elem			*ft_readdir(char *fpath, char *path, char r)
 {
 	DIR				*dir;
 	t_elem			*elem;
@@ -91,7 +56,7 @@ t_elem			*ft_readdir(char *fpath, char *path)
 		ft_error(1, path);
 		return (NULL);
 	}
-	elem = ft_readdir_bis(dir);
+	elem = ft_readdir_bis(dir, r);
 	closedir(dir);
 	return (elem);
 }

@@ -25,7 +25,6 @@ typedef struct		s_elem
 {
 	char			*name;
 	char			type;
-	int				nbelem;
 	char			*droit;
 	char			*nlink;
 	char			*uid;
@@ -36,8 +35,12 @@ typedef struct		s_elem
 	char			*rdevmineur;
 	char			*rdevmajeur;
 	char			*link;
-
+	struct s_elem	*next;
 }					t_elem;
+
+
+t_elem				*ft_elem_insert(t_elem **aelem, char *name, char r);
+t_elem				*ft_elem_new(char *name);
 
 void				ft_init_t_ft_ls(t_ft_ls *data);
 void				ft_init_t_elem(t_elem *elem);
@@ -48,7 +51,7 @@ void				ft_sort_str(char ***str, int size, int r);
 
 int					ft_error(int nb, char *str);
 
-t_elem				*ft_readdir(char *fpath, char *path);
+t_elem				*ft_readdir(char *fpath, char *path, char r);
 
 char				*ft_get_arg(t_ft_ls *data, char **lst, int nb);
 void				ft_set_op(char *op, t_ft_ls *data);
@@ -63,7 +66,7 @@ int					ft_is_dir(char *path);
 void				ft_browse(t_ft_ls *data);
 
 void				ft_free_lst(t_ft_ls *data);
-void				ft_free_elem(t_elem *elem);
+void				ft_free_elem(t_elem **elem);
 
 void				ft_print(t_ft_ls data, t_elem **elem, char *path, int t);
 

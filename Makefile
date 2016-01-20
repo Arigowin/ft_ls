@@ -6,7 +6,7 @@
 #    By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/03 10:52:20 by dolewski          #+#    #+#              #
-#    Updated: 2016/01/19 17:37:40 by dolewski         ###   ########.fr        #
+#    Updated: 2016/01/20 10:49:51 by dolewski         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC = main.c \
 	  ft_ls_print.c \
 	  ft_ls_init.c \
 	  ft_ls_print_get_info.c \
-	  ft_ls_print_get_info_bis.c
+	  ft_ls_print_get_info_bis.c \
+	  ft_ls_elem.c
 
 OFILES = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
 
@@ -66,8 +67,7 @@ clean:
 	@echo "$(NAME) : Deleting objs"
 	@$(RM) -rf $(OPATH)
 
-# libft.clean -----------------------------------------------------------------------
-fclean: clean
+fclean: clean lib.fclean
 	@echo "$(NAME) : Deleting $(NAME)"
 	@$(RM) -f $(NAME)
 	@echo "\033[32mDone !\033[0m"

@@ -22,21 +22,31 @@ void	ft_free_lst(t_ft_ls *data)
 	free(data->path);
 }
 
-void	ft_free_elem(t_elem *elem)
+void	ft_free_elem(t_elem **elem)
 {
 	// DEBUG
 #ifdef DEBUG
 	printf("DEBUG : ft_free_elem\n");
 #endif
+	t_elem	*tmp;
+	t_elem	*tmp2;
 
-	free(elem->name);
-	free(elem->droit);
-	free(elem->nlink);
-	free(elem->uid);
-	free(elem->grp);
-	free(elem->size);
-	free(elem->date);
-	free(elem->rdevmajeur);
-	free(elem->rdevmineur);
-	free(elem->link);
+	tmp = *elem;
+	while (tmp)
+	{
+	//	free(tmp->name);
+	//	free(tmp->droit);
+	//	free(tmp->nlink);
+	//	free(tmp->uid);
+	//	free(tmp->grp);
+	//	free(tmp->size);
+	//	free(tmp->date);
+	//	free(tmp->rdevmajeur);
+	//	free(tmp->rdevmineur);
+	//	free(tmp->link);
+		tmp2 = tmp->next;
+	//	free (tmp);
+		tmp = tmp2;
+	}
+	//free (elem);
 }

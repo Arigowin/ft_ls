@@ -14,7 +14,6 @@ int main(int ac, char **av)
 #endif
 
 	ft_init_t_ft_ls(&data);
-
 	op = ft_get_arg(&data, av, ac);
 	ft_set_op(op, &data);
 	if (data.nb_path > 1)

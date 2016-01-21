@@ -9,13 +9,7 @@
 static int		ft_browse_read(t_ft_ls data, char **path, int i, t_elem **elem)
 {
 	char	*fpath;
-	char	*tmp;
-	char	*tmp2;
-	int		j;
 
-	tmp = NULL;
-	tmp2 = NULL;
-	j = 0;
 	if (data.nb_path > 1 || (data.op_recu && i > 0))
 	{
 		if (i > 0)
@@ -37,7 +31,6 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 	t_elem	*tmpel;
 	char	*tmp;
 	char	*tmp2;
-	int		j;
 
 	// DEBUG
 #ifdef DEBUG
@@ -47,7 +40,6 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 	if (ft_browse_read(data, &path, i, &elem) == 0)
 		return (0);
 	tmpel = elem;
-	j = 0;
 	while (tmpel && data.op_recu)
 	{
 		if ((data.op_a || tmpel->name[0] != '.')
@@ -63,6 +55,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 				tmp2 = ft_strjoin(tmp, tmpel->name);
 				ft_strdel(&tmp);
 				ft_browse_recu(data, tmp2, i + 1);
+				ft_strdel(&tmp2);
 			}
 		}
 		tmpel = tmpel->next;

@@ -17,7 +17,6 @@ static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path)
 	printf("DEBUG : ft_readdir_bis\n");
 #endif
 
-	
 	elem = NULL;
 	new = NULL;
 	while ((dp = readdir(dir)) != NULL)

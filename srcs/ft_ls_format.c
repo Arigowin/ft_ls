@@ -40,11 +40,14 @@ static char		*future(time_t date)
 		tmp = ft_strsub(ctime(&(date)), 19, 10);
 		tmp = ft_strsplit(tmp, ' ')[0];
 		tmp2 = ft_strdup(" ");
-		tmp2 = ft_strjoin(tmp2, tmp);
+		ft_strproperjoin(&tmp2, &tmp);
+		ft_strproperjoin(&tmp, &tmp2);
+		free(tmp2);
 	}
 	else
 		tmp = ft_strsub(ctime(&(date)), 19, 5);
-	ret = ft_strjoin(ret, tmp);
+	ft_strproperjoin(&ret, &tmp);
+	free(tmp);
 	return (ret);
 }
 
@@ -70,7 +73,8 @@ char			*ft_format_date(time_t date)
 	{
 		ret = ft_strsub(tmp, 4, 7);
 		tmp2 = ft_strsub(tmp, 19, 5);
-		ret = ft_strjoin(ret, tmp2);
+		ft_strproperjoin(&ret, &tmp2);
+		free(tmp2);
 	}
 	else
 		ret = ft_strsub(tmp, 4, 12);

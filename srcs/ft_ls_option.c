@@ -35,8 +35,8 @@ void		ft_set_op(char *op, t_ft_ls *data)
 
 static char		*ft_get_option(char **lst, int *nb)
 {
-	int		i;
 	char	*ret;
+	int		i;
 	int		nbb;
 
 	// DEBUG
@@ -68,10 +68,10 @@ static char		*ft_get_option(char **lst, int *nb)
 
 char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
 {
+	char	*op;
 	int		i;
 	int		j;
 	int		nbb;
-	char	*op;
 
 	// DEBUG
 #ifdef DEBUG
@@ -130,6 +130,7 @@ int			ft_check_arg(t_ft_ls data)
 #ifdef DEBUG
 	printf("DEBUG : ft_check_arg\n");
 #endif
+
 	int i;
 
 	i = 0;

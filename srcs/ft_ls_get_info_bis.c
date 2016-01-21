@@ -9,14 +9,17 @@ int		ft_get_info_rdev(t_elem *elem, dev_t rdev, size_t *size)
 	char	*tmp;
 	char	*tmp2;
 	size_t	size2;
+	size_t	ltmp;
 
 	size2 = 0;
 	tmp = ft_itoa((rdev & MAJOR) >> 24);
 	tmp2 = ft_itoa((rdev & ~MAJOR));
-	if (*size < ft_strlen(tmp))
-		*size = ft_strlen(tmp);
-	if (size2 < ft_strlen(tmp2))
-		size2 = ft_strlen(tmp2);
+	ltmp = ft_strlen(tmp);
+	if (*size < ltmp)
+		*size = ltmp;
+	ltmp = ft_strlen(tmp2);
+	if (size2 < ltmp)
+		size2 = ltmp;
 	elem->rdevmineur = ft_strdup(tmp);
 	elem->rdevmajeur = ft_strdup(tmp2);
 	ft_strdel(&tmp);
@@ -26,7 +29,7 @@ int		ft_get_info_rdev(t_elem *elem, dev_t rdev, size_t *size)
 
 void	ft_get_info_date(t_elem *elem, time_t mtime)
 {
-	elem->date = ft_strdup(ft_format_date(mtime));
+	elem->date = ft_format_date(mtime);
 	elem->sec_date = mtime;
 }
 

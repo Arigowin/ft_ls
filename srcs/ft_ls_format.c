@@ -62,7 +62,7 @@ char			*ft_format_date(time_t date)
 	{
 		ret = future(sdate);
 	}
-	else if (sdate < now - (365 * ((3600 * 24)) / 2))
+	else if (sdate < now - ((365 / 2) * (3600 * 24)))
 	{
 		ret = ft_strsub(ctime(&(sdate)), 4, 7);
 		tmp = ft_strsub(ctime(&(sdate)), 19, 5);

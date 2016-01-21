@@ -6,11 +6,11 @@
 #include <sys/stat.h>
 
 #include <stdio.h>
-static t_elem		*ft_readdir_bis(DIR *dir, char r)
+static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path)
 {
 	struct dirent	*dp;
 	t_elem			*elem;
-	t_elem			*tmp;
+	t_elem			*new;
 
 	// DEBUG
 #ifdef DEBUG
@@ -19,19 +19,22 @@ static t_elem		*ft_readdir_bis(DIR *dir, char r)
 
 	
 	elem = NULL;
-	tmp = NULL;
+	new = NULL;
 	while ((dp = readdir(dir)) != NULL)
 	{
-		tmp = ft_elem_insert(&elem, dp->d_name, r);
-		tmp->type = ((char)dp->d_type != 0 ? (char)dp->d_type : 42);
-		// ajouter stat ici ??????????????????????
+		new = ft_elem_new(dp->d_name);
+		new->type = ((char)dp->d_type != 0 ? (char)dp->d_type : 42);
+		if ((data->op_a || new->name[0] != '.') && (data->op_l || data->op_t))
+			data->total += ft_get_info(path, new, data);
+		ft_elem_insert(&elem, new, data->op_r, data->op_t);
+		new = new->next;
 	}
 	if (dp == NULL && elem == NULL)
 		ft_error(1, "ft_read_bis");
 	return (elem);
 }
 
-t_elem			*ft_readdir(char *fpath, char *path, char r)
+t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls *data)
 {
 	DIR				*dir;
 	t_elem			*elem;
@@ -51,7 +54,7 @@ t_elem			*ft_readdir(char *fpath, char *path, char r)
 		ft_error(1, path);
 		return (NULL);
 	}
-	elem = ft_readdir_bis(dir, r);
+	elem = ft_readdir_bis(dir, data, fpath);
 	closedir(dir);
 	return (elem);
 }

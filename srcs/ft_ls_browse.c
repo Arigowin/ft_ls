@@ -24,9 +24,9 @@ static int		ft_browse_read(t_ft_ls data, char **path, int i, t_elem **elem)
 		ft_putendl(":");
 	}
 	fpath = ft_format_path(*path);
-	if ((*elem = ft_readdir(fpath, *path, data.op_r)) == NULL)
+	if ((*elem = ft_readdir(fpath, *path, &data)) == NULL)
 		return (0);
-	ft_print(data, elem, fpath, 1);
+	ft_print(data, elem, 1);
 	ft_strdel(&fpath);
 	return (1);
 }
@@ -72,7 +72,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 
 static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 {
-	t_elem	*tmp;
+	t_elem	*new;
 	int		i;
 	int		j;
 	int		er;
@@ -84,7 +84,10 @@ static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 		if (((er = ft_is_dir(data->path[i])) == 0 && er != -1) ||
 				(er == 2 && data->op_l))
 		{
-			tmp = ft_elem_insert(&elem, data->path[i], data->op_recu);
+			new = ft_elem_new(data->path[i]);
+			if (data->op_l || data->op_t)
+				data->total += ft_get_info("./", new, data);
+			ft_elem_insert(&elem, new, data->op_r, data->op_t);
 			ft_strdel(&(data->path[i]));
 			j++;
 		}
@@ -93,7 +96,7 @@ static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 	   i++;
 	}
 	if (elem && j != 0)
-		ft_print(*data, &elem, "./", 0);
+		ft_print(*data, &elem, 0);
 //	ft_free_elem(&elem);
 	return (j);
 }

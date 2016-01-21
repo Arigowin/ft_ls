@@ -10,6 +10,12 @@ void	ft_init_t_ft_ls(t_ft_ls *data)
 	data->op_r = 0;
 	data->op_t = 0;
 	data->nb_path = 0;
+	data->total = 0;;
+	data->sizemax[0] = 0;
+	data->sizemax[1] = 0;
+	data->sizemax[2] = 0;
+	data->sizemax[3] = 0;
+	data->sizemax[4] = 0;
 }
 
 void	ft_init_t_elem(t_elem *elem)

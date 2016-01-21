@@ -15,7 +15,7 @@ static void		ft_swap_s(char **s1, char **s2)
 	free(tmp);
 }
 
-void			ft_sort_str(char ***str, int size, int r)
+void			ft_sort_str(char ***str, int size, char r)
 {
 	int		i;
 	int		x;

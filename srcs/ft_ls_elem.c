@@ -36,8 +36,8 @@ static void	ft_elem_insert_bis(t_elem **aelem, t_elem *new, char r)
 		tmp->next = new;
 	else
 	{
-		while (tmp->next != NULL && (cmp = (r ?
-						ft_strcmp(tmp->next->name, new->name) :
+		while (tmp->next != NULL
+				&& (cmp = (r ? ft_strcmp(tmp->next->name, new->name) :
 						ft_strcmp(new->name, tmp->next->name)) > 0))
 			tmp = tmp->next;
 		new->next = tmp->next;
@@ -45,19 +45,46 @@ static void	ft_elem_insert_bis(t_elem **aelem, t_elem *new, char r)
 	}
 }
 
-t_elem		*ft_elem_insert(t_elem **aelem, char *name, char r)
+static void	ft_elem_insert_bis_t(t_elem **aelem, t_elem *new, char r)
+{
+	t_elem	*tmp;
+	int		cmp;
+
+	tmp = *aelem;
+	if ((cmp = (r ? new->sec_date - tmp->sec_date :
+					tmp->sec_date - new->sec_date)) < 0)
+	{
+		new->next = tmp;
+		*aelem = new;
+	}
+	else if (tmp->next == NULL)
+		tmp->next = new;
+	else
+	{
+		while (tmp->next != NULL
+				&& (cmp = (r ? new->sec_date - tmp->next->sec_date :
+						tmp->next->sec_date - new->sec_date)) >= 0)
+			tmp = tmp->next;
+		new->next = tmp->next;
+		tmp->next = new;
+	}
+}
+
+
+void		ft_elem_insert(t_elem **aelem, t_elem *new, char r, char t)
 {
 	// DEBUG
 #ifdef DEBUG
 	printf("DEBUG : ft_elem_insert\n");
 #endif
 
-	t_elem	*new;
-
-	new = ft_elem_new(name);
 	if (*aelem == NULL)
 		*aelem = new;
 	else
-		ft_elem_insert_bis(aelem, new, r);
-	return (new);
+	{
+		if (!t)
+			ft_elem_insert_bis(aelem, new, r);
+		else
+			ft_elem_insert_bis_t(aelem, new, r);
+	}
 }

@@ -19,6 +19,8 @@ typedef struct		s_ft_ls
 	char			op_t;
 	char			**path;
 	int				nb_path;
+	size_t			sizemax[5];
+	size_t			total;
 }					t_ft_ls;
 
 typedef struct		s_elem
@@ -31,7 +33,7 @@ typedef struct		s_elem
 	char			*grp;
 	char			*size;
 	char			*date;
-	int				sec_date;
+	size_t			sec_date;
 	char			*rdevmineur;
 	char			*rdevmajeur;
 	char			*link;
@@ -41,7 +43,7 @@ typedef struct		s_elem
 // elem
 t_elem				*ft_elem_new(char *name);
 void				ft_init_t_elem(t_elem *elem);
-t_elem				*ft_elem_insert(t_elem **aelem, char *name, char r);
+void				ft_elem_insert(t_elem **aelem, t_elem *new, char r, char t);
 void				ft_free_elem(t_elem **elem);
 
 // data
@@ -49,13 +51,13 @@ void				ft_init_t_ft_ls(t_ft_ls *data);
 void				ft_free_lst(t_ft_ls *data);
 
 // str
-void				ft_sort_str(char ***str, int size, int r);
+void				ft_sort_str(char ***str, int size, char r);
 
 // error
 int					ft_error(int nb, char *str);
 
 //read
-t_elem				*ft_readdir(char *fpath, char *path, char r);
+t_elem				*ft_readdir(char *fpath, char *path, t_ft_ls *data);
 
 // arg
 char				*ft_get_arg(t_ft_ls *data, char **lst, int nb);
@@ -72,10 +74,10 @@ int					ft_is_dir(char *path);
 void				ft_browse(t_ft_ls *data);
 
 // print
-void				ft_print(t_ft_ls data, t_elem **elem, char *path, int t);
+void				ft_print(t_ft_ls data, t_elem **elem, char t);
 
 char				*ft_modeoffile(mode_t mode);
-size_t				ft_get_info(char *path, t_elem *elem, size_t sizemax[]);
+size_t				ft_get_info(char *path, t_elem *elem, t_ft_ls *data);
 int					ft_get_info_nlink(t_elem *elem, nlink_t nlink, size_t size);
 int					ft_get_info_pw(t_elem *elem, uid_t uid, size_t size);
 int					ft_get_info_gr(t_elem *elem, gid_t gid, size_t size);

@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-size_t	ft_get_info(char *path, t_elem *elem, size_t sizemax[])
+size_t	ft_get_info(char *path, t_elem *elem, t_ft_ls *data)
 {
 	struct stat	st;
 	char		*tmp2;
@@ -17,18 +17,23 @@ size_t	ft_get_info(char *path, t_elem *elem, size_t sizemax[])
 		ft_error(1, elem->name);
 		return (0);
 	}
-	ft_strdel(&tmp2);
-	elem->droit = ft_modeoffile(st.st_mode);
-	sizemax[0] = ft_get_info_nlink(elem, st.st_nlink, sizemax[0]);
-	sizemax[1] = ft_get_info_pw(elem, st.st_uid, sizemax[1]);
-	sizemax[2] = ft_get_info_gr(elem, st.st_gid, sizemax[2]);
-	if (elem->droit[0] != 'c' && elem->droit[0] != 'b')
-		sizemax[3] = ft_get_info_size(elem, st.st_size, sizemax[3]);
+	if (data->op_t && !data->op_l)
+		ft_get_info_date(elem, st.st_mtime);
 	else
-		sizemax[4] = ft_get_info_rdev(elem, st.st_size, &(sizemax[3]));
-	ft_get_info_date(elem, st.st_mtime);
-	if (elem->droit[0] == 'l')
-		ft_get_info_link(elem, path);
+	{
+		ft_strdel(&tmp2);
+		elem->droit = ft_modeoffile(st.st_mode);
+		data->sizemax[0] = ft_get_info_nlink(elem, st.st_nlink, data->sizemax[0]);
+		data->sizemax[1] = ft_get_info_pw(elem, st.st_uid, data->sizemax[1]);
+		data->sizemax[2] = ft_get_info_gr(elem, st.st_gid, data->sizemax[2]);
+		if (elem->droit[0] != 'c' && elem->droit[0] != 'b')
+			data->sizemax[3] = ft_get_info_size(elem, st.st_size, data->sizemax[3]);
+		else
+			data->sizemax[4] = ft_get_info_rdev(elem, st.st_size, &(data->sizemax[3]));
+		ft_get_info_date(elem, st.st_mtime);
+		if (elem->droit[0] == 'l')
+			ft_get_info_link(elem, path);
+	}
 	return (st.st_blocks);
 }
 

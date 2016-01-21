@@ -84,7 +84,7 @@ static void		ft_printone(t_elem *elem, size_t *size, int rdev, int op_l)
 		ft_putendl(elem->name);
 }
 
-static void		ft_print_while(t_elem **elem, t_ft_ls data, size_t sizemax[], int t)
+static void		ft_print_while(t_elem **elem, t_ft_ls data, int t)
 {
 	t_elem	*tmp;
 
@@ -93,45 +93,28 @@ static void		ft_print_while(t_elem **elem, t_ft_ls data, size_t sizemax[], int t
 	{
 		if ((data.op_a || tmp->name[0] != '.' || !t) && tmp->name != NULL)
 		{
-			if (sizemax[4] == 0)
-				ft_printone(tmp, sizemax, 0, data.op_l);
+			if (data.sizemax[4] == 0)
+				ft_printone(tmp, data.sizemax, 0, data.op_l);
 			else
-				ft_printone(tmp, sizemax, 1, data.op_l);
+				ft_printone(tmp, data.sizemax, 1, data.op_l);
 		}
 		tmp = tmp->next;
 	}
 }
 
-#include <stdlib.h>
-void			ft_print(t_ft_ls data, t_elem **elem, char *path, int t)
+void			ft_print(t_ft_ls data, t_elem **elem, char t)
 {
 	// DEBUG
 #ifdef DEBUG
 	printf("DEBUG : print\n");
 #endif
 
-	t_elem		*tmp;
-	size_t		sizemax[5] = {0, 0, 0, 0, 0};
-	size_t		total;
-	int			i;
-
-	total = 0;
-	i = 0;
-	tmp = *elem;
-	while (tmp)
-	{
-		if (tmp->name != NULL && (data.op_a || tmp->name[0] != '.' || !t))
-			total += ft_get_info(path, tmp, sizemax);
-		i++;
-		tmp = tmp->next;
-	}
 	// condition a ajouter mais je ne sais pas encore laquelle
-	if (data.op_l && t && (i > 2 || data.op_a))
+	// pas afficher si dossier vide
+	if (data.op_l && t)
 	{
 		ft_putstr("total ");
-		ft_putnbrendl(total);
+		ft_putnbrendl(data.total);
 	}
-	//	if (data.op_t)
-	//		ft_sort_tmp_date(tmp, tmp.nbelem, data.op_r, data.op_a);
-	ft_print_while(elem, data, sizemax, t);
+	ft_print_while(elem, data, t);
 }

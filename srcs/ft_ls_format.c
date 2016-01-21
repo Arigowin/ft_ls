@@ -25,6 +25,7 @@ char			*ft_format_path(char *str)
 		return (str);
 	tmp = ft_strdup("/");
 	str = ft_strjoin(str, tmp);
+	free(tmp);
 	return (str);
 }
 

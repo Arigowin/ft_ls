@@ -112,7 +112,7 @@ void			ft_browse(t_ft_ls *data)
 	while (i < data->nb_path)
 	{
 		if (data->path[i] != NULL)
-			ft_browse_recu(*data, ft_strdup(data->path[i]), i + j);
+			ft_browse_recu(*data, data->path[i], i + j);
 		i++;
 	}
 }

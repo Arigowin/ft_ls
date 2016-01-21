@@ -36,6 +36,7 @@ void		ft_set_op(char *op, t_ft_ls *data)
 static char		*ft_get_option(char **lst, int *nb)
 {
 	char	*ret;
+	char	*tmp;
 	int		i;
 	int		nbb;
 
@@ -52,7 +53,11 @@ static char		*ft_get_option(char **lst, int *nb)
 		if (ft_strcmp(lst[i], "--") != 0)
 		{
 			if (lst[i][0] == '-' && lst[i][1] != '\0')
-				ret = ft_strjoin(ret, ft_strdup(&lst[i][1]));
+			{
+				tmp = ft_strdup(&lst[i][1]);
+				ft_strproperjoin(&ret, &tmp);
+				free(tmp);
+			}
 		}
 		else
 		{

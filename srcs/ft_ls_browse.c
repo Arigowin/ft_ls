@@ -98,6 +98,7 @@ static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 void			ft_browse(t_ft_ls *data)
 {
 	t_elem	*elem;
+	char	*tmp;
 	int		i;
 	int		j;
 
@@ -112,7 +113,11 @@ void			ft_browse(t_ft_ls *data)
 	while (i < data->nb_path)
 	{
 		if (data->path[i] != NULL)
-			ft_browse_recu(*data, data->path[i], i + j);
+		{
+			tmp = ft_strdup(data->path[i]);
+			ft_browse_recu(*data, tmp, i + j);
+			ft_strdel(&tmp);
+		}
 		i++;
 	}
 }

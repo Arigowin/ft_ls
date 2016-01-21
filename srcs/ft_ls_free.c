@@ -47,7 +47,7 @@ void	ft_free_elem(t_elem **elem, char l, char t)
 		if (l || t)
 			free((*elem)->date);
 		tmp = (*elem)->next;
-		free (*elem);
+		free(*elem);
 		*elem = tmp;
 	}
 }

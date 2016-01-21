@@ -51,7 +51,7 @@ t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls *data)
 				return (NULL);
 			}
 		}
-		//ft_error(1, "OK");
+		ft_error(1, path);
 		return (NULL);
 	}
 	elem = ft_readdir_bis(dir, data, fpath);

@@ -6,7 +6,7 @@
 #    By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/03 10:52:20 by dolewski          #+#    #+#              #
-#    Updated: 2016/01/20 15:51:56 by dolewski         ###   ########.fr        #
+#    Updated: 2016/01/21 16:29:13 by dolewski         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRC = main.c \
 	  ft_ls_format.c \
 	  ft_ls_modeoffile.c \
 	  ft_ls_option.c \
-	  ft_ls_sort.c \
 	  ft_ls_error.c \
 	  ft_ls_readdir.c \
 	  ft_ls_browse.c \

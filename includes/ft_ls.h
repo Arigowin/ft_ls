@@ -3,7 +3,7 @@
 
 # define FT_LS_H
 # define MAJOR 0XFF000000
-# define OP "1Ralrt"
+# define OP "Ralrt1" // 1 a virer
 # define BUFF_SIZE 1024
 
 # include <sys/types.h>
@@ -44,14 +44,11 @@ typedef struct		s_elem
 t_elem				*ft_elem_new(char *name);
 void				ft_init_t_elem(t_elem *elem);
 void				ft_elem_insert(t_elem **aelem, t_elem *new, char r, char t);
-void				ft_free_elem(t_elem **elem);
+void				ft_free_elem(t_elem **elem, char l, char t);
 
 // data
 void				ft_init_t_ft_ls(t_ft_ls *data);
 void				ft_free_lst(t_ft_ls *data);
-
-// str
-void				ft_sort_str(char ***str, int size, char r);
 
 // error
 int					ft_error(int nb, char *str);

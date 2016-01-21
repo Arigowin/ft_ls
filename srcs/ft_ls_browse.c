@@ -61,12 +61,13 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 				else
 					tmp = ft_strjoin(path, "/");
 				tmp2 = ft_strjoin(tmp, tmpel->name);
+				ft_strdel(&tmp);
 				ft_browse_recu(data, tmp2, i + 1);
 			}
 		}
 		tmpel = tmpel->next;
 	}
-//	ft_free_elem(&elem);
+	ft_free_elem(&elem, data.op_l, data.op_t);
 	return (0);
 }
 
@@ -97,7 +98,7 @@ static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 	}
 	if (elem && j != 0)
 		ft_print(*data, &elem, 0);
-//	ft_free_elem(&elem);
+	ft_free_elem(&elem, data->op_l, data->op_t);
 	return (j);
 }
 

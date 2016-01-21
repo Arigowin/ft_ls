@@ -23,20 +23,24 @@ char			*ft_format_path(char *str)
 	}
 	if ((ret =ft_is_dir(str)) == 0)
 		return (str);
-	return (ft_strjoin(str, ft_strdup("/")));
+	tmp = ft_strdup("/");
+	str = ft_strjoin(str, tmp);
+	return (str);
 }
 
 static char		*future(time_t date)
 {
-	char *ret;
-	char *tmp;
+	char	*ret;
+	char	*tmp;
+	char	*tmp2;
 
 	ret = ft_strsub(ctime(&(date)), 4, 7);
 	if (date > 253402297199)
 	{
 		tmp = ft_strsub(ctime(&(date)), 19, 10);
 		tmp = ft_strsplit(tmp, ' ')[0];
-		tmp = ft_strjoin(" ", tmp);
+		tmp2 = ft_strdup(" ");
+		tmp2 = ft_strjoin(tmp2, tmp);
 	}
 	else
 		tmp = ft_strsub(ctime(&(date)), 19, 5);
@@ -46,10 +50,11 @@ static char		*future(time_t date)
 
 char			*ft_format_date(time_t date)
 {
-	char *ret;
-	char *tmp;
-	time_t sdate;
-	time_t now;
+	char	*ret;
+	char	*tmp;
+	char	*tmp2;
+	time_t	sdate;
+	time_t	now;
 
 	// DEBUG
 #ifdef DEBUG
@@ -58,17 +63,16 @@ char			*ft_format_date(time_t date)
 
 	sdate = date;
 	now = time(&date);
+	tmp = ctime(&(sdate));
 	if (sdate > now)
-	{
 		ret = future(sdate);
-	}
 	else if (sdate < now - ((365 / 2) * (3600 * 24)))
 	{
-		ret = ft_strsub(ctime(&(sdate)), 4, 7);
-		tmp = ft_strsub(ctime(&(sdate)), 19, 5);
-		ret = ft_strjoin(ret, tmp);
+		ret = ft_strsub(tmp, 4, 7);
+		tmp2 = ft_strsub(tmp, 19, 5);
+		ret = ft_strjoin(ret, tmp2);
 	}
 	else
-		ret = ft_strsub(ctime(&(sdate)), 4, 12);
+		ret = ft_strsub(tmp, 4, 12);
 	return (ret);
 }

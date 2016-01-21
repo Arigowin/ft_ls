@@ -14,10 +14,10 @@ size_t	ft_get_info(char *path, t_elem *elem, t_ft_ls *data)
 	tmp2 = ft_strjoin(path, elem->name);
 	if (lstat(tmp2, &st) == -1)
 		return (ft_error(1, elem->name));
+	elem->droit = ft_modeoffile(st.st_mode);
 	ft_get_info_date(elem, st.st_mtime);
-	if (data->op_l)
+	if ((data->op_a || elem->name[0] != '.') && data->op_l)
 	{
-		elem->droit = ft_modeoffile(st.st_mode);
 		data->sizemax[0] = ft_get_info_nlink(elem, st.st_nlink, data->sizemax[0]);
 		data->sizemax[1] = ft_get_info_pw(elem, st.st_uid, data->sizemax[1]);
 		data->sizemax[2] = ft_get_info_gr(elem, st.st_gid, data->sizemax[2]);

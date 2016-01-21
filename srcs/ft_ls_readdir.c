@@ -22,9 +22,7 @@ static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path)
 	while ((dp = readdir(dir)) != NULL)
 	{
 		new = ft_elem_new(dp->d_name);
-		new->type = ((char)dp->d_type != 0 ? (char)dp->d_type : 42);
-		if ((data->op_a || new->name[0] != '.') && (data->op_l || data->op_t))
-			data->total += ft_get_info(path, new, data);
+		data->total += ft_get_info(path, new, data);
 		ft_elem_insert(&elem, new, data->op_r, data->op_t);
 		new = new->next;
 	}
@@ -45,12 +43,15 @@ t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls *data)
 
 	if ((dir = opendir(fpath)) == NULL)
 	{
-		if (ft_is_dir(path) != 0 && (errno == ENOENT || errno == ENOTDIR))
+		if (errno == ENOENT || errno == ENOTDIR)
 		{
-			ft_putendl(ft_strsub(path, 2, ft_strlen(path)));
-			return (NULL);
+			if (ft_is_dir(path) != 0)
+			{
+				ft_putendl(ft_strsub(path, 2, ft_strlen(path)));
+				return (NULL);
+			}
 		}
-		ft_error(1, path);
+		//ft_error(1, "OK");
 		return (NULL);
 	}
 	elem = ft_readdir_bis(dir, data, fpath);

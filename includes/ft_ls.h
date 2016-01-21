@@ -8,7 +8,7 @@
 
 # include <sys/types.h>
 
-//#define DEBUG
+#define DEBUG
 
 typedef struct		s_ft_ls
 {

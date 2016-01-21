@@ -46,7 +46,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 				&& ft_strcmp(tmpel->name, "..") != 0
 				&& ft_strcmp(tmpel->name, ".") != 0)
 		{
-			if (tmpel->type == DT_DIR)
+			if (tmpel->droit[0] == 'd')
 			{
 				if (path[ft_strlen(path) - 1] == '/')
 					tmp = ft_strdup(path);

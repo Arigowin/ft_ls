@@ -37,9 +37,12 @@ void	ft_get_info_link(t_elem *elem, char *path)
 {
 	int		ret;
 	char	buff[BUFF_SIZE];
+	char	*tmp;
 
-	if ((ret = readlink(ft_strjoin(path, elem->name), buff, BUFF_SIZE)) == -1)
+	tmp = ft_strjoin(path, elem->name);
+	if ((ret = readlink(tmp, buff, BUFF_SIZE)) == -1)
 		ft_error(1, path);
 	buff[ret] = '\0';
 	elem->link = ft_strdup(buff);
+	ft_strdel(&tmp);
 }

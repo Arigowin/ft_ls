@@ -3,7 +3,6 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include <stdio.h>
 char			*ft_format_path(char *str)
 {
 	char	*tmp;
@@ -24,6 +23,7 @@ char			*ft_format_path(char *str)
 	if ((ret =ft_is_dir(str)) == 0)
 		return (str);
 	tmp = ft_strdup("/");
+	// free(str); -----------------------------------------------------> free qui plante
 	str = ft_strjoin(str, tmp);
 	free(tmp);
 	return (str);

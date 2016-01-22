@@ -5,12 +5,12 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-#include <stdio.h>
 static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path)
 {
 	struct dirent	*dp;
 	t_elem			*elem;
 	t_elem			*new;
+	int				tmp;
 
 	// DEBUG
 #ifdef DEBUG
@@ -22,7 +22,9 @@ static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path)
 	while ((dp = readdir(dir)) != NULL)
 	{
 		new = ft_elem_new(dp->d_name);
-		data->total += ft_get_info(path, new, data);
+		if ((tmp = ft_get_info(path, new, data)) == -1)
+			continue ;
+		data->total += tmp;
 		ft_elem_insert(&elem, new, data->op_r, data->op_t);
 		new = new->next;
 	}

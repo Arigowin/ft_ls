@@ -6,7 +6,7 @@
 
 int		ft_error(int nb, char *str)
 {
-	// DEBUG
+// DEBUG
 #ifdef DEBUG
 	ft_putstr("DEBUG : ft_error\n");
 #endif

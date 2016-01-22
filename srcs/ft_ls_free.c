@@ -2,7 +2,6 @@
 #include "libft.h"
 #include <stdlib.h>
 
-#include <stdio.h>
 void	ft_free_lst(t_ft_ls *data)
 {
 	int i;

@@ -3,7 +3,7 @@
 
 # define FT_LS_H
 # define MAJOR 0XFF000000
-# define OP "Ralrt1" // 1 a virer
+# define OP "Ralrt"
 # define BUFF_SIZE 1024
 
 # include <sys/types.h>
@@ -40,40 +40,24 @@ typedef struct		s_elem
 	struct s_elem	*next;
 }					t_elem;
 
-// elem
 t_elem				*ft_elem_new(char *name);
 void				ft_init_t_elem(t_elem *elem);
 void				ft_elem_insert(t_elem **aelem, t_elem *new, char r, char t);
 void				ft_free_elem(t_elem **elem, char l, char t);
-
-// data
 void				ft_init_t_ft_ls(t_ft_ls *data);
 void				ft_free_lst(t_ft_ls *data);
-
-// error
 int					ft_error(int nb, char *str);
-
-//read
 t_elem				*ft_readdir(char *fpath, char *path, t_ft_ls *data);
-
-// arg
 char				*ft_get_arg(t_ft_ls *data, char **lst, int nb);
 void				ft_set_op(char *op, t_ft_ls *data);
 int					ft_check_op(char *op);
 int					ft_check_arg(t_ft_ls data);
 void				ft_sort_str(char ***str, int size, char r);
-
-//format
 char				*ft_format_path(char *str);
 char				*ft_format_date(time_t date);
-
 int					ft_is_dir(char *path);
-
 void				ft_browse(t_ft_ls *data);
-
-// print
 void				ft_print(t_ft_ls *data, t_elem **elem, char t);
-
 char				*ft_modeoffile(mode_t mode);
 size_t				ft_get_info(char *path, t_elem *elem, t_ft_ls *data);
 int					ft_get_info_nlink(t_elem *elem, nlink_t nlink, size_t size);

@@ -4,8 +4,6 @@
 #include <dirent.h>
 #include <sys/errno.h>
 
-#include <stdio.h>
-#include <unistd.h>
 static int		ft_browse_read(t_ft_ls *data, char **path, int i, t_elem **elem)
 {
 	// DEBUG
@@ -127,7 +125,7 @@ void			ft_browse(t_ft_ls *data)
 		{
 			tmp = ft_strdup(data->path[i]);
 			ft_browse_recu(data, tmp, i + j);
-			//ft_strdel(&tmp);
+			//ft_strdel(&tmp); ---------------------------------------------> free qui plante
 		}
 		i++;
 	}

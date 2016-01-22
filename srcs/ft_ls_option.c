@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <errno.h>
 
-#include <stdio.h>
 void		ft_set_op(char *op, t_ft_ls *data)
 {
 	int	i;

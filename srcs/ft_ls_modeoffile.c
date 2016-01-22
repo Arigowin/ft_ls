@@ -2,7 +2,6 @@
 # include "libft.h"
 #include <sys/stat.h>
 
-#include <stdio.h>
 static char		ft_typeoffile(mode_t mode)
 {
 	// DEBUG

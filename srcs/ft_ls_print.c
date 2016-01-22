@@ -1,7 +1,6 @@
 #include "ft_ls.h"
 #include "libft.h"
 
-#include <stdio.h>
 void			ft_printone1(t_elem *elem, size_t *size)
 {
 	// DEBUG

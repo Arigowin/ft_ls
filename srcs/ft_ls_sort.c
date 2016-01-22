@@ -2,7 +2,6 @@
 # include "libft.h"
 #include <stdlib.h>
 
-#include <stdio.h>
 static void		ft_swap_s(char **s1, char **s2)
 {
 	char	*tmp;

@@ -138,4 +138,9 @@ void			ft_print(t_ft_ls *data, t_elem **elem, char t)
 		data->total = 0;
 	}
 	ft_print_while(elem, *data, t);
+	data->sizemax[0] = 0;
+	data->sizemax[1] = 0;
+	data->sizemax[2] = 0;
+	data->sizemax[3] = 0;
+	data->sizemax[4] = 0;
 }

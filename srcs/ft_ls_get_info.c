@@ -29,7 +29,10 @@ size_t	ft_get_info(char *path, t_elem *elem, t_ft_ls *data)
 			ft_get_info_link(elem, path);
 	}
 	free(tmp2);
-	return (st.st_blocks);
+	if (elem->name[0] != '.' || data->op_a)
+		return (st.st_blocks);
+	else
+		return (0);
 }
 
 int		ft_get_info_nlink(t_elem *elem, nlink_t nlink, size_t size)

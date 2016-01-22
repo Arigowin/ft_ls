@@ -47,7 +47,7 @@ t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls *data)
 		{
 			if (ft_is_dir(path) != 0)
 			{
-				ft_putstr(ft_strsub(path, 2, ft_strlen(path)));
+				ft_putendl(ft_strsub(path, 2, ft_strlen(path)));
 				return (NULL);
 			}
 		}

@@ -42,7 +42,8 @@ static char		*future(time_t date)
 		tmp = ft_strsplit(tmp, ' ')[0];
 		tmp2 = ft_strdup(" ");
 		ft_strproperjoin(&tmp2, &tmp);
-		ft_strproperjoin(&tmp, &tmp2);
+		free(tmp);
+		tmp = ft_strdup(tmp2);
 		free(tmp2);
 	}
 	else

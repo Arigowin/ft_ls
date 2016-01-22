@@ -8,6 +8,11 @@
 #include <unistd.h>
 static int		ft_browse_read(t_ft_ls *data, char **path, int i, t_elem **elem)
 {
+	// DEBUG
+#ifdef DEBUG
+	ft_putstr("DEBUG : ft_browse_read\n");
+#endif
+
 	char	*fpath;
 
 	if (data->nb_path > 1 || (data->op_recu && i > 0))
@@ -18,14 +23,14 @@ static int		ft_browse_read(t_ft_ls *data, char **path, int i, t_elem **elem)
 		ft_putendl(":");
 	}
 	fpath = ft_format_path(*path);
-	if ((*elem = ft_readdir(fpath, *path, &data)) == NULL)
+	if ((*elem = ft_readdir(fpath, *path, data)) == NULL)
 		return (0);
 	ft_print(data, elem, 1);
 	ft_strdel(&fpath);
 	return (1);
 }
 
-static int		ft_browse_recu(t_ft_ls data, char *path, int i)
+static int		ft_browse_recu(t_ft_ls *data, char *path, int i)
 {
 	t_elem	*elem;
 	t_elem	*tmpel;
@@ -40,9 +45,9 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 	if (ft_browse_read(data, &path, i, &elem) == 0)
 		return (0);
 	tmpel = elem;
-	while (tmpel && data.op_recu)
+	while (tmpel && data->op_recu)
 	{
-		if ((data.op_a || tmpel->name[0] != '.')
+		if ((data->op_a || tmpel->name[0] != '.')
 				&& ft_strcmp(tmpel->name, "..") != 0
 				&& ft_strcmp(tmpel->name, ".") != 0)
 		{
@@ -60,12 +65,17 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 		}
 		tmpel = tmpel->next;
 	}
-	ft_free_elem(&elem, data.op_l, data.op_t);
+	ft_free_elem(&elem, data->op_l, data->op_t);
 	return (0);
 }
 
 static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 {
+	// DEBUG
+#ifdef DEBUG
+	ft_putstr("DEBUG : ft_browse_not_a_directory\n");
+#endif
+
 	t_elem	*new;
 	int		i;
 	int		j;
@@ -116,7 +126,7 @@ void			ft_browse(t_ft_ls *data)
 		if (data->path[i] != NULL)
 		{
 			tmp = ft_strdup(data->path[i]);
-			ft_browse_recu(*data, tmp, i + j);
+			ft_browse_recu(data, tmp, i + j);
 			//ft_strdel(&tmp);
 		}
 		i++;

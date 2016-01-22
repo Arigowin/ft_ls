@@ -61,6 +61,7 @@ char				*ft_get_arg(t_ft_ls *data, char **lst, int nb);
 void				ft_set_op(char *op, t_ft_ls *data);
 int					ft_check_op(char *op);
 int					ft_check_arg(t_ft_ls data);
+void				ft_sort_str(char ***str, int size, char r);
 
 //format
 char				*ft_format_path(char *str);

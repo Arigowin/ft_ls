@@ -14,7 +14,7 @@ static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_readdir_bis\n");
+	ft_putstr("DEBUG : ft_readdir_bis\n");
 #endif
 
 	elem = NULL;
@@ -38,7 +38,7 @@ t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls *data)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_readdir\n");
+	ft_putstr("DEBUG : ft_readdir\n");
 #endif
 
 	if ((dir = opendir(fpath)) == NULL)
@@ -47,7 +47,7 @@ t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls *data)
 		{
 			if (ft_is_dir(path) != 0)
 			{
-				ft_putendl(ft_strsub(path, 2, ft_strlen(path)));
+				ft_putstr(ft_strsub(path, 2, ft_strlen(path)));
 				return (NULL);
 			}
 		}
@@ -65,7 +65,7 @@ int				ft_is_dir(char *path)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_is_dir\n");
+	ft_putstr("DEBUG : ft_is_dir\n");
 #endif
 
 	if (lstat(path, &b) == -1)

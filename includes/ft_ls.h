@@ -71,7 +71,7 @@ int					ft_is_dir(char *path);
 void				ft_browse(t_ft_ls *data);
 
 // print
-void				ft_print(t_ft_ls data, t_elem **elem, char t);
+void				ft_print(t_ft_ls *data, t_elem **elem, char t);
 
 char				*ft_modeoffile(mode_t mode);
 size_t				ft_get_info(char *path, t_elem *elem, t_ft_ls *data);

@@ -6,11 +6,11 @@
 
 #include <stdio.h>
 #include <unistd.h>
-static int		ft_browse_read(t_ft_ls data, char **path, int i, t_elem **elem)
+static int		ft_browse_read(t_ft_ls *data, char **path, int i, t_elem **elem)
 {
 	char	*fpath;
 
-	if (data.nb_path > 1 || (data.op_recu && i > 0))
+	if (data->nb_path > 1 || (data->op_recu && i > 0))
 	{
 		if (i > 0)
 			ft_putendl("");
@@ -34,7 +34,7 @@ static int		ft_browse_recu(t_ft_ls data, char *path, int i)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_browse_recu\n");
+	ft_putstr("DEBUG : ft_browse_recu\n");
 #endif
 
 	if (ft_browse_read(data, &path, i, &elem) == 0)
@@ -90,8 +90,9 @@ static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 	   i++;
 	}
 	if (elem && j != 0)
-		ft_print(*data, &elem, 0);
-	ft_free_elem(&elem, data->op_l, data->op_t);
+		ft_print(data, &elem, 0);
+	if (elem != NULL)
+		ft_free_elem(&elem, data->op_l, data->op_t);
 	return (j);
 }
 
@@ -104,7 +105,7 @@ void			ft_browse(t_ft_ls *data)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_browse\n");
+	ft_putstr("DEBUG : ft_browse\n");
 #endif
 
 	elem = NULL;
@@ -116,7 +117,7 @@ void			ft_browse(t_ft_ls *data)
 		{
 			tmp = ft_strdup(data->path[i]);
 			ft_browse_recu(*data, tmp, i + j);
-			ft_strdel(&tmp);
+			//ft_strdel(&tmp);
 		}
 		i++;
 	}

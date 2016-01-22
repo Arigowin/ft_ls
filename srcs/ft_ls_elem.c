@@ -7,7 +7,7 @@ t_elem		*ft_elem_new(char *name)
 {
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_elem_new\n");
+	ft_putstr("DEBUG : ft_elem_new\n");
 #endif
 
 	t_elem	*new;
@@ -75,7 +75,7 @@ void		ft_elem_insert(t_elem **aelem, t_elem *new, char r, char t)
 {
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_elem_insert\n");
+	ft_putstr("DEBUG : ft_elem_insert\n");
 #endif
 
 	if (*aelem == NULL)

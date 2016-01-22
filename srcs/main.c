@@ -10,7 +10,7 @@ int	main(int ac, char **av)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : START\nDEBUG : main\n");
+	ft_putstr("DEBUG : START\nDEBUG : main\n");
 #endif
 
 	ft_init_t_ft_ls(&data);
@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : END\n");
+	ft_putstr("DEBUG : END\n");
 #endif
 	return (0);
 }

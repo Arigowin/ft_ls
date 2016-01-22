@@ -7,7 +7,7 @@ static char		ft_typeoffile(mode_t mode)
 {
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_typeoffile\n");
+	ft_putstr("DEBUG : ft_typeoffile\n");
 #endif
 
 	char droit;
@@ -54,7 +54,7 @@ char			*ft_modeoffile(mode_t mode)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_modeoffile\n");
+	ft_putstr("DEBUG : ft_modeoffile\n");
 #endif
 
 	droit = ft_strnew(10);

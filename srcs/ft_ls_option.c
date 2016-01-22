@@ -11,7 +11,7 @@ void		ft_set_op(char *op, t_ft_ls *data)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_set_option\n");
+	ft_putstr("DEBUG : ft_set_option\n");
 #endif
 
 	i = 0;
@@ -42,7 +42,7 @@ static char		*ft_get_option(char **lst, int *nb)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_get_option\n");
+	ft_putstr("DEBUG : ft_get_option\n");
 #endif
 
 	i = 1;
@@ -80,7 +80,7 @@ char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_get_arg\n");
+	ft_putstr("DEBUG : ft_get_arg\n");
 #endif
 
 	nbb = nb;
@@ -116,7 +116,7 @@ int				ft_check_op(char *op)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_check_op\n");
+	ft_putstr("DEBUG : ft_check_op\n");
 #endif
 
 	lstop = OP;
@@ -133,7 +133,7 @@ int				ft_check_op(char *op)
 int			ft_check_arg(t_ft_ls data)
 {
 #ifdef DEBUG
-	printf("DEBUG : ft_check_arg\n");
+	ft_putstr("DEBUG : ft_check_arg\n");
 #endif
 
 	int i;

@@ -11,7 +11,7 @@ char			*ft_format_path(char *str)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_format_path\n");
+	ft_putstr("DEBUG : ft_format_path\n");
 #endif
 
 	if ((str[0] != '/' && str[1] != '/') && (str[0] != '.'))
@@ -62,7 +62,7 @@ char			*ft_format_date(time_t date)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_format_date\n");
+	ft_putstr("DEBUG : ft_format_date\n");
 #endif
 
 	sdate = date;

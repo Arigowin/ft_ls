@@ -9,7 +9,7 @@ void	ft_free_lst(t_ft_ls *data)
 
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_free_lst\n");
+	ft_putstr("DEBUG : ft_free_lst\n");
 #endif
 
 	i = 0;
@@ -26,7 +26,7 @@ void	ft_free_elem(t_elem **elem, char l, char t)
 {
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_free_elem\n");
+	ft_putstr("DEBUG : ft_free_elem\n");
 #endif
 	t_elem	*tmp;
 

@@ -8,7 +8,7 @@ int		ft_error(int nb, char *str)
 {
 	// DEBUG
 #ifdef DEBUG
-	printf("DEBUG : ft_error\n");
+	ft_putstr("DEBUG : ft_error\n");
 #endif
 
 	if (nb == 1)

@@ -62,7 +62,7 @@ void			ft_printone2(t_elem *elem, size_t *size, int rdev)
 	}
 }
 
-void			ft_printone3(t_elem *elem)
+void			ft_printone3(t_elem *elem, )
 {
 	// DEBUG
 #ifdef DEBUG
@@ -72,7 +72,14 @@ void			ft_printone3(t_elem *elem)
 	ft_putstr(" ");
 	ft_putstr(elem->date);
 	ft_putstr(" ");
-	ft_putstr(elem->name);
+	if (elem->droit[0] == 'l')
+		ft_putstr_color(PURPLE, elem->name);
+	else if (elem->droit[0] == 'd')
+		ft_putstr_color(CYAN, elem->name);
+	else if (ft_strchr(elem->droit, 'x') != NULL)
+		ft_putstr_color(GREEN, elem->name);
+	else
+		ft_putstr(elem->name);
 	if (elem->link != NULL)
 	{
 		ft_putstr(" -> ");

@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:14 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:50:47 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 16:55:49 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ size_t	ft_get_info(char *path, t_elem *elem, t_ft_ls *data)
 	ft_get_info_date(elem, st.st_mtime);
 	if ((data->op_a || elem->name[0] != '.') && data->op_l)
 	{
-		data->sizemax[0] = ft_get_info_nlink(elem, st.st_nlink, data->sizemax[0]);
-		data->sizemax[1] = ft_get_info_pw(elem, st.st_uid, data->sizemax[1]);
-		data->sizemax[2] = ft_get_info_gr(elem, st.st_gid, data->sizemax[2]);
+		data->size[0] = ft_get_info_nlink(elem, st.st_nlink, data->size[0]);
+		data->size[1] = ft_get_info_pw(elem, st.st_uid, data->size[1]);
+		data->size[2] = ft_get_info_gr(elem, st.st_gid, data->size[2]);
 		if (elem->droit[0] != 'c' && elem->droit[0] != 'b')
-			data->sizemax[3] = ft_get_info_size(elem, st.st_size, data->sizemax[3]);
+			data->size[3] = ft_get_info_size(elem, st.st_size, data->size[3]);
 		else
-			data->sizemax[4] = ft_get_info_rdev(elem, st.st_size, &(data->sizemax[3]));
+			data->size[4] = ft_get_infordev(elem, st.st_size, &(data->size[3]));
 		if (elem->droit[0] == 'l')
 			ft_get_info_link(elem, path);
 	}

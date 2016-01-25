@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:47:49 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:47:54 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 17:08:26 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 # define FT_LS_H
 # define MAJOR 0XFF000000
-# define OP "Ralrti1" // a enlever
+# define OP "Ralrti"
 # define BUFF_SIZE 1024
 
 # include <sys/types.h>
-
-//#define DEBUG
 
 typedef struct		s_ft_ls
 {
@@ -30,7 +28,7 @@ typedef struct		s_ft_ls
 	char			op_t;
 	char			**path;
 	int				nb_path;
-	size_t			sizemax[5];
+	size_t			size[5];
 	size_t			total;
 }					t_ft_ls;
 
@@ -58,7 +56,7 @@ void				ft_free_elem(t_elem **elem, char l, char t);
 void				ft_init_t_ft_ls(t_ft_ls *data);
 void				ft_free_lst(t_ft_ls *data);
 int					ft_error(int nb, char *str);
-t_elem				*ft_readdir(char *fpath, char *path, t_ft_ls *data, int *nb);
+t_elem				*ft_readdir(char *fp, char *path, t_ft_ls *data, int *nb);
 char				*ft_get_arg(t_ft_ls *data, char **lst, int nb);
 void				ft_set_op(char *op, t_ft_ls *data);
 int					ft_check_op(char *op);
@@ -75,7 +73,7 @@ int					ft_get_info_nlink(t_elem *elem, nlink_t nlink, size_t size);
 int					ft_get_info_pw(t_elem *elem, uid_t uid, size_t size);
 int					ft_get_info_gr(t_elem *elem, gid_t gid, size_t size);
 int					ft_get_info_size(t_elem *elem, off_t s, size_t size);
-int					ft_get_info_rdev(t_elem *elem, dev_t rdev, size_t *size);
+int					ft_get_infordev(t_elem *elem, dev_t rdev, size_t *size);
 void				ft_get_info_date(t_elem *elem, time_t mtime);
 void				ft_get_info_link(t_elem *elem, char *path);
 

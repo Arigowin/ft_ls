@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:29 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:52:10 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 17:07:32 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ int	main(int ac, char **av)
 	ft_browse(&data);
 	ft_free_lst(&data);
 	ft_strdel(&op);
-
 	return (0);
 }

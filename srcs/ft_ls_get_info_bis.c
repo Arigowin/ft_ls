@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:16 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:50:49 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 16:55:33 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <grp.h>
 #include <unistd.h>
 
-int		ft_get_info_rdev(t_elem *elem, dev_t rdev, size_t *size)
+int		ft_get_infordev(t_elem *elem, dev_t rdev, size_t *size)
 {
 	char	*tmp;
 	char	*tmp2;

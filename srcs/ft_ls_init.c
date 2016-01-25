@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:17 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:50:50 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 17:03:35 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	ft_init_t_ft_ls(t_ft_ls *data)
 	data->op_r = 0;
 	data->op_t = 0;
 	data->nb_path = 0;
-	data->total = 0;;
-	data->sizemax[0] = 0;
-	data->sizemax[1] = 0;
-	data->sizemax[2] = 0;
-	data->sizemax[3] = 0;
-	data->sizemax[4] = 0;
+	data->total = 0;
+	data->size[0] = 0;
+	data->size[1] = 0;
+	data->size[2] = 0;
+	data->size[3] = 0;
+	data->size[4] = 0;
 }
 
 void	ft_init_t_elem(t_elem *elem)

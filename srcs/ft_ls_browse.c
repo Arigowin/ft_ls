@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:02 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:50:06 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 17:02:01 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static int		ft_browse_recu(t_ft_ls *data, char *path, int i)
 	return (0);
 }
 
-#include <stdio.h>
 static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 {
 	t_elem	*new;
@@ -93,9 +92,9 @@ static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 			ft_strdel(&(data->path[i]));
 			j++;
 		}
-	   if (er == -1)
-		   ft_strdel(&(data->path[i]));
-	   i++;
+		if (er == -1)
+			ft_strdel(&(data->path[i]));
+		i++;
 	}
 	if (elem && j != 0)
 		ft_print(data, &elem, 0, j);
@@ -120,7 +119,6 @@ void			ft_browse(t_ft_ls *data)
 		{
 			tmp = ft_strdup(data->path[i]);
 			ft_browse_recu(data, tmp, i + j);
-			//ft_strdel(&tmp); ---------------------------------------------> free qui plante
 		}
 		i++;
 	}

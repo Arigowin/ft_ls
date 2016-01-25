@@ -6,12 +6,12 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:19 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:50:58 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 17:03:51 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-# include "libft.h"
+#include "libft.h"
 #include <sys/stat.h>
 
 static char		ft_typeoffile(mode_t mode)

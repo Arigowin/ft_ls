@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:21 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:51:24 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 17:05:07 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-void		ft_set_op(char *op, t_ft_ls *data)
+void			ft_set_op(char *op, t_ft_ls *data)
 {
 	int	i;
 
@@ -81,7 +81,8 @@ char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
 
 	nbb = nb;
 	op = ft_get_option(lst, &nb);
-	if ((data->path = (char **)malloc(sizeof(char *) * (((nb) == 0 ? 1 : nb) + 1))) == NULL)
+	if ((data->path = (char **)malloc(sizeof(char *) *
+					(((nb) == 0 ? 1 : nb) + 1))) == NULL)
 		ft_error(1, "ft_get_arg");
 	if (nb < 1)
 	{
@@ -115,13 +116,13 @@ int				ft_check_op(char *op)
 	while (op[i])
 	{
 		if (ft_strchr(lstop, op[i]) == NULL)
-			exit (ft_error(2, &(op[i])));
+			exit(ft_error(2, &(op[i])));
 		i++;
 	}
 	return (0);
 }
 
-int			ft_check_arg(t_ft_ls data)
+int				ft_check_arg(t_ft_ls data)
 {
 	int i;
 

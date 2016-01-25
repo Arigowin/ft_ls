@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:05 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:50:13 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 17:09:56 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 #include "libft.h"
 #include <stdlib.h>
 
-#include <stdio.h>
 t_elem		*ft_elem_new(char *name)
 {
 	t_elem	*new;
 
 	if ((new = (t_elem *)malloc(sizeof(t_elem))) == NULL)
-		exit (ft_error(1, "ft_elem_new"));
+		exit(ft_error(1, "ft_elem_new"));
 	ft_init_t_elem(new);
 	if ((new->name = ft_strdup(name)) == NULL)
 		exit(ft_error(1, name));
@@ -57,9 +56,8 @@ static void	ft_elem_insert_bis_t(t_elem **aelem, t_elem *new, char r)
 	t_elem	*tmp;
 	int		cmp;
 
-	// si cmp == 0 trie dans l'ordre alpha ou si r inverse
 	tmp = *aelem;
-	if ((cmp = (r ? (new->sec_date - tmp->sec_date) + (ft_strcmp(tmp->name, new->name)):
+	if ((cmp = (r ? (new->sec_date - tmp->sec_date) + (ft_strcmp(tmp->name, new->name)) :
 					(tmp->sec_date - new->sec_date) + (ft_strcmp(new->name, tmp->name)))) < 0)
 	{
 		new->next = tmp;
@@ -70,7 +68,7 @@ static void	ft_elem_insert_bis_t(t_elem **aelem, t_elem *new, char r)
 	else
 	{
 		while (tmp->next != NULL
-				&& (cmp = (r ? (new->sec_date - tmp->next->sec_date) + (ft_strcmp(tmp->next->name, new->name)):
+				&& (cmp = (r ? (new->sec_date - tmp->next->sec_date) + (ft_strcmp(tmp->next->name, new->name)) :
 						(tmp->next->sec_date - new->sec_date) + (ft_strcmp(new->name, tmp->next->name)))) > 0)
 		{
 			tmp = tmp->next;
@@ -79,7 +77,6 @@ static void	ft_elem_insert_bis_t(t_elem **aelem, t_elem *new, char r)
 		tmp->next = new;
 	}
 }
-
 
 void		ft_elem_insert(t_elem **aelem, t_elem *new, char r, char t)
 {

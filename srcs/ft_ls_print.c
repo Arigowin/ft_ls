@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:23 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:52:31 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 17:05:33 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ static void		ft_print_while(t_elem **elem, t_ft_ls data, int t)
 	{
 		if ((data.op_a || tmp->name[0] != '.' || !t) && tmp->name != NULL)
 		{
-			if (data.sizemax[4] == 0)
-				ft_printone(tmp, data.sizemax, 0, data.op_l);
+			if (data.size[4] == 0)
+				ft_printone(tmp, data.size, 0, data.op_l);
 			else
-				ft_printone(tmp, data.sizemax, 1, data.op_l);
+				ft_printone(tmp, data.size, 1, data.op_l);
 		}
 		tmp = tmp->next;
 	}
@@ -117,8 +117,6 @@ static void		ft_print_while(t_elem **elem, t_ft_ls data, int t)
 
 void			ft_print(t_ft_ls *data, t_elem **elem, char t, int nb)
 {
-	// condition a ajouter mais je ne sais pas encore laquelle
-	// pas afficher si dossier vide
 	if (data->op_l && t && (nb > 2 || data->op_a))
 	{
 		ft_putstr("total ");
@@ -126,9 +124,9 @@ void			ft_print(t_ft_ls *data, t_elem **elem, char t, int nb)
 		data->total = 0;
 	}
 	ft_print_while(elem, *data, t);
-	data->sizemax[0] = 0;
-	data->sizemax[1] = 0;
-	data->sizemax[2] = 0;
-	data->sizemax[3] = 0;
-	data->sizemax[4] = 0;
+	data->size[0] = 0;
+	data->size[1] = 0;
+	data->size[2] = 0;
+	data->size[3] = 0;
+	data->size[4] = 0;
 }

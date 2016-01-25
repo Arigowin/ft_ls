@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:10 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:50:29 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 17:03:13 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ char			*ft_format_path(char *str)
 		str = ft_strdup(tmp);
 		ft_strdel(&tmp);
 	}
-	if ((ret =ft_is_dir(str)) == 0)
+	if ((ret = ft_is_dir(str)) == 0)
 		return (str);
 	tmp = ft_strdup("/");
-	// free(str); -----------------------------------------------------> free qui plante
 	str = ft_strjoin(str, tmp);
 	free(tmp);
 	return (str);

@@ -6,12 +6,12 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:27 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:52:00 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 17:07:22 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-# include "libft.h"
+#include "libft.h"
 #include <stdlib.h>
 
 static void		ft_swap_s(char **s1, char **s2)

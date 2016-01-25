@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:25 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 16:51:51 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 17:06:08 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path, int *nb)
+static t_elem	*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path, int *nb)
 {
 	struct dirent	*dp;
 	t_elem			*elem;

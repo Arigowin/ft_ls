@@ -1,13 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls_print.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/25 16:48:23 by dolewski          #+#    #+#             */
+/*   Updated: 2016/01/25 16:52:31 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 #include "libft.h"
 
 void			ft_printone1(t_elem *elem, size_t *size)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : printone1\n");
-#endif
-
 	size_t		i;
 
 	ft_putstr(elem->droit);
@@ -31,11 +38,6 @@ void			ft_printone1(t_elem *elem, size_t *size)
 
 void			ft_printone2(t_elem *elem, size_t *size, int rdev)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : printone2\n");
-#endif
-
 	size_t		i;
 	size_t		t;
 
@@ -62,13 +64,8 @@ void			ft_printone2(t_elem *elem, size_t *size, int rdev)
 	}
 }
 
-void			ft_printone3(t_elem *elem, )
+void			ft_printone3(t_elem *elem)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : printone3\n");
-#endif
-
 	ft_putstr(" ");
 	ft_putstr(elem->date);
 	ft_putstr(" ");
@@ -89,11 +86,6 @@ void			ft_printone3(t_elem *elem, )
 
 static void		ft_printone(t_elem *elem, size_t *size, int rdev, int op_l)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : printone\n");
-#endif
-
 	if (op_l)
 	{
 		ft_printone1(elem, size);
@@ -107,11 +99,6 @@ static void		ft_printone(t_elem *elem, size_t *size, int rdev, int op_l)
 
 static void		ft_print_while(t_elem **elem, t_ft_ls data, int t)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : print_while\n");
-#endif
-
 	t_elem	*tmp;
 
 	tmp = *elem;
@@ -130,11 +117,6 @@ static void		ft_print_while(t_elem **elem, t_ft_ls data, int t)
 
 void			ft_print(t_ft_ls *data, t_elem **elem, char t, int nb)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : print\n");
-#endif
-
 	// condition a ajouter mais je ne sais pas encore laquelle
 	// pas afficher si dossier vide
 	if (data->op_l && t && (nb > 2 || data->op_a))

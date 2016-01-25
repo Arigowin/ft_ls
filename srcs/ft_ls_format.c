@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls_format.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/25 16:48:10 by dolewski          #+#    #+#             */
+/*   Updated: 2016/01/25 16:50:29 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 #include "libft.h"
 #include <time.h>
@@ -7,11 +19,6 @@ char			*ft_format_path(char *str)
 {
 	char	*tmp;
 	int		ret;
-
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_format_path\n");
-#endif
 
 	if ((str[0] != '/' && str[1] != '/') && (str[0] != '.'))
 	{
@@ -60,11 +67,6 @@ char			*ft_format_date(time_t date)
 	char	*tmp2;
 	time_t	sdate;
 	time_t	now;
-
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_format_date\n");
-#endif
 
 	sdate = date;
 	now = time(&date);

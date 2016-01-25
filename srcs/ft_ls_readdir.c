@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls_readdir.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/25 16:48:25 by dolewski          #+#    #+#             */
+/*   Updated: 2016/01/25 16:51:51 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 #include "libft.h"
 #include <dirent.h>
@@ -11,11 +23,6 @@ static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path, int *nb)
 	t_elem			*elem;
 	t_elem			*new;
 	int				tmp;
-
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_readdir_bis\n");
-#endif
 
 	elem = NULL;
 	new = NULL;
@@ -39,11 +46,6 @@ t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls *data, int *nb)
 	DIR				*dir;
 	t_elem			*elem;
 
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_readdir\n");
-#endif
-
 	if ((dir = opendir(fpath)) == NULL)
 	{
 		if (errno == ENOENT || errno == ENOTDIR)
@@ -65,11 +67,6 @@ t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls *data, int *nb)
 int				ft_is_dir(char *path)
 {
 	struct stat b;
-
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_is_dir\n");
-#endif
 
 	if (stat(path, &b) == -1)
 	{

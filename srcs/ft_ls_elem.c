@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls_elem.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/25 16:48:05 by dolewski          #+#    #+#             */
+/*   Updated: 2016/01/25 16:50:13 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 #include "libft.h"
 #include <stdlib.h>
@@ -5,11 +17,6 @@
 #include <stdio.h>
 t_elem		*ft_elem_new(char *name)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_elem_new\n");
-#endif
-
 	t_elem	*new;
 
 	if ((new = (t_elem *)malloc(sizeof(t_elem))) == NULL)
@@ -76,11 +83,6 @@ static void	ft_elem_insert_bis_t(t_elem **aelem, t_elem *new, char r)
 
 void		ft_elem_insert(t_elem **aelem, t_elem *new, char r, char t)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_elem_insert\n");
-#endif
-
 	if (*aelem == NULL)
 		*aelem = new;
 	else

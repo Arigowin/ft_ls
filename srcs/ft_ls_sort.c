@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/25 16:48:27 by dolewski          #+#    #+#             */
+/*   Updated: 2016/01/25 16:52:00 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 # include "libft.h"
 #include <stdlib.h>
@@ -19,11 +31,6 @@ void			ft_sort_str(char ***str, int size, char r)
 	int		i;
 	int		x;
 	int		cmp;
-
-	// DEBUG
-#ifdef DEBUG
-	printf("DEBUG : ft_sort_str\n");
-#endif
 
 	i = 0;
 	x = 0;

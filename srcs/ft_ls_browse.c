@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls_browse.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/25 16:48:02 by dolewski          #+#    #+#             */
+/*   Updated: 2016/01/25 16:50:06 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 #include "libft.h"
 #include <stdlib.h>
@@ -6,11 +18,6 @@
 
 static int		ft_browse_read(t_ft_ls *data, char **path, int i, t_elem **elem)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_browse_read\n");
-#endif
-
 	char	*fpath;
 	int		nb;
 
@@ -36,11 +43,6 @@ static int		ft_browse_recu(t_ft_ls *data, char *path, int i)
 	t_elem	*tmpel;
 	char	*tmp;
 	char	*tmp2;
-
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_browse_recu\n");
-#endif
 
 	if (ft_browse_read(data, &path, i, &elem) == 0)
 		return (0);
@@ -72,11 +74,6 @@ static int		ft_browse_recu(t_ft_ls *data, char *path, int i)
 #include <stdio.h>
 static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_browse_not_a_directory\n");
-#endif
-
 	t_elem	*new;
 	int		i;
 	int		j;
@@ -113,11 +110,6 @@ void			ft_browse(t_ft_ls *data)
 	char	*tmp;
 	int		i;
 	int		j;
-
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_browse\n");
-#endif
 
 	elem = NULL;
 	j = ft_browse_not_a_directorie(data, elem);

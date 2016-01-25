@@ -1,14 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls_modeoffile.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/25 16:48:19 by dolewski          #+#    #+#             */
+/*   Updated: 2016/01/25 16:50:58 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 # include "libft.h"
 #include <sys/stat.h>
 
 static char		ft_typeoffile(mode_t mode)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_typeoffile\n");
-#endif
-
 	char droit;
 
 	droit = '-';
@@ -50,11 +57,6 @@ void			ft_modeoffile_bis(mode_t mode, char **droit)
 char			*ft_modeoffile(mode_t mode)
 {
 	char *droit;
-
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_modeoffile\n");
-#endif
 
 	droit = ft_strnew(10);
 	droit = ft_memset(droit, '-', 10);

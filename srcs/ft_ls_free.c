@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls_free.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/25 16:48:12 by dolewski          #+#    #+#             */
+/*   Updated: 2016/01/25 16:50:43 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 #include "libft.h"
 #include <stdlib.h>
@@ -5,11 +17,6 @@
 void	ft_free_lst(t_ft_ls *data)
 {
 	int i;
-
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_free_lst\n");
-#endif
 
 	i = 0;
 	while (i < data->nb_path)
@@ -23,10 +30,6 @@ void	ft_free_lst(t_ft_ls *data)
 
 void	ft_free_elem(t_elem **elem, char l, char t)
 {
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_free_elem\n");
-#endif
 	t_elem	*tmp;
 
 	while (*elem)

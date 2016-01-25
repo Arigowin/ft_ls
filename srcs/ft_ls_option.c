@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls_option.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/25 16:48:21 by dolewski          #+#    #+#             */
+/*   Updated: 2016/01/25 16:51:24 by dolewski         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 #include "libft.h"
 #include <sys/stat.h>
@@ -7,11 +19,6 @@
 void		ft_set_op(char *op, t_ft_ls *data)
 {
 	int	i;
-
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_set_option\n");
-#endif
 
 	i = 0;
 	ft_check_op(op);
@@ -38,11 +45,6 @@ static char		*ft_get_option(char **lst, int *nb)
 	char	*tmp;
 	int		i;
 	int		nbb;
-
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_get_option\n");
-#endif
 
 	i = 1;
 	nbb = (*nb);
@@ -77,11 +79,6 @@ char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
 	int		j;
 	int		nbb;
 
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_get_arg\n");
-#endif
-
 	nbb = nb;
 	op = ft_get_option(lst, &nb);
 	if ((data->path = (char **)malloc(sizeof(char *) * (((nb) == 0 ? 1 : nb) + 1))) == NULL)
@@ -113,11 +110,6 @@ int				ft_check_op(char *op)
 	char	*lstop;
 	int		i;
 
-	// DEBUG
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_check_op\n");
-#endif
-
 	lstop = OP;
 	i = 0;
 	while (op[i])
@@ -131,10 +123,6 @@ int				ft_check_op(char *op)
 
 int			ft_check_arg(t_ft_ls data)
 {
-#ifdef DEBUG
-	ft_putstr("DEBUG : ft_check_arg\n");
-#endif
-
 	int i;
 
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:47:49 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 17:08:26 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 18:14:05 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ char				*ft_format_path(char *str);
 char				*ft_format_date(time_t date);
 int					ft_is_dir(char *path);
 void				ft_browse(t_ft_ls *data);
+int					ft_browse_recu(t_ft_ls *data, char *path, int i);
 void				ft_print(t_ft_ls *data, t_elem **elem, char t, int nb);
+void				ft_printone1(t_elem *elem, size_t *size);
+void				ft_printone2(t_elem *elem, size_t *size, int rdev);
+void				ft_printone3(t_elem *elem);
 char				*ft_modeoffile(mode_t mode);
 size_t				ft_get_info(char *path, t_elem *elem, t_ft_ls *data);
 int					ft_get_info_nlink(t_elem *elem, nlink_t nlink, size_t size);

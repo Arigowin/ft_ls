@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:05 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 17:09:56 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 18:12:20 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ static void	ft_elem_insert_bis_t(t_elem **aelem, t_elem *new, char r)
 	int		cmp;
 
 	tmp = *aelem;
-	if ((cmp = (r ? (new->sec_date - tmp->sec_date) + (ft_strcmp(tmp->name, new->name)) :
-					(tmp->sec_date - new->sec_date) + (ft_strcmp(new->name, tmp->name)))) < 0)
+	if ((cmp = (r ? (new->sec_date - tmp->sec_date) +
+		(ft_strcmp(tmp->name, new->name)) : (tmp->sec_date - new->sec_date) +
+		(ft_strcmp(new->name, tmp->name)))) < 0)
 	{
 		new->next = tmp;
 		*aelem = new;
@@ -67,12 +68,12 @@ static void	ft_elem_insert_bis_t(t_elem **aelem, t_elem *new, char r)
 		tmp->next = new;
 	else
 	{
-		while (tmp->next != NULL
-				&& (cmp = (r ? (new->sec_date - tmp->next->sec_date) + (ft_strcmp(tmp->next->name, new->name)) :
-						(tmp->next->sec_date - new->sec_date) + (ft_strcmp(new->name, tmp->next->name)))) > 0)
-		{
+		while (tmp->next != NULL && (cmp = (r ?
+				(new->sec_date - tmp->next->sec_date) +
+				(ft_strcmp(tmp->next->name, new->name)) :
+				(tmp->next->sec_date - new->sec_date) +
+				(ft_strcmp(new->name, tmp->next->name)))) > 0)
 			tmp = tmp->next;
-		}
 		new->next = tmp->next;
 		tmp->next = new;
 	}

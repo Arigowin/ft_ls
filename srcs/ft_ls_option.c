@@ -6,15 +6,13 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:21 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 17:05:07 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 18:08:57 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "libft.h"
-#include <sys/stat.h>
 #include <stdlib.h>
-#include <errno.h>
 
 void			ft_set_op(char *op, t_ft_ls *data)
 {
@@ -39,10 +37,21 @@ void			ft_set_op(char *op, t_ft_ls *data)
 	}
 }
 
+static void		ft_get_option_bis(char **lst, int i, char **ret)
+{
+	char	*tmp;
+
+	if (lst[i][0] == '-' && lst[i][1] != '\0')
+	{
+		tmp = ft_strdup(&lst[i][1]);
+		ft_strproperjoin(ret, &tmp);
+		free(tmp);
+	}
+}
+
 static char		*ft_get_option(char **lst, int *nb)
 {
 	char	*ret;
-	char	*tmp;
 	int		i;
 	int		nbb;
 
@@ -52,14 +61,7 @@ static char		*ft_get_option(char **lst, int *nb)
 	while (i < nbb && lst[i][0] == '-' && lst[i][1] != '\0')
 	{
 		if (ft_strcmp(lst[i], "--") != 0)
-		{
-			if (lst[i][0] == '-' && lst[i][1] != '\0')
-			{
-				tmp = ft_strdup(&lst[i][1]);
-				ft_strproperjoin(&ret, &tmp);
-				free(tmp);
-			}
-		}
+			ft_get_option_bis(lst, i, &ret);
 		else
 		{
 			(*nb)--;
@@ -70,6 +72,15 @@ static char		*ft_get_option(char **lst, int *nb)
 	}
 	(*nb)--;
 	return (ret);
+}
+
+static char		*ft_get_arg_bis(t_ft_ls *data, char *op)
+{
+	data->path[0] = NULL;
+	data->path[0] = ft_strdup(".");
+	data->path[1] = NULL;
+	data->nb_path++;
+	return (op);
 }
 
 char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
@@ -85,13 +96,7 @@ char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
 					(((nb) == 0 ? 1 : nb) + 1))) == NULL)
 		ft_error(1, "ft_get_arg");
 	if (nb < 1)
-	{
-		data->path[0] = NULL;
-		data->path[0] = ft_strdup(".");
-		data->path[1] = NULL;
-		data->nb_path++;
-		return (op);
-	}
+		return (ft_get_arg_bis(data, op));
 	i = nbb - nb;
 	j = 0;
 	while (i < nbb)
@@ -104,37 +109,4 @@ char			*ft_get_arg(t_ft_ls *data, char **lst, int nb)
 	}
 	data->path[j] = NULL;
 	return (op);
-}
-
-int				ft_check_op(char *op)
-{
-	char	*lstop;
-	int		i;
-
-	lstop = OP;
-	i = 0;
-	while (op[i])
-	{
-		if (ft_strchr(lstop, op[i]) == NULL)
-			exit(ft_error(2, &(op[i])));
-		i++;
-	}
-	return (0);
-}
-
-int				ft_check_arg(t_ft_ls data)
-{
-	int i;
-
-	i = 0;
-	while (i < data.nb_path)
-	{
-		if (data.path[i][0] == '\0')
-		{
-			errno = ENOENT;
-			exit(ft_error(1, "fts_open"));
-		}
-		i++;
-	}
-	return (0);
 }

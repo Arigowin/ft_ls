@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:23 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 18:13:16 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 18:28:11 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		ft_printone(t_elem *elem, size_t *size, int rdev, int op_l)
 		ft_printone1(elem, size);
 		ft_printone2(elem, size, rdev);
 		ft_printone3(elem);
-		ft_putstr("\n");
+		ft_putendl("");
 	}
 	else
 		ft_putendl(elem->name);

@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 18:15:03 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 18:15:04 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 18:28:09 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,20 @@ void			ft_printone3(t_elem *elem)
 	ft_putstr(elem->date);
 	ft_putstr(" ");
 	if (elem->droit[0] == 'l')
+	{
 		ft_putstr_color(PURPLE, elem->name);
+		ft_putendl("");
+	}
 	else if (elem->droit[0] == 'd')
+	{
 		ft_putstr_color(CYAN, elem->name);
+		ft_putendl("");
+	}
 	else if (ft_strchr(elem->droit, 'x') != NULL)
+	{
 		ft_putstr_color(GREEN, elem->name);
+		ft_putendl("");
+	}
 	else
 		ft_putstr(elem->name);
 	if (elem->link != NULL)

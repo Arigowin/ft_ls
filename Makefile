@@ -6,7 +6,7 @@
 #    By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/03 10:52:20 by dolewski          #+#    #+#              #
-#    Updated: 2016/01/25 18:14:37 by dolewski         ###   ########.fr        #
+#    Updated: 2016/01/25 18:35:57 by dolewski         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HPATH =		$(ROOT)/includes
 LIBPATH =	$(ROOT)/libft
 LFTHPATH =	$(LIBPATH)/includes
 
-CFLAGS = -g -Wall -Werror -Wextra -I $(HPATH) -I $(LFTHPATH)
+CFLAGS = -O3 -Wall -Werror -Wextra -I $(HPATH) -I $(LFTHPATH)
 LIBS = -L $(LIBPATH) -lft
 
 SRC = main.c \

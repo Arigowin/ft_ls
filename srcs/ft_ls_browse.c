@@ -6,12 +6,13 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:02 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 18:22:49 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 18:36:21 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "libft.h"
+#include <stdlib.h>
 
 static int		ft_browse_not_a_dir_bis(t_ft_ls **data, t_elem **elem, int i)
 {
@@ -66,6 +67,7 @@ void			ft_browse(t_ft_ls *data)
 		{
 			tmp = ft_strdup(data->path[i]);
 			ft_browse_recu(data, tmp, i + j);
+			free(tmp);
 		}
 		i++;
 	}

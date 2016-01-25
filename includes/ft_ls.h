@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:47:49 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 18:19:07 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/25 18:34:48 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define FT_LS_H
 # define MAJOR 0XFF000000
-# define OP "Ralrt1"
+# define OP "Ralrt"
 # define BUFF_SIZE 1024
 
 # include <sys/types.h>

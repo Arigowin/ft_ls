@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path)
+static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path, int *nb)
 {
 	struct dirent	*dp;
 	t_elem			*elem;
@@ -27,13 +27,14 @@ static t_elem		*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path)
 		data->total += tmp;
 		ft_elem_insert(&elem, new, data->op_r, data->op_t);
 		new = new->next;
+		(*nb)++;
 	}
 	if (dp == NULL && elem == NULL)
 		ft_error(1, "ft_read_bis");
 	return (elem);
 }
 
-t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls *data)
+t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls *data, int *nb)
 {
 	DIR				*dir;
 	t_elem			*elem;
@@ -56,7 +57,7 @@ t_elem			*ft_readdir(char *fpath, char *path, t_ft_ls *data)
 		ft_error(1, path);
 		return (NULL);
 	}
-	elem = ft_readdir_bis(dir, data, fpath);
+	elem = ft_readdir_bis(dir, data, fpath, nb);
 	closedir(dir);
 	return (elem);
 }
@@ -70,11 +71,14 @@ int				ft_is_dir(char *path)
 	ft_putstr("DEBUG : ft_is_dir\n");
 #endif
 
-	if (lstat(path, &b) == -1)
+	if (stat(path, &b) == -1)
 	{
-		if (errno == ENOTDIR)
-			return (0);
-		return (ft_error(1, path));
+		if (lstat(path, &b) == -1)
+		{
+			if (errno == ENOTDIR)
+				return (0);
+			return (ft_error(1, path));
+		}
 	}
 	if (S_ISDIR(b.st_mode))
 		return (1);

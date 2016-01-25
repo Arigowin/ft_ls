@@ -12,6 +12,7 @@ static int		ft_browse_read(t_ft_ls *data, char **path, int i, t_elem **elem)
 #endif
 
 	char	*fpath;
+	int		nb;
 
 	if (data->nb_path > 1 || (data->op_recu && i > 0))
 	{
@@ -21,9 +22,10 @@ static int		ft_browse_read(t_ft_ls *data, char **path, int i, t_elem **elem)
 		ft_putendl(":");
 	}
 	fpath = ft_format_path(*path);
-	if ((*elem = ft_readdir(fpath, *path, data)) == NULL)
+	nb = 0;
+	if ((*elem = ft_readdir(fpath, *path, data, &nb)) == NULL)
 		return (0);
-	ft_print(data, elem, 1);
+	ft_print(data, elem, 1, nb);
 	ft_strdel(&fpath);
 	return (1);
 }
@@ -67,6 +69,7 @@ static int		ft_browse_recu(t_ft_ls *data, char *path, int i)
 	return (0);
 }
 
+#include <stdio.h>
 static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 {
 	// DEBUG
@@ -84,7 +87,7 @@ static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 	while (i < data->nb_path)
 	{
 		if (((er = ft_is_dir(data->path[i])) == 0 && er != -1) ||
-				(er == 2 && data->op_l))
+				(er == 2))
 		{
 			new = ft_elem_new(data->path[i]);
 			if (data->op_l || data->op_t)
@@ -98,7 +101,7 @@ static int		ft_browse_not_a_directorie(t_ft_ls *data, t_elem *elem)
 	   i++;
 	}
 	if (elem && j != 0)
-		ft_print(data, &elem, 0);
+		ft_print(data, &elem, 0, j);
 	if (elem != NULL)
 		ft_free_elem(&elem, data->op_l, data->op_t);
 	return (j);

@@ -52,30 +52,22 @@ static void	ft_elem_insert_bis_t(t_elem **aelem, t_elem *new, char r)
 
 	// si cmp == 0 trie dans l'ordre alpha ou si r inverse
 	tmp = *aelem;
-	if ((cmp = (r ? new->sec_date - tmp->sec_date :
-					tmp->sec_date - new->sec_date)) <= 0)
+	if ((cmp = (r ? (new->sec_date - tmp->sec_date) + (ft_strcmp(tmp->name, new->name)):
+					(tmp->sec_date - new->sec_date) + (ft_strcmp(new->name, tmp->name)))) < 0)
 	{
-		if (cmp == 0)
-		{
-			while (tmp->next)
-				tmp = tmp->next;
-			new->next = tmp->next;
-			tmp->next = new;
-		}
-		else
-		{
-			new->next = tmp;
-			*aelem = new;
-		}
+		new->next = tmp;
+		*aelem = new;
 	}
 	else if (tmp->next == NULL)
 		tmp->next = new;
 	else
 	{
 		while (tmp->next != NULL
-				&& (cmp = (r ? new->sec_date - tmp->next->sec_date :
-						tmp->next->sec_date - new->sec_date)) > 0)
+				&& (cmp = (r ? (new->sec_date - tmp->next->sec_date) + (ft_strcmp(tmp->next->name, new->name)):
+						(tmp->next->sec_date - new->sec_date) + (ft_strcmp(new->name, tmp->next->name)))) > 0)
+		{
 			tmp = tmp->next;
+		}
 		new->next = tmp->next;
 		tmp->next = new;
 	}

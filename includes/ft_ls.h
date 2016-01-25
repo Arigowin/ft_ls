@@ -3,7 +3,7 @@
 
 # define FT_LS_H
 # define MAJOR 0XFF000000
-# define OP "Ralrt"
+# define OP "Ralrti1" // a enlever
 # define BUFF_SIZE 1024
 
 # include <sys/types.h>
@@ -47,7 +47,7 @@ void				ft_free_elem(t_elem **elem, char l, char t);
 void				ft_init_t_ft_ls(t_ft_ls *data);
 void				ft_free_lst(t_ft_ls *data);
 int					ft_error(int nb, char *str);
-t_elem				*ft_readdir(char *fpath, char *path, t_ft_ls *data);
+t_elem				*ft_readdir(char *fpath, char *path, t_ft_ls *data, int *nb);
 char				*ft_get_arg(t_ft_ls *data, char **lst, int nb);
 void				ft_set_op(char *op, t_ft_ls *data);
 int					ft_check_op(char *op);
@@ -57,7 +57,7 @@ char				*ft_format_path(char *str);
 char				*ft_format_date(time_t date);
 int					ft_is_dir(char *path);
 void				ft_browse(t_ft_ls *data);
-void				ft_print(t_ft_ls *data, t_elem **elem, char t);
+void				ft_print(t_ft_ls *data, t_elem **elem, char t, int nb);
 char				*ft_modeoffile(mode_t mode);
 size_t				ft_get_info(char *path, t_elem *elem, t_ft_ls *data);
 int					ft_get_info_nlink(t_elem *elem, nlink_t nlink, size_t size);

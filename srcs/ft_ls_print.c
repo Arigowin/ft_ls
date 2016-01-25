@@ -121,7 +121,7 @@ static void		ft_print_while(t_elem **elem, t_ft_ls data, int t)
 	}
 }
 
-void			ft_print(t_ft_ls *data, t_elem **elem, char t)
+void			ft_print(t_ft_ls *data, t_elem **elem, char t, int nb)
 {
 	// DEBUG
 #ifdef DEBUG
@@ -130,7 +130,7 @@ void			ft_print(t_ft_ls *data, t_elem **elem, char t)
 
 	// condition a ajouter mais je ne sais pas encore laquelle
 	// pas afficher si dossier vide
-	if (data->op_l && t)
+	if (data->op_l && t && (nb > 2 || data->op_a))
 	{
 		ft_putstr("total ");
 		ft_putnbrendl(data->total);

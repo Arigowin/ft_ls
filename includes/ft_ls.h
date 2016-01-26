@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:47:49 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 18:34:48 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/26 18:01:58 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct		s_elem
 t_elem				*ft_elem_new(char *name);
 void				ft_init_t_elem(t_elem *elem);
 void				ft_elem_insert(t_elem **aelem, t_elem *new, char r, char t);
+void				ft_t_ascii(t_elem **aelem, char r);
 void				ft_free_elem(t_elem **elem, char l, char t);
 void				ft_init_t_ft_ls(t_ft_ls *data);
 void				ft_free_lst(t_ft_ls *data);

@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:25 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/26 18:35:43 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/01/28 12:48:30 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static t_elem	*ft_readdir_bis(DIR *dir, t_ft_ls *data, char *path, int *nb)
 	}
 	if (dp == NULL && elem == NULL)
 		ft_error(1, "ft_read_bis");
-	if (data->op_t)
-		ft_t_ascii(&elem, data->op_r);
 	return (elem);
 }
 

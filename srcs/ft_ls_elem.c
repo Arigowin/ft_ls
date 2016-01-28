@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/25 16:48:05 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/26 18:46:47 by dolewski         ###   ########.fr       */
+/*   Created: 2016/01/28 12:48:08 by dolewski          #+#    #+#             */
+/*   Updated: 2016/01/28 12:48:25 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "libft.h"
 #include <stdlib.h>
 
-#include <stdio.h>
 t_elem		*ft_elem_new(char *name)
 {
 	t_elem	*new;
@@ -52,63 +51,30 @@ static void	ft_elem_insert_bis(t_elem **aelem, t_elem *new, char r)
 	}
 }
 
-void		ft_t_ascii(t_elem **aelem, char r)
+int			ft_cdt(int i, t_elem *new, t_elem *tmp, char r)
 {
-	t_elem	*elem;
-	t_elem	*tmp;
-	int		cmp;
+	int cmp;
 
-	printf("DEBUG\n");
-	r = 0;
-	if ((*aelem)->next && (*aelem)->sec_date == (*aelem)->next->sec_date)
-	{
-		if ((cmp = ft_strcmp((*aelem)->name, (*aelem)->next->name)) > 0)
-		{
-			tmp = (*aelem);
-			(*aelem) = (*aelem)->next;
-			tmp->next = (*aelem)->next;
-			(*aelem)->next = tmp;
-		}
-	}
-	elem = *aelem;;
-	while (elem->next)
-	{
-		if (elem->sec_date == elem->next->sec_date)
-		{
-			printf("EQUAL\n");
-			if ((cmp = ft_strcmp(elem->name, elem->next->name)) > 0)
-			{
-				if (elem == *aelem)
-				{
-					tmp = (*aelem);
-					(*aelem) = (*aelem)->next;
-					tmp->next = (*aelem)->next;
-					(*aelem)->next = tmp;
-					elem = *aelem;
-				}
-				else
-				{
-					tmp = elem;
-					elem = elem->next;
-					tmp->next = elem->next;
-					elem->next = tmp;
-				}
-			}
-			else
-				printf("%d\n", cmp);
-		}
-		elem = elem->next;
-	}
+	if (i == 1)
+		return (tmp->next != NULL && ((cmp = (r ? \
+							new->sec_date - tmp->next->sec_date : \
+							tmp->next->sec_date - new->sec_date)) > 0 \
+					|| (cmp == 0 && (r ? ft_strcmp(tmp->next->name, new->name) \
+							: ft_strcmp(new->name, tmp->next->name) > 0))));
+	else
+		return ((cmp = (r ? \
+							new->sec_date - tmp->sec_date : \
+							tmp->sec_date - new->sec_date)) < 0 \
+					|| (cmp == 0 && (r ? ft_strcmp(tmp->name, new->name) \
+							: ft_strcmp(new->name, tmp->name) < 0)));
 }
 
 static void	ft_elem_insert_bis_t(t_elem **aelem, t_elem *new, char r)
 {
 	t_elem	*tmp;
-	int		cmp;
 
 	tmp = *aelem;
-	if ((cmp = (r ? (new->sec_date - tmp->sec_date) :
-					(tmp->sec_date - new->sec_date))) < 0)
+	if (ft_cdt(0, new, tmp, r))
 	{
 		new->next = tmp;
 		*aelem = new;
@@ -117,9 +83,7 @@ static void	ft_elem_insert_bis_t(t_elem **aelem, t_elem *new, char r)
 		tmp->next = new;
 	else
 	{
-		while (tmp->next != NULL && (cmp = (r ?
-						(new->sec_date - tmp->next->sec_date) :
-						(tmp->next->sec_date - new->sec_date)) > 0))
+		while (ft_cdt(1, new, tmp, r))
 			tmp = tmp->next;
 		new->next = tmp->next;
 		tmp->next = new;

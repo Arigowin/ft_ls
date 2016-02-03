@@ -6,20 +6,20 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:23 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 18:28:11 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/02/03 10:46:01 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "libft.h"
 
-static void		ft_printone(t_elem *elem, size_t *size, int rdev, int op_l)
+static void		ft_printone(t_elem *elem, size_t *size, int rdev, t_ft_ls *d)
 {
-	if (op_l)
+	if (d->op_l)
 	{
 		ft_printone1(elem, size);
 		ft_printone2(elem, size, rdev);
-		ft_printone3(elem);
+		ft_printone3(elem, d);
 		ft_putendl("");
 	}
 	else
@@ -36,9 +36,9 @@ static void		ft_print_while(t_elem **elem, t_ft_ls data, int t)
 		if ((data.op_a || tmp->name[0] != '.' || !t) && tmp->name != NULL)
 		{
 			if (data.size[4] == 0)
-				ft_printone(tmp, data.size, 0, data.op_l);
+				ft_printone(tmp, data.size, 0, &data);
 			else
-				ft_printone(tmp, data.size, 1, data.op_l);
+				ft_printone(tmp, data.size, 1, &data);
 		}
 		tmp = tmp->next;
 	}

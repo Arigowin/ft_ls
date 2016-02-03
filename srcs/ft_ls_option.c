@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:21 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 18:08:57 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/02/03 10:46:47 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void			ft_set_op(char *op, t_ft_ls *data)
 			data->op_r = (op[i] == 'r' ? 1 : 0);
 		if (!data->op_t)
 			data->op_t = (op[i] == 't' ? 1 : 0);
+		if (!data->op_color)
+			data->op_color = (op[i] == 'G' ? 1 : 0);
 		i++;
 	}
 }

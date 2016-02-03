@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:47:49 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/26 18:01:58 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/02/03 10:48:23 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define FT_LS_H
 # define MAJOR 0XFF000000
-# define OP "Ralrt"
+# define OP "GRalrt1"
 # define BUFF_SIZE 1024
 
 # include <sys/types.h>
@@ -26,6 +26,7 @@ typedef struct		s_ft_ls
 	char			op_l;
 	char			op_r;
 	char			op_t;
+	char			op_color;
 	char			**path;
 	int				nb_path;
 	size_t			size[5];
@@ -71,7 +72,7 @@ int					ft_browse_recu(t_ft_ls *data, char *path, int i);
 void				ft_print(t_ft_ls *data, t_elem **elem, char t, int nb);
 void				ft_printone1(t_elem *elem, size_t *size);
 void				ft_printone2(t_elem *elem, size_t *size, int rdev);
-void				ft_printone3(t_elem *elem);
+void				ft_printone3(t_elem *elem, t_ft_ls *data);
 char				*ft_modeoffile(mode_t mode);
 size_t				ft_get_info(char *path, t_elem *elem, t_ft_ls *data);
 int					ft_get_info_nlink(t_elem *elem, nlink_t nlink, size_t size);

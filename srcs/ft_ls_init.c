@@ -6,7 +6,7 @@
 /*   By: dolewski <dolewski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:48:17 by dolewski          #+#    #+#             */
-/*   Updated: 2016/01/25 17:03:35 by dolewski         ###   ########.fr       */
+/*   Updated: 2016/02/03 10:47:56 by dolewski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_init_t_ft_ls(t_ft_ls *data)
 	data->op_l = 0;
 	data->op_r = 0;
 	data->op_t = 0;
+	data->op_color = 0;
 	data->nb_path = 0;
 	data->total = 0;
 	data->size[0] = 0;
